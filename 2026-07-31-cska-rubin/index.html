@@ -163,7 +163,13 @@ a{color:var(--accent);text-decoration:none;}a:hover{text-decoration:underline;}
 .scorers-mini__row .player{color:var(--text);font-weight:600;}
 .scorers-mini__row .club{color:var(--text-dim);font-size:10px;}
 .scorers-mini__row .g{font-weight:700;}
-.scorers-mini__sub{background:var(--bg-divider);color:var(--text-muted);font-size:10px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:7px 12px;}
+.scorers-mini__sub{background:var(--bg-divider);color:var(--text-muted);font-size:10px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:9px 12px;cursor:pointer;user-select:none;display:flex;align-items:center;justify-content:space-between;gap:8px;transition:color .15s;}
+.scorers-mini__sub:hover{color:var(--text);}
+.scorers-mini__sub::after{content:'▾';font-size:10px;opacity:.55;transition:transform .2s;flex-shrink:0;}
+.scorers-mini__sub--closed::after{transform:rotate(-90deg);}
+.scorers-mini--team .scorers-mini__head,.scorers-mini--team .scorers-mini__row{grid-template-columns:46px 1fr 30px 30px;}
+.scorers-mini__rank{color:var(--text-dim);font-weight:700;}
+.scorers-mini__row--self .scorers-mini__rank{color:var(--accent);}
 .scorers-mini__note{font-size:10px;color:var(--text-dim);padding:8px 12px;background:var(--bg-row);border-top:1px solid var(--border-soft);font-style:italic;}
 .on-air{background:linear-gradient(135deg,rgba(164,214,57,0.08),rgba(164,214,57,0.02));border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:6px;padding:12px 14px;margin-bottom:10px;}
 .on-air__label{font-size:10px;text-transform:uppercase;letter-spacing:0.14em;color:var(--accent);font-weight:700;margin-bottom:6px;}
@@ -341,37 +347,43 @@ a{color:var(--accent);text-decoration:none;}a:hover{text-decoration:underline;}
         <div class="standings-mini__note">После 15 туров · источник yflrussia.ru</div>
       </div>
     </div>
-    <div class="section-divider">Бомбардирская окрестность</div>
+    <div class="section-divider">Бомбардиры</div>
     <div style="padding:14px 16px">
       <div class="scorers-mini">
-        <div class="scorers-mini__sub">Топ бомбардиров дивизиона А</div>
+        <div class="scorers-mini__sub">Топ-5 дивизиона А</div>
+        <div class="scorers-mini__body">
         <div class="scorers-mini__head"><span>#</span><span>Игрок</span><span>Команда</span><span>И</span><span>Г</span></div>
         <div class="scorers-mini__row scorers-mini__row--self"><span class="pos">1</span><span class="player">Тарасенко Иван</span><span class="club">ЦСКА</span><span>15</span><span class="g">12</span></div>
-        <div class="scorers-mini__row"><span class="pos">2</span><span class="player">Полевой</span><span class="club">Краснодар</span><span>—</span><span class="g">11</span></div>
-        <div class="scorers-mini__row"><span class="pos">3</span><span class="player">Амбарцумов</span><span class="club">Краснодар</span><span>—</span><span class="g">10</span></div>
-        <div class="scorers-mini__row"><span class="pos">4</span><span class="player">Гитинов</span><span class="club">Динамо-Мх</span><span>—</span><span class="g">8</span></div>
-        <div class="scorers-mini__row"><span class="pos">5</span><span class="player">Сагария</span><span class="club">Локомотив</span><span>—</span><span class="g">8</span></div>
-        <div class="scorers-mini__note">Лучший снайпер лиги играет за ЦСКА. Порог топ-5 — 8 голов · источник yflrussia.ru</div>
+        <div class="scorers-mini__row"><span class="pos">2</span><span class="player">Полевой Андрей</span><span class="club">Краснодар</span><span>14</span><span class="g">11</span></div>
+        <div class="scorers-mini__row"><span class="pos">3</span><span class="player">Амбарцумов Даниэль</span><span class="club">Краснодар</span><span>14</span><span class="g">10</span></div>
+        <div class="scorers-mini__row"><span class="pos">4</span><span class="player">Гитинов Гасан</span><span class="club">Динамо-Мх</span><span>14</span><span class="g">8</span></div>
+        <div class="scorers-mini__row"><span class="pos">5</span><span class="player">Сагария Денис</span><span class="club">Локомотив</span><span>14</span><span class="g">8</span></div>
+        <div class="scorers-mini__note">Лучший снайпер лиги играет за ЦСКА. У Тарасенко 3 гола из 12 — с пенальти · после 15 туров, yflrussia.ru</div>
+        </div>
       </div>
-      <div class="scorers-mini">
+      <div class="scorers-mini scorers-mini--team">
         <div class="scorers-mini__sub">ЦСКА — свои бомбардиры</div>
-        <div class="scorers-mini__head"><span>#</span><span>Игрок</span><span>Амплуа</span><span>И</span><span>Г</span></div>
-        <div class="scorers-mini__row scorers-mini__row--self"><span class="pos">1</span><span class="player">Тарасенко Иван <span class="club">№81</span></span><span class="club">нападающий</span><span>15</span><span class="g">12</span></div>
-        <div class="scorers-mini__row"><span class="pos">2</span><span class="player">Джанашия Владимир <span class="club">№65</span></span><span class="club">нападающий</span><span>15</span><span class="g">6</span></div>
-        <div class="scorers-mini__row"><span class="pos">3</span><span class="player">Хужахметов Тимур <span class="club">№59</span></span><span class="club">—</span><span>14</span><span class="g">5</span></div>
-        <div class="scorers-mini__row"><span class="pos">4</span><span class="player">Фиров Имран <span class="club">№62</span></span><span class="club">—</span><span>6</span><span class="g">4</span></div>
-        <div class="scorers-mini__row"><span class="pos">5</span><span class="player">Пасичник Илья <span class="club">№89</span></span><span class="club">нападающий</span><span>13</span><span class="g">4</span></div>
-        <div class="scorers-mini__note">Фиров — 4 гола за 6 игр: самый высокий темп в составе.</div>
+        <div class="scorers-mini__body">
+        <div class="scorers-mini__head"><span>В лиге</span><span>Игрок</span><span>И</span><span>Г</span></div>
+        <div class="scorers-mini__row scorers-mini__row--self"><span class="scorers-mini__rank">1</span><span class="player">Тарасенко Иван <span class="club">№81, нап.</span></span><span>15</span><span class="g">12</span></div>
+        <div class="scorers-mini__row"><span class="scorers-mini__rank">13</span><span class="player">Джанашия Владимир <span class="club">№65, нап.</span></span><span>15</span><span class="g">6</span></div>
+        <div class="scorers-mini__row"><span class="scorers-mini__rank">22</span><span class="player">Хужахметов Тимур <span class="club">№59</span></span><span>14</span><span class="g">5</span></div>
+        <div class="scorers-mini__row"><span class="scorers-mini__rank">27</span><span class="player">Фиров Имран <span class="club">№62</span></span><span>6</span><span class="g">4</span></div>
+        <div class="scorers-mini__row"><span class="scorers-mini__rank">36</span><span class="player">Пасичник Илья <span class="club">№89, нап.</span></span><span>13</span><span class="g">4</span></div>
+        <div class="scorers-mini__note">Фиров — 4 гола за 6 игр (0,67 за матч): лучший темп в составе после Тарасенко.</div>
+        </div>
       </div>
-      <div class="scorers-mini">
+      <div class="scorers-mini scorers-mini--team">
         <div class="scorers-mini__sub">«Рубин» — свои бомбардиры</div>
-        <div class="scorers-mini__head"><span>#</span><span>Игрок</span><span>Амплуа</span><span>И</span><span>Г</span></div>
-        <div class="scorers-mini__row scorers-mini__row--self"><span class="pos">1</span><span class="player">Сафаров Инсаф <span class="club">№17</span></span><span class="club">—</span><span>14</span><span class="g">4</span></div>
-        <div class="scorers-mini__row"><span class="pos">2</span><span class="player">Кузнецов Егор <span class="club">№99</span></span><span class="club">нападающий</span><span>15</span><span class="g">3</span></div>
-        <div class="scorers-mini__row"><span class="pos">3</span><span class="player">Гумеров Риваль <span class="club">№68</span></span><span class="club">нападающий</span><span>7</span><span class="g">3</span></div>
-        <div class="scorers-mini__row"><span class="pos">4</span><span class="player">Печугин Егор <span class="club">№23</span></span><span class="club">—</span><span>12</span><span class="g">2</span></div>
-        <div class="scorers-mini__row"><span class="pos">5</span><span class="player">Толстов Арсений <span class="club">№15</span></span><span class="club">полузащитник</span><span>8</span><span class="g">2</span></div>
-        <div class="scorers-mini__note">Лучший бомбардир «Рубина» — 4 гола: вдвое меньше порога топ-5 лиги. Точное место в рейтинге лиги не сверено.</div>
+        <div class="scorers-mini__body">
+        <div class="scorers-mini__head"><span>В лиге</span><span>Игрок</span><span>И</span><span>Г</span></div>
+        <div class="scorers-mini__row scorers-mini__row--self"><span class="scorers-mini__rank">35</span><span class="player">Сафаров Инсаф <span class="club">№17</span></span><span>14</span><span class="g">4</span></div>
+        <div class="scorers-mini__row"><span class="scorers-mini__rank">37</span><span class="player">Гумеров Риваль <span class="club">№68, нап.</span></span><span>7</span><span class="g">3</span></div>
+        <div class="scorers-mini__row"><span class="scorers-mini__rank">51</span><span class="player">Кузнецов Егор <span class="club">№99, нап.</span></span><span>15</span><span class="g">3</span></div>
+        <div class="scorers-mini__row"><span class="scorers-mini__rank">64</span><span class="player">Толстов Арсений <span class="club">№15, пз.</span></span><span>8</span><span class="g">2</span></div>
+        <div class="scorers-mini__row"><span class="scorers-mini__rank">76</span><span class="player">Богомолов Роман <span class="club">№4, защ.</span></span><span>12</span><span class="g">2</span></div>
+        <div class="scorers-mini__note">Лучший снайпер «Рубина» — лишь 35-й в лиге. Богомолов — защитник, забивший столько же, сколько ведущие полузащитники.</div>
+        </div>
       </div>
     </div>
     <div class="section-divider">Очные встречи — во всех сильнее ЦСКА</div>
@@ -595,6 +607,14 @@ document.querySelectorAll('.section-divider').forEach(function(d){
     var body=d.nextElementSibling;
     if(!body||body.classList.contains('section-divider'))return;
     var closed=d.classList.toggle('section-divider--closed');
+    body.style.display=closed?'none':'';
+  });
+});
+document.querySelectorAll('.scorers-mini__sub').forEach(function(s){
+  s.addEventListener('click',function(){
+    var body=s.nextElementSibling;
+    if(!body)return;
+    var closed=s.classList.toggle('scorers-mini__sub--closed');
     body.style.display=closed?'none':'';
   });
 });
