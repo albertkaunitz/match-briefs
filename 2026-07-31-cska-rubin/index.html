@@ -170,6 +170,12 @@ a{color:var(--accent);text-decoration:none;}a:hover{text-decoration:underline;}
 .scorers-mini--team .scorers-mini__head,.scorers-mini--team .scorers-mini__row{grid-template-columns:46px 1fr 30px 30px;}
 .scorers-mini__rank{color:var(--text-dim);font-weight:700;}
 .scorers-mini__row--self .scorers-mini__rank{color:var(--accent);}
+.scorers-mini__sub .sum{display:none;font-weight:600;color:var(--text-dim);text-transform:none;letter-spacing:0;font-size:10px;margin-left:auto;padding-right:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.scorers-mini__sub--closed .sum{display:inline-block;}
+.toolbar{display:flex;gap:8px;padding:10px 16px;background:var(--bg-row);border-bottom:1px solid var(--border);}
+.toolbar__btn{background:var(--bg-card);border:1px solid var(--border);color:var(--text-muted);font-family:inherit;font-size:11px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;padding:7px 13px;border-radius:6px;cursor:pointer;transition:.15s;}
+.toolbar__btn:hover{border-color:var(--accent);color:var(--accent);}
+.toolbar__btn:active{transform:translateY(1px);}
 .scorers-mini__note{font-size:10px;color:var(--text-dim);padding:8px 12px;background:var(--bg-row);border-top:1px solid var(--border-soft);font-style:italic;}
 .on-air{background:linear-gradient(135deg,rgba(164,214,57,0.08),rgba(164,214,57,0.02));border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:6px;padding:12px 14px;margin-bottom:10px;}
 .on-air__label{font-size:10px;text-transform:uppercase;letter-spacing:0.14em;color:var(--accent);font-weight:700;margin-bottom:6px;}
@@ -337,6 +343,11 @@ a{color:var(--accent);text-decoration:none;}a:hover{text-decoration:underline;}
     <button class="tab" data-tab="protocol">Протокол</button>
   </div>
 
+  <div class="toolbar">
+    <button class="toolbar__btn" id="expandAll">Развернуть всё</button>
+    <button class="toolbar__btn" id="collapseAll">Свернуть всё</button>
+  </div>
+
   <!-- ПРЕВЬЮ -->
   <div class="panel panel--active" data-panel="preview">
     <div class="section-divider">Турнирная окрестность</div>
@@ -350,7 +361,7 @@ a{color:var(--accent);text-decoration:none;}a:hover{text-decoration:underline;}
     <div class="section-divider">Бомбардиры</div>
     <div style="padding:14px 16px">
       <div class="scorers-mini">
-        <div class="scorers-mini__sub">Топ-5 дивизиона А</div>
+        <div class="scorers-mini__sub"><span>Топ-5 дивизиона А</span><span class="sum">Тарасенко (ЦСКА) — 12 голов, 1-й</span></div>
         <div class="scorers-mini__body">
         <div class="scorers-mini__head"><span>#</span><span>Игрок</span><span>Команда</span><span>И</span><span>Г</span></div>
         <div class="scorers-mini__row scorers-mini__row--self"><span class="pos">1</span><span class="player">Тарасенко Иван</span><span class="club">ЦСКА</span><span>15</span><span class="g">12</span></div>
@@ -362,7 +373,7 @@ a{color:var(--accent);text-decoration:none;}a:hover{text-decoration:underline;}
         </div>
       </div>
       <div class="scorers-mini scorers-mini--team">
-        <div class="scorers-mini__sub">ЦСКА — свои бомбардиры</div>
+        <div class="scorers-mini__sub"><span>ЦСКА — свои бомбардиры</span><span class="sum">5 игроков · лучший Тарасенко, 12</span></div>
         <div class="scorers-mini__body">
         <div class="scorers-mini__head"><span>В лиге</span><span>Игрок</span><span>И</span><span>Г</span></div>
         <div class="scorers-mini__row scorers-mini__row--self"><span class="scorers-mini__rank">1</span><span class="player">Тарасенко Иван <span class="club">№81, нап.</span></span><span>15</span><span class="g">12</span></div>
@@ -374,7 +385,7 @@ a{color:var(--accent);text-decoration:none;}a:hover{text-decoration:underline;}
         </div>
       </div>
       <div class="scorers-mini scorers-mini--team">
-        <div class="scorers-mini__sub">«Рубин» — свои бомбардиры</div>
+        <div class="scorers-mini__sub"><span>«Рубин» — свои бомбардиры</span><span class="sum">5 игроков · лучший Сафаров, 4</span></div>
         <div class="scorers-mini__body">
         <div class="scorers-mini__head"><span>В лиге</span><span>Игрок</span><span>И</span><span>Г</span></div>
         <div class="scorers-mini__row scorers-mini__row--self"><span class="scorers-mini__rank">35</span><span class="player">Сафаров Инсаф <span class="club">№17</span></span><span>14</span><span class="g">4</span></div>
@@ -618,6 +629,22 @@ document.querySelectorAll('.scorers-mini__sub').forEach(function(s){
     body.style.display=closed?'none':'';
   });
 });
+function setAll(closed){
+  document.querySelectorAll('.section-divider').forEach(function(d){
+    var b=d.nextElementSibling;
+    if(!b||b.classList.contains('section-divider'))return;
+    d.classList.toggle('section-divider--closed',closed);
+    b.style.display=closed?'none':'';
+  });
+  document.querySelectorAll('.scorers-mini__sub').forEach(function(s){
+    var b=s.nextElementSibling;
+    if(!b)return;
+    s.classList.toggle('scorers-mini__sub--closed',closed);
+    b.style.display=closed?'none':'';
+  });
+}
+document.getElementById('expandAll').addEventListener('click',function(){setAll(false);});
+document.getElementById('collapseAll').addEventListener('click',function(){setAll(true);window.scrollTo({top:0,behavior:'smooth'});});
 </script>
 
 </body>
