@@ -1,4 +1,7 @@
-*.v2-*.html
+*.backup.html
+*.final.html
+*.pre-*.html
+*.v[0-9]*.html
 *.draft.*
 data.md
 .DS_Store
