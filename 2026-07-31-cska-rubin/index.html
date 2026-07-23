@@ -145,6 +145,26 @@ a{color:var(--accent);text-decoration:none;}a:hover{text-decoration:underline;}
 .standings-mini__row--self .pos,.standings-mini__row--self .pts{color:var(--accent);font-weight:800;}
 .standings-mini__row .team{color:var(--text);font-weight:600;}
 .standings-mini__note{font-size:10px;color:var(--text-dim);padding:8px 12px;background:var(--bg-row);border-top:1px solid var(--border-soft);font-style:italic;}
+.section-divider{cursor:pointer;user-select:none;display:flex;align-items:center;justify-content:space-between;gap:10px;transition:color .15s;}
+.section-divider:hover{color:var(--text);}
+.section-divider::after{content:'▾';font-size:11px;opacity:.55;transition:transform .2s;flex-shrink:0;}
+.section-divider--closed::after{transform:rotate(-90deg);}
+.scorers-mini{background:var(--bg-card);border:1px solid var(--border);border-radius:8px;overflow:hidden;margin-bottom:12px;}
+.scorers-mini__head,.scorers-mini__row{display:grid;grid-template-columns:24px 1fr 96px 30px 30px;gap:0;align-items:center;padding:8px 12px;font-size:11px;}
+.scorers-mini__head{background:var(--bg-divider);color:var(--text-muted);text-transform:uppercase;letter-spacing:0.06em;font-weight:700;font-size:10px;}
+.scorers-mini__head>span,.scorers-mini__row>span{text-align:right;padding-left:6px;}
+.scorers-mini__head>span:nth-child(1),.scorers-mini__row>span:nth-child(1),
+.scorers-mini__head>span:nth-child(2),.scorers-mini__row>span:nth-child(2),
+.scorers-mini__head>span:nth-child(3),.scorers-mini__row>span:nth-child(3){text-align:left;padding-left:0;}
+.scorers-mini__head>span:nth-child(2),.scorers-mini__row>span:nth-child(2){padding-left:0;}
+.scorers-mini__row{border-top:1px solid var(--border-soft);color:#d6d8da;}
+.scorers-mini__row--self{background:var(--accent-soft);border-left:3px solid var(--accent);padding-left:9px;}
+.scorers-mini__row--self .pos,.scorers-mini__row--self .g{color:var(--accent);font-weight:800;}
+.scorers-mini__row .player{color:var(--text);font-weight:600;}
+.scorers-mini__row .club{color:var(--text-dim);font-size:10px;}
+.scorers-mini__row .g{font-weight:700;}
+.scorers-mini__sub{background:var(--bg-divider);color:var(--text-muted);font-size:10px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:7px 12px;}
+.scorers-mini__note{font-size:10px;color:var(--text-dim);padding:8px 12px;background:var(--bg-row);border-top:1px solid var(--border-soft);font-style:italic;}
 .on-air{background:linear-gradient(135deg,rgba(164,214,57,0.08),rgba(164,214,57,0.02));border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:6px;padding:12px 14px;margin-bottom:10px;}
 .on-air__label{font-size:10px;text-transform:uppercase;letter-spacing:0.14em;color:var(--accent);font-weight:700;margin-bottom:6px;}
 .on-air p{color:#e3e5e7;margin:0;font-size:13px;line-height:1.55;}
@@ -283,7 +303,7 @@ a{color:var(--accent);text-decoration:none;}a:hover{text-decoration:underline;}
 <div class="wrap">
   <div class="site-header">
     <img src="data:image/png;base64,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" alt="ЮФЛ" style="height:38px;width:auto">
-    <div class="site-header__title">Молодёжная футбольная лига · Дивизион А</div>
+    <div class="site-header__title">МФЛ · Дивизион А</div>
     <div style="width:38px"></div>
   </div>
 
@@ -319,6 +339,39 @@ a{color:var(--accent);text-decoration:none;}a:hover{text-decoration:underline;}
         <div class="standings-mini__head"><span>#</span><span>Команда</span><span>И</span><span>В</span><span>Н</span><span>П</span><span>М</span><span>О</span></div>
         <div class="standings-mini__row"><span class="pos">1</span><span class="team">Краснодар</span><span>15</span><span>12</span><span>1</span><span>2</span><span>53 - 20</span><span class="pts">37</span></div><div class="standings-mini__row standings-mini__row--self"><span class="pos">2</span><span class="team">ЦСКА</span><span>15</span><span>10</span><span>2</span><span>3</span><span>44 - 21</span><span class="pts">32</span></div><div class="standings-mini__row"><span class="pos">3</span><span class="team">Локомотив</span><span>15</span><span>9</span><span>5</span><span>1</span><span>44 - 21</span><span class="pts">32</span></div><div class="standings-mini__row"><span class="pos">4</span><span class="team">Зенит</span><span>15</span><span>10</span><span>2</span><span>3</span><span>42 - 18</span><span class="pts">32</span></div><div class="standings-mini__note">· · · · · ·  15-е и 16-е места  · · · · · ·</div><div class="standings-mini__row"><span class="pos">14</span><span class="team">Динамо-Махачкала</span><span>15</span><span>3</span><span>2</span><span>10</span><span>22 - 34</span><span class="pts">11</span></div><div class="standings-mini__row"><span class="pos">15</span><span class="team">Факел</span><span>15</span><span>3</span><span>0</span><span>12</span><span>20 - 35</span><span class="pts">9</span></div><div class="standings-mini__row standings-mini__row--self"><span class="pos">16</span><span class="team">«Рубин»</span><span>15</span><span>2</span><span>3</span><span>10</span><span>20 - 36</span><span class="pts">9</span></div>
         <div class="standings-mini__note">После 15 туров · источник yflrussia.ru</div>
+      </div>
+    </div>
+    <div class="section-divider">Бомбардирская окрестность</div>
+    <div style="padding:14px 16px">
+      <div class="scorers-mini">
+        <div class="scorers-mini__sub">Топ бомбардиров дивизиона А</div>
+        <div class="scorers-mini__head"><span>#</span><span>Игрок</span><span>Команда</span><span>И</span><span>Г</span></div>
+        <div class="scorers-mini__row scorers-mini__row--self"><span class="pos">1</span><span class="player">Тарасенко Иван</span><span class="club">ЦСКА</span><span>15</span><span class="g">12</span></div>
+        <div class="scorers-mini__row"><span class="pos">2</span><span class="player">Полевой</span><span class="club">Краснодар</span><span>—</span><span class="g">11</span></div>
+        <div class="scorers-mini__row"><span class="pos">3</span><span class="player">Амбарцумов</span><span class="club">Краснодар</span><span>—</span><span class="g">10</span></div>
+        <div class="scorers-mini__row"><span class="pos">4</span><span class="player">Гитинов</span><span class="club">Динамо-Мх</span><span>—</span><span class="g">8</span></div>
+        <div class="scorers-mini__row"><span class="pos">5</span><span class="player">Сагария</span><span class="club">Локомотив</span><span>—</span><span class="g">8</span></div>
+        <div class="scorers-mini__note">Лучший снайпер лиги играет за ЦСКА. Порог топ-5 — 8 голов · источник yflrussia.ru</div>
+      </div>
+      <div class="scorers-mini">
+        <div class="scorers-mini__sub">ЦСКА — свои бомбардиры</div>
+        <div class="scorers-mini__head"><span>#</span><span>Игрок</span><span>Амплуа</span><span>И</span><span>Г</span></div>
+        <div class="scorers-mini__row scorers-mini__row--self"><span class="pos">1</span><span class="player">Тарасенко Иван <span class="club">№81</span></span><span class="club">нападающий</span><span>15</span><span class="g">12</span></div>
+        <div class="scorers-mini__row"><span class="pos">2</span><span class="player">Джанашия Владимир <span class="club">№65</span></span><span class="club">нападающий</span><span>15</span><span class="g">6</span></div>
+        <div class="scorers-mini__row"><span class="pos">3</span><span class="player">Хужахметов Тимур <span class="club">№59</span></span><span class="club">—</span><span>14</span><span class="g">5</span></div>
+        <div class="scorers-mini__row"><span class="pos">4</span><span class="player">Фиров Имран <span class="club">№62</span></span><span class="club">—</span><span>6</span><span class="g">4</span></div>
+        <div class="scorers-mini__row"><span class="pos">5</span><span class="player">Пасичник Илья <span class="club">№89</span></span><span class="club">нападающий</span><span>13</span><span class="g">4</span></div>
+        <div class="scorers-mini__note">Фиров — 4 гола за 6 игр: самый высокий темп в составе.</div>
+      </div>
+      <div class="scorers-mini">
+        <div class="scorers-mini__sub">«Рубин» — свои бомбардиры</div>
+        <div class="scorers-mini__head"><span>#</span><span>Игрок</span><span>Амплуа</span><span>И</span><span>Г</span></div>
+        <div class="scorers-mini__row scorers-mini__row--self"><span class="pos">1</span><span class="player">Сафаров Инсаф <span class="club">№17</span></span><span class="club">—</span><span>14</span><span class="g">4</span></div>
+        <div class="scorers-mini__row"><span class="pos">2</span><span class="player">Кузнецов Егор <span class="club">№99</span></span><span class="club">нападающий</span><span>15</span><span class="g">3</span></div>
+        <div class="scorers-mini__row"><span class="pos">3</span><span class="player">Гумеров Риваль <span class="club">№68</span></span><span class="club">нападающий</span><span>7</span><span class="g">3</span></div>
+        <div class="scorers-mini__row"><span class="pos">4</span><span class="player">Печугин Егор <span class="club">№23</span></span><span class="club">—</span><span>12</span><span class="g">2</span></div>
+        <div class="scorers-mini__row"><span class="pos">5</span><span class="player">Толстов Арсений <span class="club">№15</span></span><span class="club">полузащитник</span><span>8</span><span class="g">2</span></div>
+        <div class="scorers-mini__note">Лучший бомбардир «Рубина» — 4 гола: вдвое меньше порога топ-5 лиги. Точное место в рейтинге лиги не сверено.</div>
       </div>
     </div>
     <div class="section-divider">Очные встречи — во всех сильнее ЦСКА</div>
@@ -535,6 +588,14 @@ document.querySelectorAll('.tab').forEach(function(t){
     t.classList.add('tab--active');
     document.querySelector('.panel[data-panel="'+p+'"]').classList.add('panel--active');
     window.scrollTo({top:0,behavior:'smooth'});
+  });
+});
+document.querySelectorAll('.section-divider').forEach(function(d){
+  d.addEventListener('click',function(){
+    var body=d.nextElementSibling;
+    if(!body||body.classList.contains('section-divider'))return;
+    var closed=d.classList.toggle('section-divider--closed');
+    body.style.display=closed?'none':'';
   });
 });
 </script>
