@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<meta name="brief-version" content="20260724-171317">
+<meta name="brief-version" content="20260724-172319">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Справка комментатора · ЦСКА — Рубин · МФЛ-А, 17 тур · 31.07.2026</title>
@@ -173,6 +173,34 @@ a{color:var(--accent);text-decoration:none;}a:hover{text-decoration:underline;}
 .scorers-mini__row--self .scorers-mini__rank{color:var(--accent);}
 .scorers-mini__sub .sum{display:none;font-weight:600;color:var(--text-dim);text-transform:none;letter-spacing:0;font-size:10px;margin-left:auto;padding-right:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 .scorers-mini__sub--closed .sum{display:inline-block;}
+/* Блоки вкладок команд. Подпись сверху, текст во всю ширину — не разъезжается на длинных фразах. */
+.kv{background:var(--bg-card);border:1px solid var(--border);border-radius:8px;overflow:hidden;margin-bottom:10px;}
+.kv__row{padding:11px 14px;border-top:1px solid var(--border-soft);}
+.kv__row:first-child{border-top:none;}
+.kv__label{display:block;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-muted);margin-bottom:5px;}
+.kv__val{display:block;font-size:13px;line-height:1.55;color:#e3e5e7;}
+.kv__val b{color:var(--text);font-weight:700;}
+.kv__note,.ctable__note{font-size:10.5px;color:var(--text-dim);padding:9px 14px;background:var(--bg-row);border-top:1px solid var(--border-soft);font-style:italic;line-height:1.45;}
+/* Таблицы блоков: карточки и вклад в голы */
+.ctable{background:var(--bg-card);border:1px solid var(--border);border-radius:8px;overflow:hidden;margin-bottom:10px;}
+.ctable__head,.ctable__row{display:grid;gap:0;align-items:center;padding:9px 12px;font-size:11.5px;}
+.ctable--cards .ctable__head,.ctable--cards .ctable__row{grid-template-columns:1fr 94px 28px 30px 30px;}
+.ctable--contrib .ctable__head,.ctable--contrib .ctable__row{grid-template-columns:1fr 30px 40px 48px;}
+.ctable__head{background:var(--bg-divider);color:var(--text-muted);text-transform:uppercase;letter-spacing:0.06em;font-weight:700;font-size:10px;}
+.ctable__head>span,.ctable__row>span{text-align:right;padding-left:6px;}
+.ctable__head>span:first-child,.ctable__row>span:first-child{text-align:left;padding-left:0;}
+.ctable--cards .ctable__head>span:nth-child(2),.ctable--cards .ctable__row>span:nth-child(2){text-align:left;}
+.ctable__row{border-top:1px solid var(--border-soft);color:#d6d8da;}
+.ctable__row .nm{color:var(--text);font-weight:600;}
+.ctable__row .nm i{font-style:normal;color:var(--text-dim);font-weight:400;margin-left:4px;}
+.ctable__row .rl{color:var(--text-dim);font-size:10.5px;}
+.ctable__row--warn{background:var(--accent-soft);border-left:3px solid var(--accent);padding-left:9px;}
+.ctable__row .yk{font-weight:700;}
+.ctable__row--warn .yk{color:var(--accent);}
+.ctable__row .rk{color:#ff6b6b;font-weight:800;}
+.ctable__row .dim{color:var(--text-dim);}
+.blocknote{font-size:13px;line-height:1.55;color:#e3e5e7;background:var(--bg-row-2);border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:8px;padding:12px 14px;margin-bottom:10px;}
+.blocknote b{color:var(--text);}
 .stale{display:none;background:#3d2b0f;border:1px solid #8a6d1f;color:#f5c451;font-size:12px;font-weight:600;padding:11px 16px;border-radius:8px;margin:0 0 12px;line-height:1.45;}
 .stale--on{display:block;}
 .stale b{color:#ffd97a;}
@@ -212,7 +240,12 @@ a{color:var(--accent);text-decoration:none;}a:hover{text-decoration:underline;}
 .site-footer__private{text-align:center;color:var(--text-dim);font-size:11px;line-height:1.5;margin-top:14px;padding-top:14px;border-top:1px solid var(--border);}
 .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:var(--accent);color:var(--bg);padding:10px 18px;border-radius:6px;font-size:13px;font-weight:700;z-index:100;opacity:0;pointer-events:none;transition:opacity 0.2s;}
 .toast--show{opacity:1;}
-@media (max-width:480px){body{font-size:14px;}.match-card__team img{width:40px;height:40px;}.match-card__team-name{font-size:13px;}.match-card__date{font-size:14px;}.match-card__time{font-size:19px;}.match-card__center{min-width:92px;}.tour-header__title{font-size:16px;}.match-row{grid-template-columns:96px 1fr auto;padding:9px 8px;gap:6px;}.match-row__when{font-size:9px;}.match-row__teams{gap:3px;font-size:11px;}.match-row__logo{width:20px;height:20px;}.match-row__name{font-size:11px;}.tab{font-size:11px;padding:11px 10px;min-width:76px;letter-spacing:0.06em;}.h2h-hero__logo{width:32px;height:32px;}.h2h-hero__name{font-size:11px;}.h2h-hero__title{font-size:10px;}.h2h-stats__chip{font-size:10px;}.standings-mini__head,.standings-mini__row{font-size:10px;grid-template-columns:20px 1fr 22px 22px 22px 22px 44px 28px;padding:7px 8px;}.acc>summary{padding:12px;}.acc__title{font-size:13px;}.acc__body{padding:0 12px 12px;}}
+@media (max-width:480px){body{font-size:14px;}.match-card__team img{width:40px;height:40px;}.match-card__team-name{font-size:13px;}.match-card__date{font-size:14px;}.match-card__time{font-size:19px;}.match-card__center{min-width:92px;}.tour-header__title{font-size:16px;}.match-row{grid-template-columns:96px 1fr auto;padding:9px 8px;gap:6px;}.match-row__when{font-size:9px;}.match-row__teams{gap:3px;font-size:11px;}.match-row__logo{width:20px;height:20px;}.match-row__name{font-size:11px;}.tab{font-size:11px;padding:11px 10px;min-width:76px;letter-spacing:0.06em;}.h2h-hero__logo{width:32px;height:32px;}.h2h-hero__name{font-size:11px;}.h2h-hero__title{font-size:10px;}.h2h-stats__chip{font-size:10px;}.standings-mini__head,.standings-mini__row{font-size:10px;grid-template-columns:20px 1fr 22px 22px 22px 22px 44px 28px;padding:7px 8px;}.acc>summary{padding:12px;}.acc__title{font-size:13px;}.acc__body{padding:0 12px 12px;}
+.ctable__head,.ctable__row{font-size:10.5px;padding:8px 9px;}
+.ctable--cards .ctable__head,.ctable--cards .ctable__row{grid-template-columns:1fr 24px 26px 26px;}
+.ctable--cards .ctable__head>span:nth-child(2),.ctable--cards .ctable__row>span:nth-child(2){display:none;}
+.ctable--contrib .ctable__head,.ctable--contrib .ctable__row{grid-template-columns:1fr 24px 34px 42px;}
+.kv__row{padding:10px 12px;}.kv__val{font-size:12.5px;}.blocknote{font-size:12.5px;padding:11px 12px;}}
 @media (min-width:1024px){.wrap{max-width:760px;}}
 
 /* === v6: VISITED CHIPS === */
@@ -510,44 +543,50 @@ a{color:var(--accent);text-decoration:none;}a:hover{text-decoration:underline;}
 
     <div class="section-divider">Под угрозой и вне игры</div>
     <div style="padding:14px 16px">
-      <ul class="staff-list">
-        <li><b>Мингиян Бадмаев</b> №67, защитник — <span style="color:var(--accent)">3 ЖК + красная</span> в 6 матчах. Тот самый, что дебютировал за основу ЦСКА в РПЛ.</li>
-        <li><b>Андрей Платонов</b> №96, вратарь — 4 ЖК в 11 матчах. Редкий случай: основной вратарь среди лидеров по карточкам.</li>
-        <li><b>Саркис Тверитнев</b> №68, полузащитник — 4 ЖК в 14 матчах.</li>
-        <li><b>Алексей Бондаренко</b> №82 · <b>Семён Николаев</b> №72 · <b>Илья Пасичник</b> №89 — по 3 ЖК.</li>
-      </ul>
-      <div class="standings-mini__note" style="border:1px solid var(--border);border-radius:8px;margin-top:10px">Показана жёлтая — сразу видно, чья она по счёту. Источник: <a href="https://yflrussia.ru/tournament/1060904/stats/cards?common=1" target="_blank" rel="noopener">карточки лиги ↗</a></div>
+      <div class="ctable ctable--cards">
+        <div class="ctable__head"><span>Игрок</span><span>Амплуа</span><span>И</span><span>ЖК</span><span>КК</span></div>
+        <div class="ctable__row ctable__row--warn"><span class="nm">Мингиян Бадмаев <i>№67</i></span><span class="rl">защитник</span><span>6</span><span class="yk">3</span><span class="rk">1</span></div>
+        <div class="ctable__row"><span class="nm">Андрей Платонов <i>№96</i></span><span class="rl">вратарь</span><span>11</span><span class="yk">4</span><span class="dim">—</span></div>
+        <div class="ctable__row"><span class="nm">Саркис Тверитнев <i>№68</i></span><span class="rl">полузащитник</span><span>14</span><span class="yk">4</span><span class="dim">—</span></div>
+        <div class="ctable__row"><span class="nm">Алексей Бондаренко <i>№82</i></span><span class="rl">полузащитник</span><span>14</span><span class="yk">3</span><span class="dim">—</span></div>
+        <div class="ctable__row"><span class="nm">Семён Николаев <i>№72</i></span><span class="rl">нападающий</span><span>14</span><span class="yk">3</span><span class="dim">—</span></div>
+        <div class="ctable__row"><span class="nm">Илья Пасичник <i>№89</i></span><span class="rl">нападающий</span><span>14</span><span class="yk">3</span><span class="dim">—</span></div>
+        <div class="ctable__note">Единственная красная в команде — у Бадмаева, и он же дебютировал за основу ЦСКА в РПЛ. Источник: <a href="https://yflrussia.ru/tournament/1060904/stats/cards?common=1" target="_blank" rel="noopener">карточки лиги ↗</a></div>
+      </div>
     </div>
 
     <div class="section-divider">Глубина обоймы</div>
     <div style="padding:14px 16px">
-      <ul class="staff-list">
-        <li><b>Заявка — 33 игрока</b>, средний возраст 18,03.</li>
-        <li><b>Ядро:</b> Джанашия и Тарасенко — по 15 матчей; Хужахметов 14; Филюшин, Тверитнев, Бондаренко, Николаев, Пасичник, Бохов — по 13.</li>
-        <li><b>Периферия:</b> Фиров 6, Бадмаев 6, Баранов 6, Шанхоев 8, Шивеоби 9, Корнеев 9, Сериков 9 — выйдет такой номер, у вас есть что сказать.</li>
-        <li><b>Вратари:</b> Платонов — 11 матчей, основной; Маракулин 3; Рамонов и Бунич в заявке без матчей.</li>
-      </ul>
-      <div class="standings-mini__note" style="border:1px solid var(--border);border-radius:8px;margin-top:10px">Считается «матчи с участием» — выход на замену тоже учтён.</div>
+      <div class="kv">
+        <div class="kv__row"><span class="kv__label">Заявка</span><span class="kv__val"><b>33 игрока</b>, средний возраст 18,03.</span></div>
+        <div class="kv__row"><span class="kv__label">Ядро состава</span><span class="kv__val">Джанашия и Тарасенко — по 15 матчей. Хужахметов — 14. Филюшин, Тверитнев, Бондаренко, Николаев, Пасичник, Бохов — по 13.</span></div>
+        <div class="kv__row"><span class="kv__label">Периферия — заготовка на замену</span><span class="kv__val">Фиров, Бадмаев, Баранов — по 6 матчей. Шанхоев — 8. Шивеоби, Корнеев, Сериков — по 9.</span></div>
+        <div class="kv__row"><span class="kv__label">Вратари</span><span class="kv__val">Платонов — 11 матчей, основной. Маракулин — 3. Рамонов и Бунич в заявке без матчей.</span></div>
+        <div class="kv__note">Считаются «матчи с участием» — выход на замену тоже учтён.</div>
+      </div>
     </div>
 
     <div class="section-divider">Кто делает голы, кроме бомбардира</div>
     <div style="padding:14px 16px">
-      <ul class="staff-list">
-        <li><b>44 гола забиты 12 разными авторами.</b> Лидер даёт 27% — тезис «закройте Тарасенко» не работает.</li>
-        <li><b>Вклад (голы+пасы) за матч:</b> Тарасенко 0,80 · Пасичник 0,77 · Джанашия 0,67 · Фиров 0,67.</li>
-        <li><b>Пасичник №89 — созидатель, а не финишер:</b> 6 голевых при 4 голах. Второй по влиянию на голы, хотя в бомбардирах лишь 36-й в лиге.</li>
-      </ul>
-      <div class="standings-mini__note" style="border:1px solid var(--border);border-radius:8px;margin-top:10px">Сумма голов по заявке сходится с таблицей: 44.</div>
+      <div class="blocknote"><b>44 гола забиты 12 разными авторами</b>, лидер даёт лишь 27%. Тезис «закройте Тарасенко — и ЦСКА не забьёт» не работает.</div>
+      <div class="ctable ctable--contrib">
+        <div class="ctable__head"><span>Игрок</span><span>И</span><span>Г+П</span><span>За матч</span></div>
+        <div class="ctable__row ctable__row--warn"><span class="nm">Иван Тарасенко <i>№81</i></span><span>15</span><span>12</span><span class="yk">0,80</span></div>
+        <div class="ctable__row"><span class="nm">Илья Пасичник <i>№89</i></span><span>13</span><span>10</span><span>0,77</span></div>
+        <div class="ctable__row"><span class="nm">Владимир Джанашия <i>№65</i></span><span>15</span><span>10</span><span>0,67</span></div>
+        <div class="ctable__row"><span class="nm">Имран Фиров <i>№62</i></span><span>6</span><span>4</span><span>0,67</span></div>
+        <div class="ctable__note">Пасичник — созидатель, а не финишер: 6 голевых при 4 голах. Второй по влиянию на голы, хотя в бомбардирах лиги лишь 36-й. Сумма голов по заявке сходится с таблицей: 44.</div>
+      </div>
     </div>
 
     <div class="section-divider">Что на кону</div>
     <div style="padding:14px 16px">
-      <ul class="staff-list">
-        <li><b>Забито 44, пропущено 21</b> — разница +23.</li>
-        <li><b>Темп 2,13 очка за матч.</b> У «Краснодара» 2,47. Отставание — 5 очков.</li>
-        <li><b>Чтобы догнать лидера,</b> ЦСКА нужен темп около 2,8 — это почти 14 побед в 15 оставшихся матчах. Матч с последней командой для ЦСКА не проходной.</li>
-      </ul>
-      <div class="standings-mini__note" style="border:1px solid var(--border);border-radius:8px;margin-top:10px">Проекция при сохранении темпа — не прогноз. Регламент стыков не сверялся.</div>
+      <div class="kv">
+        <div class="kv__row"><span class="kv__label">Забито и пропущено</span><span class="kv__val"><b>44 : 21</b> — разница <b>+23</b>, лучшая среди показанных в таблице.</span></div>
+        <div class="kv__row"><span class="kv__label">Темп очков</span><span class="kv__val"><b>2,13 за матч.</b> У «Краснодара» — 2,47. Отставание от лидера — 5 очков.</span></div>
+        <div class="kv__row"><span class="kv__label">Что это значит в эфире</span><span class="kv__val">Чтобы догнать «Краснодар», ЦСКА нужен темп около <b>2,8</b> — почти 14 побед в 15 оставшихся матчах. Матч с последней командой для ЦСКА не проходной.</span></div>
+        <div class="kv__note">Проекция при сохранении темпа — не прогноз. Регламент стыков не сверялся.</div>
+      </div>
     </div>
   </div>
 
@@ -615,44 +654,52 @@ a{color:var(--accent);text-decoration:none;}a:hover{text-decoration:underline;}
 
     <div class="section-divider">Под угрозой и вне игры</div>
     <div style="padding:14px 16px">
-      <ul class="staff-list">
-        <li><b>Трое на пяти жёлтых:</b> <b>Инсаф Сафаров</b> №17 (14 матчей) · <b>Саид Уцумиев</b> №5 (15) · <b>Захар Муха</b> №3 (15). Лучший бомбардир команды — в их числе.</li>
-        <li><b>Егор Добрынин</b> №88 — жёлтая плюс <span style="color:var(--accent)">красная</span> в 11 матчах.</li>
-        <li><b>Азат Назипов</b> — <span style="color:var(--accent)">красная</span> всего в 3 матчах.</li>
-        <li><b>По 3 ЖК:</b> Хасянзянов №9, Хайруллин №10, Кузнецов №99.</li>
-      </ul>
-      <div class="standings-mini__note" style="border:1px solid var(--border);border-radius:8px;margin-top:10px">У «Рубина» карточек заметно больше, чем у ЦСКА — фактура про игру на грани. Источник: <a href="https://yflrussia.ru/tournament/1060904/stats/cards?common=1" target="_blank" rel="noopener">карточки лиги ↗</a></div>
+      <div class="ctable ctable--cards">
+        <div class="ctable__head"><span>Игрок</span><span>Амплуа</span><span>И</span><span>ЖК</span><span>КК</span></div>
+        <div class="ctable__row ctable__row--warn"><span class="nm">Инсаф Сафаров <i>№17</i></span><span class="rl">нападающий</span><span>14</span><span class="yk">5</span><span class="dim">—</span></div>
+        <div class="ctable__row ctable__row--warn"><span class="nm">Саид Уцумиев <i>№5</i></span><span class="rl">полузащитник</span><span>15</span><span class="yk">5</span><span class="dim">—</span></div>
+        <div class="ctable__row ctable__row--warn"><span class="nm">Захар Муха <i>№3</i></span><span class="rl">полузащитник</span><span>15</span><span class="yk">5</span><span class="dim">—</span></div>
+        <div class="ctable__row ctable__row--warn"><span class="nm">Егор Добрынин <i>№88</i></span><span class="rl">полузащитник</span><span>11</span><span class="yk">1</span><span class="rk">1</span></div>
+        <div class="ctable__row ctable__row--warn"><span class="nm">Азат Назипов</span><span class="rl">—</span><span>3</span><span class="dim">0</span><span class="rk">1</span></div>
+        <div class="ctable__row"><span class="nm">Самат Хасянзянов <i>№9</i></span><span class="rl">полузащитник</span><span>12</span><span class="yk">3</span><span class="dim">—</span></div>
+        <div class="ctable__row"><span class="nm">Богдан Хайруллин <i>№10</i></span><span class="rl">—</span><span>13</span><span class="yk">3</span><span class="dim">—</span></div>
+        <div class="ctable__row"><span class="nm">Егор Кузнецов <i>№99</i></span><span class="rl">нападающий</span><span>15</span><span class="yk">3</span><span class="dim">—</span></div>
+        <div class="ctable__note">Трое на пяти жёлтых, включая лучшего бомбардира команды, плюс две красные за сезон. У ЦСКА столько нет — готовая фактура про игру на грани. Источник: <a href="https://yflrussia.ru/tournament/1060904/stats/cards?common=1" target="_blank" rel="noopener">карточки лиги ↗</a></div>
+      </div>
     </div>
 
     <div class="section-divider">Глубина обоймы</div>
     <div style="padding:14px 16px">
-      <ul class="staff-list">
-        <li><b>Заявка — 37 игроков</b>, средний возраст 18,05. На четверых шире, чем у ЦСКА.</li>
-        <li><b>Ядро:</b> Кузнецов 15; Уцумиев, Муха, Сафаров, Абдуллин — по 14; Хайруллин 13; Богомолов, Хасянзянов, Печугин — по 12.</li>
-        <li><b>Периферия:</b> Балаев 6, Гумеров 7, Хабибуллин 8, Толстов 8, Анисимов 9.</li>
-        <li><b>Вратари:</b> Щепанский — 10 матчей, основной; Соколов 5. Смена вратаря по ходу сезона была.</li>
-      </ul>
-      <div class="standings-mini__note" style="border:1px solid var(--border);border-radius:8px;margin-top:10px">Заявка шире, ядро уже — тренер Яруллин перебирает сочетания. Причину из цифр не выводим.</div>
+      <div class="kv">
+        <div class="kv__row"><span class="kv__label">Заявка</span><span class="kv__val"><b>37 игроков</b>, средний возраст 18,05 — на четверых шире, чем у ЦСКА.</span></div>
+        <div class="kv__row"><span class="kv__label">Ядро состава</span><span class="kv__val">Кузнецов — 15 матчей. Уцумиев, Муха, Сафаров, Абдуллин — по 14. Хайруллин — 13. Богомолов, Хасянзянов, Печугин — по 12.</span></div>
+        <div class="kv__row"><span class="kv__label">Периферия — заготовка на замену</span><span class="kv__val">Балаев — 6 матчей. Гумеров — 7. Хабибуллин и Толстов — по 8. Анисимов — 9.</span></div>
+        <div class="kv__row"><span class="kv__label">Вратари</span><span class="kv__val">Щепанский — 10 матчей, основной. Соколов — 5: смена вратаря по ходу сезона была.</span></div>
+        <div class="kv__note">Заявка шире, а ядро уже — тренер Яруллин перебирает сочетания. Причину из цифр не выводим.</div>
+      </div>
     </div>
 
     <div class="section-divider">Кто делает голы, кроме бомбардира</div>
     <div style="padding:14px 16px">
-      <ul class="staff-list">
-        <li><b>20 голов на 10 авторов.</b> Лидер даёт 20% — но никто не перевалил за 4 гола за половину сезона.</li>
-        <li><b>Вклад (голы+пасы) за матч:</b> Гумеров 0,43 · Хабибуллин 0,38 · Печугин 0,33 · Сафаров 0,29.</li>
-        <li><b>Карим Хабибуллин №44 — защитник</b> с 3 голевыми и нулём голов. Второй по вовлечённости в голы во всей команде.</li>
-      </ul>
-      <div class="standings-mini__note" style="border:1px solid var(--border);border-radius:8px;margin-top:10px">У Гумерова (7 матчей) и Хабибуллина (8) выборка малая — темп может не удержаться. Сумма голов сходится: 20.</div>
+      <div class="blocknote"><b>20 голов на 10 авторов</b>, и никто не перевалил за 4 гола за половину сезона. Проблема не в отсутствии лидера, а в том, что забивать некому.</div>
+      <div class="ctable ctable--contrib">
+        <div class="ctable__head"><span>Игрок</span><span>И</span><span>Г+П</span><span>За матч</span></div>
+        <div class="ctable__row ctable__row--warn"><span class="nm">Риваль Гумеров <i>№68</i></span><span>7</span><span>3</span><span class="yk">0,43</span></div>
+        <div class="ctable__row"><span class="nm">Карим Хабибуллин <i>№44</i></span><span>8</span><span>3</span><span>0,38</span></div>
+        <div class="ctable__row"><span class="nm">Егор Печугин <i>№23</i></span><span>12</span><span>4</span><span>0,33</span></div>
+        <div class="ctable__row"><span class="nm">Инсаф Сафаров <i>№17</i></span><span>14</span><span>4</span><span>0,29</span></div>
+        <div class="ctable__note">Хабибуллин — защитник: 3 голевых при нуле голов, второй по вовлечённости в голы во всей команде. У Гумерова (7 матчей) и Хабибуллина (8) выборка малая, темп может не удержаться. Сумма голов сходится: 20.</div>
+      </div>
     </div>
 
     <div class="section-divider">Что на кону</div>
     <div style="padding:14px 16px">
-      <ul class="staff-list">
-        <li><b>Забито 20, пропущено 36</b> — разница −16. У ЦСКА +23.</li>
-        <li><b>Темп 0,60 очка за матч</b> против 2,13 у соперника — более чем втрое ниже.</li>
-        <li><b>9 очков вровень с «Факелом»,</b> но «Рубин» ниже по дополнительным показателям. Чтобы уйти со дна, нужно прибавлять в разы, и отсчёт идёт с каждого тура.</li>
-      </ul>
-      <div class="standings-mini__note" style="border:1px solid var(--border);border-radius:8px;margin-top:10px">Только арифметика мест. Регламент вылета не сверялся — про стыки не говорим.</div>
+      <div class="kv">
+        <div class="kv__row"><span class="kv__label">Забито и пропущено</span><span class="kv__val"><b>20 : 36</b> — разница <b>−16</b>. У ЦСКА +23.</span></div>
+        <div class="kv__row"><span class="kv__label">Темп очков</span><span class="kv__val"><b>0,60 за матч</b> против 2,13 у соперника — более чем втрое ниже.</span></div>
+        <div class="kv__row"><span class="kv__label">Что это значит в эфире</span><span class="kv__val">9 очков вровень с «Факелом», но «Рубин» ниже по дополнительным показателям. Чтобы уйти со дна, нужно прибавлять в разы — и отсчёт идёт с каждого тура.</span></div>
+        <div class="kv__note">Только арифметика мест. Регламент вылета не сверялся — про стыки не говорим.</div>
+      </div>
     </div>
   </div>
 
