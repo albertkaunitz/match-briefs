@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
+<meta name="brief-version" content="20260724-171025">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="cache-control" content="no-cache">
@@ -965,5 +966,28 @@ document.querySelectorAll('.bundle__chips .chip, .team-angles__chips .chip').for
 
 })();
 </script>
+
+<script id="brief-version-check">
+// Свежая ссылка: страница сама сверяет свою версию с сервером и обновляется.
+(function () {
+  var meta = document.querySelector('meta[name="brief-version"]');
+  if (!meta || !window.fetch) return;
+  var mine = (meta.getAttribute('content') || '').trim();
+  fetch('version.txt?t=' + Date.now(), { cache: 'no-store' })
+    .then(function (r) { return r.ok ? r.text() : null; })
+    .then(function (txt) {
+      if (!txt) return;
+      var live = txt.trim();
+      if (!live || live === mine) return;
+      var tried = null;
+      try { tried = sessionStorage.getItem('brief-reload'); } catch (e) {}
+      if (tried === live) return;              // защита от петли перезагрузок
+      try { sessionStorage.setItem('brief-reload', live); } catch (e) {}
+      location.replace(location.pathname + '?v=' + encodeURIComponent(live));
+    })
+    .catch(function () {});
+})();
+</script>
+
 </body>
 </html>
