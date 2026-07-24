@@ -172,6 +172,9 @@ a{color:var(--accent);text-decoration:none;}a:hover{text-decoration:underline;}
 .scorers-mini__row--self .scorers-mini__rank{color:var(--accent);}
 .scorers-mini__sub .sum{display:none;font-weight:600;color:var(--text-dim);text-transform:none;letter-spacing:0;font-size:10px;margin-left:auto;padding-right:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 .scorers-mini__sub--closed .sum{display:inline-block;}
+.stale{display:none;background:#3d2b0f;border:1px solid #8a6d1f;color:#f5c451;font-size:12px;font-weight:600;padding:11px 16px;border-radius:8px;margin:0 0 12px;line-height:1.45;}
+.stale--on{display:block;}
+.stale b{color:#ffd97a;}
 .toolbar{display:flex;gap:8px;padding:10px 16px;background:var(--bg-row);border-bottom:1px solid var(--border);}
 .toolbar__btn{background:var(--bg-card);border:1px solid var(--border);color:var(--text-muted);font-family:inherit;font-size:11px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;padding:7px 13px;border-radius:6px;cursor:pointer;transition:.15s;}
 .toolbar__btn:hover{border-color:var(--accent);color:var(--accent);}
@@ -318,6 +321,8 @@ a{color:var(--accent);text-decoration:none;}a:hover{text-decoration:underline;}
     <div class="site-header__title">МФЛ · Дивизион А</div>
     <div style="width:38px"></div>
   </div>
+
+  <div class="stale" id="staleWarn"></div>
 
   <div class="tour-header">
     <h1 class="tour-header__title">Молодёжная футбольная лига — А · 17-й тур</h1>
@@ -501,6 +506,48 @@ a{color:var(--accent);text-decoration:none;}a:hover{text-decoration:underline;}
       <div class="fact__source"><a href="https://yflrussia.ru/tournament/1060904/calendar" target="_blank" rel="noopener">календарь ↗</a></div>
     </div>
     </div>
+
+    <div class="section-divider">Под угрозой и вне игры</div>
+    <div style="padding:14px 16px">
+      <ul class="staff-list">
+        <li><b>Мингиян Бадмаев</b> №67, защитник — <span style="color:var(--accent)">3 ЖК + красная</span> в 6 матчах. Тот самый, что дебютировал за основу ЦСКА в РПЛ.</li>
+        <li><b>Андрей Платонов</b> №96, вратарь — 4 ЖК в 11 матчах. Редкий случай: основной вратарь среди лидеров по карточкам.</li>
+        <li><b>Саркис Тверитнев</b> №68, полузащитник — 4 ЖК в 14 матчах.</li>
+        <li><b>Алексей Бондаренко</b> №82 · <b>Семён Николаев</b> №72 · <b>Илья Пасичник</b> №89 — по 3 ЖК.</li>
+      </ul>
+      <div class="standings-mini__note" style="border:1px solid var(--border);border-radius:8px;margin-top:10px">Показана жёлтая — сразу видно, чья она по счёту. Источник: <a href="https://yflrussia.ru/tournament/1060904/stats/cards?common=1" target="_blank" rel="noopener">карточки лиги ↗</a></div>
+    </div>
+
+    <div class="section-divider">Глубина обоймы</div>
+    <div style="padding:14px 16px">
+      <ul class="staff-list">
+        <li><b>Заявка — 33 игрока</b>, средний возраст 18,03.</li>
+        <li><b>Ядро:</b> Джанашия и Тарасенко — по 15 матчей; Хужахметов 14; Филюшин, Тверитнев, Бондаренко, Николаев, Пасичник, Бохов — по 13.</li>
+        <li><b>Периферия:</b> Фиров 6, Бадмаев 6, Баранов 6, Шанхоев 8, Шивеоби 9, Корнеев 9, Сериков 9 — выйдет такой номер, у вас есть что сказать.</li>
+        <li><b>Вратари:</b> Платонов — 11 матчей, основной; Маракулин 3; Рамонов и Бунич в заявке без матчей.</li>
+      </ul>
+      <div class="standings-mini__note" style="border:1px solid var(--border);border-radius:8px;margin-top:10px">Считается «матчи с участием» — выход на замену тоже учтён.</div>
+    </div>
+
+    <div class="section-divider">Кто делает голы, кроме бомбардира</div>
+    <div style="padding:14px 16px">
+      <ul class="staff-list">
+        <li><b>44 гола забиты 12 разными авторами.</b> Лидер даёт 27% — тезис «закройте Тарасенко» не работает.</li>
+        <li><b>Вклад (голы+пасы) за матч:</b> Тарасенко 0,80 · Пасичник 0,77 · Джанашия 0,67 · Фиров 0,67.</li>
+        <li><b>Пасичник №89 — созидатель, а не финишер:</b> 6 голевых при 4 голах. Второй по влиянию на голы, хотя в бомбардирах лишь 36-й в лиге.</li>
+      </ul>
+      <div class="standings-mini__note" style="border:1px solid var(--border);border-radius:8px;margin-top:10px">Сумма голов по заявке сходится с таблицей: 44.</div>
+    </div>
+
+    <div class="section-divider">Что на кону</div>
+    <div style="padding:14px 16px">
+      <ul class="staff-list">
+        <li><b>Забито 44, пропущено 21</b> — разница +23.</li>
+        <li><b>Темп 2,13 очка за матч.</b> У «Краснодара» 2,47. Отставание — 5 очков.</li>
+        <li><b>Чтобы догнать лидера,</b> ЦСКА нужен темп около 2,8 — это почти 14 побед в 15 оставшихся матчах. Матч с последней командой для ЦСКА не проходной.</li>
+      </ul>
+      <div class="standings-mini__note" style="border:1px solid var(--border);border-radius:8px;margin-top:10px">Проекция при сохранении темпа — не прогноз. Регламент стыков не сверялся.</div>
+    </div>
   </div>
 
   <!-- РУБИН -->
@@ -563,6 +610,48 @@ a{color:var(--accent);text-decoration:none;}a:hover{text-decoration:underline;}
       <div class="fact__phrase">«Когда терять нечего, играется свободнее — ЦСКА это должен помнить».</div>
       <div class="fact__source"><a href="https://yflrussia.ru/tournament/1060904/tables" target="_blank" rel="noopener">таблица ↗</a></div>
     </div>
+    </div>
+
+    <div class="section-divider">Под угрозой и вне игры</div>
+    <div style="padding:14px 16px">
+      <ul class="staff-list">
+        <li><b>Трое на пяти жёлтых:</b> <b>Инсаф Сафаров</b> №17 (14 матчей) · <b>Саид Уцумиев</b> №5 (15) · <b>Захар Муха</b> №3 (15). Лучший бомбардир команды — в их числе.</li>
+        <li><b>Егор Добрынин</b> №88 — жёлтая плюс <span style="color:var(--accent)">красная</span> в 11 матчах.</li>
+        <li><b>Азат Назипов</b> — <span style="color:var(--accent)">красная</span> всего в 3 матчах.</li>
+        <li><b>По 3 ЖК:</b> Хасянзянов №9, Хайруллин №10, Кузнецов №99.</li>
+      </ul>
+      <div class="standings-mini__note" style="border:1px solid var(--border);border-radius:8px;margin-top:10px">У «Рубина» карточек заметно больше, чем у ЦСКА — фактура про игру на грани. Источник: <a href="https://yflrussia.ru/tournament/1060904/stats/cards?common=1" target="_blank" rel="noopener">карточки лиги ↗</a></div>
+    </div>
+
+    <div class="section-divider">Глубина обоймы</div>
+    <div style="padding:14px 16px">
+      <ul class="staff-list">
+        <li><b>Заявка — 37 игроков</b>, средний возраст 18,05. На четверых шире, чем у ЦСКА.</li>
+        <li><b>Ядро:</b> Кузнецов 15; Уцумиев, Муха, Сафаров, Абдуллин — по 14; Хайруллин 13; Богомолов, Хасянзянов, Печугин — по 12.</li>
+        <li><b>Периферия:</b> Балаев 6, Гумеров 7, Хабибуллин 8, Толстов 8, Анисимов 9.</li>
+        <li><b>Вратари:</b> Щепанский — 10 матчей, основной; Соколов 5. Смена вратаря по ходу сезона была.</li>
+      </ul>
+      <div class="standings-mini__note" style="border:1px solid var(--border);border-radius:8px;margin-top:10px">Заявка шире, ядро уже — тренер Яруллин перебирает сочетания. Причину из цифр не выводим.</div>
+    </div>
+
+    <div class="section-divider">Кто делает голы, кроме бомбардира</div>
+    <div style="padding:14px 16px">
+      <ul class="staff-list">
+        <li><b>20 голов на 10 авторов.</b> Лидер даёт 20% — но никто не перевалил за 4 гола за половину сезона.</li>
+        <li><b>Вклад (голы+пасы) за матч:</b> Гумеров 0,43 · Хабибуллин 0,38 · Печугин 0,33 · Сафаров 0,29.</li>
+        <li><b>Карим Хабибуллин №44 — защитник</b> с 3 голевыми и нулём голов. Второй по вовлечённости в голы во всей команде.</li>
+      </ul>
+      <div class="standings-mini__note" style="border:1px solid var(--border);border-radius:8px;margin-top:10px">У Гумерова (7 матчей) и Хабибуллина (8) выборка малая — темп может не удержаться. Сумма голов сходится: 20.</div>
+    </div>
+
+    <div class="section-divider">Что на кону</div>
+    <div style="padding:14px 16px">
+      <ul class="staff-list">
+        <li><b>Забито 20, пропущено 36</b> — разница −16. У ЦСКА +23.</li>
+        <li><b>Темп 0,60 очка за матч</b> против 2,13 у соперника — более чем втрое ниже.</li>
+        <li><b>9 очков вровень с «Факелом»,</b> но «Рубин» ниже по дополнительным показателям. Чтобы уйти со дна, нужно прибавлять в разы, и отсчёт идёт с каждого тура.</li>
+      </ul>
+      <div class="standings-mini__note" style="border:1px solid var(--border);border-radius:8px;margin-top:10px">Только арифметика мест. Регламент вылета не сверялся — про стыки не говорим.</div>
     </div>
   </div>
 
@@ -643,6 +732,18 @@ function setAll(closed){
     b.style.display=closed?'none':'';
   });
 }
+// Сторож свежести: бриф сам сообщает, что после сбора данных сыграны новые туры.
+(function(){
+  var СБОР='2026-07-23', ТУРЫ=[['2026-07-24','16-й тур'],['2026-07-31','17-й тур — этот матч']];
+  var сегодня=new Date(), сыграны=[];
+  ТУРЫ.forEach(function(t){ var d=new Date(t[0]+'T21:00:00+03:00'); if(сегодня>d) сыграны.push(t[1]); });
+  if(!сыграны.length) return;
+  var el=document.getElementById('staleWarn');
+  el.innerHTML='⚠️ <b>Данные могли устареть.</b> Справка собрана '+СБОР.split('-').reverse().join('.')+
+    ' (после 15 туров). С тех пор сыграно: '+сыграны.join(', ')+
+    '. Очки, места, голы и карточки изменились — скажи ассистенту «обнови бриф».';
+  el.classList.add('stale--on');
+})();
 document.getElementById('expandAll').addEventListener('click',function(){setAll(false);});
 document.getElementById('collapseAll').addEventListener('click',function(){setAll(true);window.scrollTo({top:0,behavior:'smooth'});});
 </script>
