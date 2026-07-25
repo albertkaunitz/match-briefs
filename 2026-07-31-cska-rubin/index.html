@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<meta name="brief-version" content="20260724-211016">
+<meta name="brief-version" content="20260725-224124">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Справка комментатора · ЦСКА — Рубин · МФЛ-А, 17 тур · 31.07.2026</title>
+<title>Справка комментатора · ЦСКА – «Рубин» · МФЛ-А, 17 тур · 31.07.2026</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#18191b;--bg-card:#232527;--bg-divider:#2a2c2f;--bg-row:#1f2123;--bg-row-2:#212325;--accent:#A4D639;--accent-soft:rgba(164,214,57,0.10);--accent-dim:rgba(164,214,57,0.25);--text:#fff;--text-muted:#8a8f95;--text-dim:#5e6166;--border:#2f3134;--border-soft:#252729;--result-w:#2fa84f;--result-l:#d64541;--result-d:#6b6f74;--warn:#e6b800;}
@@ -50,9 +50,11 @@ a{color:var(--accent);text-decoration:none;}a:hover{text-decoration:underline;}
 .acc[open]{border-color:var(--accent-dim);}
 .acc>summary{list-style:none;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:14px 16px;cursor:pointer;user-select:none;}
 .acc>summary::-webkit-details-marker{display:none;}
+.acc>summary::after{content:'▸';margin-left:auto;font-size:14px;color:var(--accent);transition:transform .2s ease;flex-shrink:0;}
+.acc[open]>summary::after{transform:rotate(90deg);}
 .acc__title{font-size:14px;font-weight:700;color:var(--text);text-transform:uppercase;letter-spacing:0.06em;}
 .acc__hint{font-size:11px;color:var(--text-muted);margin-left:auto;font-weight:500;text-transform:none;letter-spacing:0;}
-.acc__chev{width:14px;height:14px;fill:var(--text-muted);transition:transform 0.2s ease;flex-shrink:0;}
+.acc__chev{width:14px;height:14px;fill:var(--accent);transition:transform 0.2s ease;flex-shrink:0;}
 .acc[open] .acc__chev{transform:rotate(90deg);fill:var(--accent);}
 .acc__body{padding:0 16px 16px;border-top:1px solid var(--border-soft);padding-top:14px;}
 .bundle{padding:14px 16px;background:var(--bg-row-2);border:1px solid var(--border);border-radius:8px;}
@@ -148,7 +150,7 @@ a{color:var(--accent);text-decoration:none;}a:hover{text-decoration:underline;}
 .standings-mini__note{font-size:10px;color:var(--text-dim);padding:8px 12px;background:var(--bg-row);border-top:1px solid var(--border-soft);font-style:italic;}
 .section-divider{cursor:pointer;user-select:none;display:flex;align-items:center;justify-content:space-between;gap:10px;transition:color .15s;}
 .section-divider:hover{color:var(--text);}
-.section-divider::after{content:'▾';font-size:11px;opacity:.55;transition:transform .2s;flex-shrink:0;}
+.section-divider::after{content:'▾';font-size:14px;opacity:1;color:var(--accent);transition:transform .2s;flex-shrink:0;}
 .section-divider--closed::after{transform:rotate(-90deg);}
 .scorers-mini{background:var(--bg-card);border:1px solid var(--border);border-radius:8px;overflow:hidden;margin-bottom:12px;}
 .scorers-mini__head,.scorers-mini__row{display:grid;grid-template-columns:24px 1fr 96px 30px 30px;gap:0;align-items:center;padding:8px 12px;font-size:11px;}
@@ -162,18 +164,18 @@ a{color:var(--accent);text-decoration:none;}a:hover{text-decoration:underline;}
 .scorers-mini__row--self{background:var(--accent-soft);border-left:3px solid var(--accent);padding-left:9px;}
 .scorers-mini__row--self .pos,.scorers-mini__row--self .g{color:var(--accent);font-weight:800;}
 .scorers-mini__row .player{color:var(--text);font-weight:600;}
-.scorers-mini__row .club{color:var(--text-dim);font-size:10px;}
+.scorers-mini__row .club{color:var(--text-dim);font-size:10px;margin-left:6px;white-space:nowrap;}
 .scorers-mini__row .g{font-weight:700;}
 .scorers-mini__sub{background:var(--bg-divider);color:var(--text-muted);font-size:10px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:9px 12px;cursor:pointer;user-select:none;display:flex;align-items:center;justify-content:space-between;gap:8px;transition:color .15s;}
 .scorers-mini__sub:hover{color:var(--text);}
-.scorers-mini__sub::after{content:'▾';font-size:10px;opacity:.55;transition:transform .2s;flex-shrink:0;}
+.scorers-mini__sub::after{content:'▾';font-size:13px;opacity:1;color:var(--accent);transition:transform .2s;flex-shrink:0;}
 .scorers-mini__sub--closed::after{transform:rotate(-90deg);}
 .scorers-mini--team .scorers-mini__head,.scorers-mini--team .scorers-mini__row{grid-template-columns:46px 1fr 30px 30px;}
 .scorers-mini__rank{color:var(--text-dim);font-weight:700;}
 .scorers-mini__row--self .scorers-mini__rank{color:var(--accent);}
 .scorers-mini__sub .sum{display:none;font-weight:600;color:var(--text-dim);text-transform:none;letter-spacing:0;font-size:10px;margin-left:auto;padding-right:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 .scorers-mini__sub--closed .sum{display:inline-block;}
-/* Блоки вкладок команд. Подпись сверху, текст во всю ширину — не разъезжается на длинных фразах. */
+/* Блоки вкладок команд. Подпись сверху, текст во всю ширину: не разъезжается на длинных фразах. */
 .kv{background:var(--bg-card);border:1px solid var(--border);border-radius:8px;overflow:hidden;margin-bottom:10px;}
 .kv__row{padding:11px 14px;border-top:1px solid var(--border-soft);}
 .kv__row:first-child{border-top:none;}
@@ -185,14 +187,14 @@ a{color:var(--accent);text-decoration:none;}a:hover{text-decoration:underline;}
 .ctable{background:var(--bg-card);border:1px solid var(--border);border-radius:8px;overflow:hidden;margin-bottom:10px;}
 .ctable__head,.ctable__row{display:grid;gap:0;align-items:center;padding:9px 12px;font-size:11.5px;}
 .ctable--cards .ctable__head,.ctable--cards .ctable__row{grid-template-columns:1fr 94px 28px 30px 30px;}
-.ctable--contrib .ctable__head,.ctable--contrib .ctable__row{grid-template-columns:1fr 30px 40px 48px;}
+.ctable--contrib .ctable__head,.ctable--contrib .ctable__row{grid-template-columns:1fr 28px 26px 26px 40px 50px;}
 .ctable__head{background:var(--bg-divider);color:var(--text-muted);text-transform:uppercase;letter-spacing:0.06em;font-weight:700;font-size:10px;}
 .ctable__head>span,.ctable__row>span{text-align:right;padding-left:6px;}
 .ctable__head>span:first-child,.ctable__row>span:first-child{text-align:left;padding-left:0;}
 .ctable--cards .ctable__head>span:nth-child(2),.ctable--cards .ctable__row>span:nth-child(2){text-align:left;}
 .ctable__row{border-top:1px solid var(--border-soft);color:#d6d8da;}
 .ctable__row .nm{color:var(--text);font-weight:600;}
-.ctable__row .nm i{font-style:normal;color:var(--text-dim);font-weight:400;margin-left:4px;}
+.ctable__row .nm i{font-style:normal;color:var(--text-dim);font-weight:400;margin-left:7px;white-space:nowrap;}
 .ctable__row .rl{color:var(--text-dim);font-size:10.5px;}
 .ctable__row--warn{background:var(--accent-soft);border-left:3px solid var(--accent);padding-left:9px;}
 .ctable__row .yk{font-weight:700;}
@@ -213,7 +215,8 @@ a{color:var(--accent);text-decoration:none;}a:hover{text-decoration:underline;}
 .on-air__label{font-size:10px;text-transform:uppercase;letter-spacing:0.14em;color:var(--accent);font-weight:700;margin-bottom:6px;}
 .on-air p{color:#e3e5e7;margin:0;font-size:13px;line-height:1.55;}
 .fact{background:var(--bg-card);border:1px solid var(--border);border-radius:6px;padding:12px 14px;margin-bottom:10px;}
-.fact__num{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;background:var(--accent);color:var(--bg);border-radius:4px;font-size:11px;font-weight:800;margin-right:8px;vertical-align:middle;}
+.fact__num{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;background:var(--accent);color:var(--bg);border-radius:4px;font-size:11px;font-weight:800;margin-right:8px;vertical-align:middle;flex-shrink:0;}
+.acc__title{display:inline-flex;align-items:center;}
 .fact__label{font-weight:700;text-transform:uppercase;font-size:11px;letter-spacing:0.08em;color:var(--text-muted);}
 .fact__phrase{font-size:14px;color:#e3e5e7;line-height:1.5;font-style:italic;margin-top:8px;margin-bottom:8px;}
 .fact__source{font-size:11px;color:var(--text-muted);padding-top:8px;border-top:1px dashed var(--border-soft);}
@@ -244,8 +247,14 @@ a{color:var(--accent);text-decoration:none;}a:hover{text-decoration:underline;}
 .ctable__head,.ctable__row{font-size:10.5px;padding:8px 9px;}
 .ctable--cards .ctable__head,.ctable--cards .ctable__row{grid-template-columns:1fr 24px 26px 26px;}
 .ctable--cards .ctable__head>span:nth-child(2),.ctable--cards .ctable__row>span:nth-child(2){display:none;}
-.ctable--contrib .ctable__head,.ctable--contrib .ctable__row{grid-template-columns:1fr 24px 34px 42px;}
-.kv__row{padding:10px 12px;}.kv__val{font-size:12.5px;}.blocknote{font-size:12.5px;padding:11px 12px;}}
+.ctable--contrib .ctable__head,.ctable--contrib .ctable__row{grid-template-columns:1fr 22px 22px 22px 34px 42px;}
+.kv__row{padding:10px 12px;}.kv__val{font-size:12.5px;}.blocknote{font-size:12.5px;padding:11px 12px;}
+.toolbar{justify-content:center;}
+.scorers-mini__head,.scorers-mini__row{grid-template-columns:22px 1fr 68px 26px 26px;font-size:10.5px;padding:8px 9px;}
+.scorers-mini--team .scorers-mini__head,.scorers-mini--team .scorers-mini__row{grid-template-columns:44px 1fr 26px 26px;}
+.scorers-mini__row .player{line-height:1.35;}
+.match-card__location{text-align:center;justify-content:center;flex-wrap:wrap;}
+.player-row{gap:8px;}.player-row__name{line-height:1.35;}}
 @media (min-width:1024px){.wrap{max-width:760px;}}
 
 /* === v6: VISITED CHIPS === */
@@ -341,7 +350,7 @@ a{color:var(--accent);text-decoration:none;}a:hover{text-decoration:underline;}
   .pr-head__city{font-size:9px;}
 }
 
-/* === Angle блок — журналистский тон === */
+/* === Angle блок: журналистский тон === */
 .angle-label{font-size:11px;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent);margin-bottom:8px;}
 .angle-quote{font-style:italic;color:#e3e5e7;line-height:1.55;font-size:13px;margin:0 0 10px;padding-left:10px;border-left:2px solid var(--accent-dim);}
 .angle-fact{font-size:12px;color:#cdd0d4;line-height:1.5;background:var(--bg-row-2);border-radius:5px;padding:8px 12px;margin-bottom:8px;}
@@ -359,10 +368,10 @@ a{color:var(--accent);text-decoration:none;}a:hover{text-decoration:underline;}
   <div class="stale" id="staleWarn"></div>
 
   <div class="tour-header">
-    <h1 class="tour-header__title">Молодёжная футбольная лига — А · 17-й тур</h1>
+    <h1 class="tour-header__title">Молодёжная футбольная лига – А · 17-й тур</h1>
     <div class="tour-header__meta">
       <span class="tour-header__meta-item">Групповой этап · сезон 2026</span>
-      <span class="tour-header__meta-item">Онлайн-эфир</span>
+      <span class="tour-header__meta-item">Комментатор на стадионе</span>
     </div>
   </div>
 
@@ -400,19 +409,19 @@ a{color:var(--accent);text-decoration:none;}a:hover{text-decoration:underline;}
     <div class="section-divider">Бомбардиры</div>
     <div style="padding:14px 16px">
       <div class="scorers-mini">
-        <div class="scorers-mini__sub"><span>Топ-5 дивизиона А</span><span class="sum">Тарасенко (ЦСКА) — 13 голов, 1-й</span></div>
+        <div class="scorers-mini__sub"><span>Топ-5 дивизиона А</span><span class="sum">Тарасенко (ЦСКА), 13 голов, 1-й</span></div>
         <div class="scorers-mini__body">
         <div class="scorers-mini__head"><span>#</span><span>Игрок</span><span>Команда</span><span>И</span><span>Г</span></div>
-        <div class="scorers-mini__row scorers-mini__row--self"><span class="pos">1</span><span class="player">Тарасенко Иван</span><span class="club">ЦСКА</span><span>16</span><span class="g">13</span></div>
-        <div class="scorers-mini__row"><span class="pos">2</span><span class="player">Полевой Андрей</span><span class="club">Краснодар</span><span>15</span><span class="g">11</span></div>
-        <div class="scorers-mini__row"><span class="pos">3</span><span class="player">Амбарцумов Даниэль</span><span class="club">Краснодар</span><span>14</span><span class="g">10</span></div>
-        <div class="scorers-mini__row"><span class="pos">4</span><span class="player">Омаров Магомед</span><span class="club">Родина</span><span>12</span><span class="g">10</span></div>
-        <div class="scorers-mini__row"><span class="pos">5</span><span class="player">Гитинов Гасан</span><span class="club">Динамо-Мх</span><span>15</span><span class="g">8</span></div>
-        <div class="scorers-mini__note">Лучший снайпер лиги играет за ЦСКА. У Тарасенко 3 гола из 13 — с пенальти, то есть с игры 10 · после 16 туров, yflrussia.ru</div>
+        <div class="scorers-mini__row scorers-mini__row--self"><span class="pos">1</span><span class="player">Тарасенко Иван <span class="club">№81, нап.</span></span><span class="club">ЦСКА</span><span>16</span><span class="g">13</span></div>
+        <div class="scorers-mini__row"><span class="pos">2</span><span class="player">Полевой Андрей <span class="club">№60, пз.</span></span><span class="club">Краснодар</span><span>15</span><span class="g">11</span></div>
+        <div class="scorers-mini__row"><span class="pos">3</span><span class="player">Амбарцумов Даниэль <span class="club">№74, нап.</span></span><span class="club">Краснодар</span><span>14</span><span class="g">10</span></div>
+        <div class="scorers-mini__row"><span class="pos">4</span><span class="player">Омаров Магомед <span class="club">№10, пз.</span></span><span class="club">Родина</span><span>12</span><span class="g">10</span></div>
+        <div class="scorers-mini__row"><span class="pos">5</span><span class="player">Гитинов Гасан <span class="club">№94</span></span><span class="club">Динамо-Мх</span><span>15</span><span class="g">8</span></div>
+        <div class="scorers-mini__note">Лучший снайпер лиги играет за ЦСКА. У Тарасенко 3 гола из 13 с пенальти, то есть с игры 10. Амплуа Гитинова на сайте лиги не указано. После 16 туров, yflrussia.ru</div>
         </div>
       </div>
       <div class="scorers-mini scorers-mini--team">
-        <div class="scorers-mini__sub"><span>ЦСКА — свои бомбардиры</span><span class="sum">5 игроков · лучший Тарасенко, 13</span></div>
+        <div class="scorers-mini__sub"><span>ЦСКА, свои бомбардиры</span><span class="sum">5 игроков · лучший Тарасенко, 13</span></div>
         <div class="scorers-mini__body">
         <div class="scorers-mini__head"><span>В лиге</span><span>Игрок</span><span>И</span><span>Г</span></div>
         <div class="scorers-mini__row scorers-mini__row--self"><span class="scorers-mini__rank">1</span><span class="player">Тарасенко Иван <span class="club">№81, нап.</span></span><span>16</span><span class="g">13</span></div>
@@ -420,11 +429,11 @@ a{color:var(--accent);text-decoration:none;}a:hover{text-decoration:underline;}
         <div class="scorers-mini__row"><span class="scorers-mini__rank">≈22</span><span class="player">Пасичник Илья <span class="club">№89, нап.</span></span><span>14</span><span class="g">5</span></div>
         <div class="scorers-mini__row"><span class="scorers-mini__rank">≈22</span><span class="player">Хужахметов Тимур <span class="club">№59</span></span><span>15</span><span class="g">5</span></div>
         <div class="scorers-mini__row"><span class="scorers-mini__rank">≈30</span><span class="player">Фиров Имран <span class="club">№62</span></span><span>6</span><span class="g">4</span></div>
-        <div class="scorers-mini__note">Пасичник добавил гол в 16-м туре. Фиров — 4 гола за 6 игр: лучший темп в составе.</div>
+        <div class="scorers-mini__note">Пасичник добавил гол в 16-м туре. Фиров: 4 гола за 6 игр, лучший темп в составе.</div>
         </div>
       </div>
       <div class="scorers-mini scorers-mini--team">
-        <div class="scorers-mini__sub"><span>«Рубин» — свои бомбардиры</span><span class="sum">5 игроков · лучший Сафаров, 4</span></div>
+        <div class="scorers-mini__sub"><span>«Рубин», свои бомбардиры</span><span class="sum">5 игроков · лучший Сафаров, 4</span></div>
         <div class="scorers-mini__body">
         <div class="scorers-mini__head"><span>В лиге</span><span>Игрок</span><span>И</span><span>Г</span></div>
         <div class="scorers-mini__row scorers-mini__row--self"><span class="scorers-mini__rank">≈35</span><span class="player">Сафаров Инсаф <span class="club">№17, нап.</span></span><span>14</span><span class="g">4</span></div>
@@ -432,13 +441,13 @@ a{color:var(--accent);text-decoration:none;}a:hover{text-decoration:underline;}
         <div class="scorers-mini__row"><span class="scorers-mini__rank">≈52</span><span class="player">Кузнецов Егор <span class="club">№99, нап.</span></span><span>16</span><span class="g">3</span></div>
         <div class="scorers-mini__row"><span class="scorers-mini__rank">≈65</span><span class="player">Толстов Арсений <span class="club">№15, пз.</span></span><span>9</span><span class="g">2</span></div>
         <div class="scorers-mini__row"><span class="scorers-mini__rank">≈77</span><span class="player">Богомолов Роман <span class="club">№4, защ.</span></span><span>13</span><span class="g">2</span></div>
-        <div class="scorers-mini__note">Лучший снайпер «Рубина» — в четвёртом десятке лиги. Богомолов — защитник, забивший столько же, сколько ведущие полузащитники. Автор победного гола в 16-м туре в протоколе ещё не опубликован.</div>
+        <div class="scorers-mini__note">Лучший снайпер «Рубина» идёт в четвёртом десятке лиги. Богомолов защитник, забивший столько же, сколько ведущие полузащитники. Победный гол в 16-м туре забил Гумеров на 59-й минуте.</div>
         </div>
       </div>
     </div>
-    <div class="section-divider">Очные встречи — во всех сильнее ЦСКА</div>
+    <div class="section-divider">Очные встречи: во всех сильнее ЦСКА</div>
     <div style="padding:14px 16px"><div class="matches-list"><div class="match-row">
-      <div class="match-row__when"><span class="match-row__date">13.03.26</span><span class="match-row__tour">Тур 2 · этот сезон</span><span class="match-row__venue"></span></div>
+      <div class="match-row__when"><span class="match-row__date">13.03.26</span><span class="match-row__tour">Тур 2 · этот сезон</span><span class="match-row__venue"><svg viewBox="0 0 24 24"><path d="M12 2C8.1 2 5 5.1 5 9c0 5.2 7 13 7 13s7-7.8 7-13c0-3.9-3.1-7-7-7zm0 9.5c-1.4 0-2.5-1.1-2.5-2.5S10.6 6.5 12 6.5s2.5 1.1 2.5 2.5-1.1 2.5-2.5 2.5z"/></svg>«Рубин», поле 2</span></div>
       <div class="match-row__teams"><span class="match-row__side match-row__side--home"><span class="match-row__name">Рубин</span></span><span class="match-row__score">2:4</span><span class="match-row__side match-row__side--away"><span class="match-row__name">ЦСКА</span></span></div>
       <span class="match-row__result match-row__result--L"><span>L</span></span>
     </div><div class="match-row">
@@ -451,37 +460,38 @@ a{color:var(--accent);text-decoration:none;}a:hover{text-decoration:underline;}
       <span class="match-row__result match-row__result--L"><span>L</span></span>
     </div></div></div>
     <div class="section-divider">Углы подачи матча</div>
-    <div style="padding:14px 16px"><div class="bundle" style="margin-bottom:10px">
-      <div class="angle-label">Контекст</div>
-      <div class="angle-fact">ЦСКА идёт 2-м (35 очков), «Рубин» — 13-й (12). Между ними 23 очка, но «Рубин» больше не последний: в 16-м туре он ушёл со дна, выиграв у «Факела» 1:0 в гостях.</div>
-      <p class="angle-quote">«Ещё неделю назад „Рубин“ замыкал таблицу. Сегодня он приезжает с двумя победами подряд — и это уже другой разговор».</p>
-      <span class="bundle__source"><a href="https://yflrussia.ru/tournament/1060904/tables" target="_blank" rel="noopener">таблица ↗</a></span>
-    </div><div class="bundle" style="margin-bottom:10px">
-      <div class="angle-label">История противостояния</div>
-      <div class="angle-fact">Тур 2 (13.03.2026), в Казани: «Рубин» 2:4 ЦСКА. Годом ранее ЦСКА тоже дважды прошёл «Рубин» — 4:1 дома и 4:0 в гостях.</div>
+    <div style="padding:14px 16px">
+      <details class="acc"><summary><span class="acc__title">Контекст</span><span class="acc__hint">между ними 23 очка</span></summary><div class="acc__body">
+      <div class="angle-fact">ЦСКА идёт вторым (35 очков), «Рубин» тринадцатый (12). Между ними 23 очка, но «Рубин» больше не последний: в 16-м туре он ушёл со дна, выиграв у «Факела» 1:0 в гостях.</div>
+      <p class="angle-quote">«Ещё неделю назад „Рубин“ замыкал таблицу. Сегодня он приезжает с двумя победами подряд, и это уже другой разговор».</p>
+      <span class="bundle__source"><a href="https://yflrussia.ru/tournament/1060904/tables" target="_blank" rel="noopener">таблица&nbsp;↗</a></span>
+      </div></details>
+      <details class="acc"><summary><span class="acc__title">История противостояния</span><span class="acc__hint">три матча, три победы ЦСКА</span></summary><div class="acc__body">
+      <div class="angle-fact">Тур 2 (13.03.2026) на поле 2 стадиона «Рубин» в Казани: «Рубин» 2:4 ЦСКА. Годом ранее ЦСКА тоже дважды прошёл соперника: 4:1 дома и 4:0 в гостях.</div>
       <p class="angle-quote">«Свежая память у „Рубина“ невесёлая: в марте ЦСКА забил четыре. Реванш нужен как воздух».</p>
-      <span class="bundle__source"><a href="https://yflrussia.ru/tournament/1060904/calendar" target="_blank" rel="noopener">календарь ↗</a></span>
-    </div><div class="bundle" style="margin-bottom:10px">
-      <div class="angle-label">Гонка за золото ожила</div>
-      <div class="angle-fact">В 16-м туре «Краснодар» получил 1:6 от «Родины». ЦСКА тем же вечером обыграл «Урал» 4:1 и сократил отставание с 5 очков до 2. Следом дышит «Зенит» — те же 35 очков.</div>
-      <p class="angle-quote">«Неделю назад до „Краснодара“ было пять очков, теперь два. Для ЦСКА эти три очка сегодня — не формальность, а прямая ставка на золото».</p>
-      <span class="bundle__source"><a href="https://yflrussia.ru/tournament/1060904/tables" target="_blank" rel="noopener">таблица ↗</a></span>
-    </div><div class="bundle" style="margin-bottom:10px">
-      <div class="angle-label">Личность матча</div>
-      <div class="angle-fact">Иван Тарасенко (№81, ЦСКА) — 13 голов в 16 матчах, лучший бомбардир дивизиона А. Отрыв от второго места вырос до двух мячей.</div>
-      <p class="angle-quote">«Забьёт ЦСКА — ищите 81-й номер. У Тарасенко 13 мячей: это больше, чем половина всего, что забил „Рубин“ за сезон».</p>
-      <span class="bundle__source"><a href="https://yflrussia.ru/tournament/1060904/stats" target="_blank" rel="noopener">бомбардиры ↗</a></span>
-    </div><div class="bundle" style="margin-bottom:10px">
-      <div class="angle-label">Интрига</div>
-      <div class="angle-fact">Две победы подряд: 2:0 «Нижнему Новгороду» и 1:0 у «Факела» в гостях, обе на ноль. До этого — три поражения кряду.</div>
-      <p class="angle-quote">«Два матча на ноль подряд — у команды, которая пропустила 36. „Рубин“ нащупал оборону, и приезжает не жертвой».</p>
-      <span class="bundle__source"><a href="https://yflrussia.ru/tournament/1060904/calendar" target="_blank" rel="noopener">результаты ↗</a></span>
-    </div><div class="bundle" style="margin-bottom:10px">
-      <div class="angle-label">Большая картина</div>
-      <div class="angle-fact">Защитник Кирилл Данилов (№79) вызывался в сборную России; Мингиян Бадмаев (№67) дебютировал за основу ЦСКА в РПЛ.</div>
-      <p class="angle-quote">«Для этих ребят матч — не потолок, а ступень. Отсюда дорога идёт прямо в РПЛ и сборную».</p>
-      <span class="bundle__source"><a href="https://yflrussia.ru/team/1246836" target="_blank" rel="noopener">новости клуба ↗</a></span>
-    </div></div>
+      <span class="bundle__source"><a href="https://yflrussia.ru/tournament/1060904/calendar" target="_blank" rel="noopener">календарь&nbsp;↗</a></span>
+      </div></details>
+      <details class="acc"><summary><span class="acc__title">Гонка за золото ожила</span><span class="acc__hint">отставание сжалось с 5 очков до 2</span></summary><div class="acc__body">
+      <div class="angle-fact">В 16-м туре «Краснодар» получил 1:6 от «Родины». ЦСКА тем же вечером обыграл «Урал» 4:1 и сократил отставание с 5 очков до 2. Следом дышит «Зенит» с теми же 35 очками.</div>
+      <p class="angle-quote">«Неделю назад до „Краснодара“ было пять очков, теперь два. Для ЦСКА эти три очка сегодня не формальность, а прямая ставка на золото».</p>
+      <span class="bundle__source"><a href="https://yflrussia.ru/tournament/1060904/tables" target="_blank" rel="noopener">таблица&nbsp;↗</a></span>
+      </div></details>
+      <details class="acc"><summary><span class="acc__title">Личность матча</span><span class="acc__hint">Тарасенко, 13 голов</span></summary><div class="acc__body">
+      <div class="angle-fact">Иван Тарасенко (№81, ЦСКА): 13 голов в 16 матчах, лучший бомбардир дивизиона А. Отрыв от второго места вырос до двух мячей. В 16-м туре забил «Уралу» на 83-й минуте.</div>
+      <p class="angle-quote">«Забьёт ЦСКА, ищите 81-й номер. У Тарасенко 13 мячей: это больше, чем половина всего, что забил „Рубин“ за сезон».</p>
+      <span class="bundle__source"><a href="https://yflrussia.ru/tournament/1060904/stats" target="_blank" rel="noopener">бомбардиры&nbsp;↗</a></span>
+      </div></details>
+      <details class="acc"><summary><span class="acc__title">Интрига</span><span class="acc__hint">две победы подряд, обе на ноль</span></summary><div class="acc__body">
+      <div class="angle-fact">Две победы подряд: 2:0 «Нижнему Новгороду» и 1:0 у «Факела» в гостях, обе на ноль. Победный мяч в Воронеже забил Риваль Гумеров на 59-й минуте. До этой серии было три поражения кряду.</div>
+      <p class="angle-quote">«Два матча на ноль подряд у команды, которая пропустила 36. „Рубин“ нащупал оборону и приезжает не жертвой».</p>
+      <span class="bundle__source"><a href="https://yflrussia.ru/match/5483126" target="_blank" rel="noopener">протокол матча&nbsp;↗</a></span>
+      </div></details>
+      <details class="acc"><summary><span class="acc__title">Большая картина</span><span class="acc__hint">двое уже засветились выше</span></summary><div class="acc__body">
+      <div class="angle-fact">Защитник Кирилл Данилов (№79) вызывался в сборную России. Мингиян Бадмаев (№67) дебютировал за основу ЦСКА в РПЛ.</div>
+      <p class="angle-quote">«Для этих ребят матч не потолок, а ступень. Отсюда дорога идёт прямо в РПЛ и сборную».</p>
+      <span class="bundle__source"><a href="https://yflrussia.ru/team/1246836" target="_blank" rel="noopener">новости клуба&nbsp;↗</a></span>
+      </div></details>
+    </div>
   </div>
 
   <!-- ЦСКА -->
@@ -510,43 +520,42 @@ a{color:var(--accent);text-decoration:none;}a:hover{text-decoration:underline;}
       <div class="match-row__teams"><span class="match-row__side match-row__side--home"><span class="match-row__name">ЦСКА</span></span><span class="match-row__score">4:1</span><span class="match-row__side match-row__side--away"><span class="match-row__name">Урал</span></span></div>
       <span class="match-row__result match-row__result--W"><span>W</span></span>
     </div></div></div></details>
-      <details class="acc"><summary><span class="acc__title">Ключевые игроки</span><span class="acc__hint">33 в заявке</span></summary><div class="acc__body"><ul class="staff-list">
-        <li><span class="staff-role">№81 · нападающий</span><span class="staff-name">Тарасенко Иван — 12 голов</span></li>
-        <li><span class="staff-role">№65 · нападающий</span><span class="staff-name">Джанашия Владимир — 6+4</span></li>
-        <li><span class="staff-role">№89 · нападающий</span><span class="staff-name">Пасичник Илья — 4+6</span></li>
-        <li><span class="staff-role">№59 · п/защитник</span><span class="staff-name">Хужахметов Тимур — 5 голов</span></li>
-        <li><span class="staff-role">№79 · защитник</span><span class="staff-name">Данилов Кирилл — сборная России</span></li>
-        <li><span class="staff-role">№67 · защитник</span><span class="staff-name">Бадмаев Мингиян — дебют в РПЛ</span></li>
-      </ul></div></details>
-      <div class="fact">
-      <div><span class="fact__num">1</span><span class="fact__label">Гонка за золото</span></div>
-      <div class="fact__data">2-е место, 35 очков, в 2 от «Краснодара». 48 забито — 22 пропущено.</div>
-      <div class="fact__phrase">«ЦСКА не выпал из чемпионской гонки — этот матч обязан брать».</div>
-      <div class="fact__source"><a href="https://yflrussia.ru/tournament/1060904/tables" target="_blank" rel="noopener">таблица ↗</a></div>
-    </div><div class="fact">
-      <div><span class="fact__num">2</span><span class="fact__label">Дома — машина</span></div>
-      <div class="fact__data">В 2026-м дома: Спартак 2:0, Динамо 3:1, Чертаново 3:0, Зенит 1:0.</div>
+      <details class="acc"><summary><span class="acc__title">Ключевые игроки</span><span class="acc__hint">33 в заявке</span></summary><div class="acc__body"><div class="kv">
+        <div class="kv__row"><span class="kv__label">№81 · нападающий</span><span class="kv__val"><b>Тарасенко Иван.</b> 13 голов в 16 матчах, три с пенальти. Первый бомбардир дивизиона.</span></div>
+        <div class="kv__row"><span class="kv__label">№65 · нападающий</span><span class="kv__val"><b>Джанашия Владимир.</b> 6 голов и 4 передачи в 16 матчах.</span></div>
+        <div class="kv__row"><span class="kv__label">№89 · нападающий</span><span class="kv__val"><b>Пасичник Илья.</b> 5 голов и 6 передач в 14 матчах. Забил в 16-м туре «Уралу».</span></div>
+        <div class="kv__row"><span class="kv__label">№59 · полузащитник</span><span class="kv__val"><b>Хужахметов Тимур.</b> 5 голов в 15 матчах.</span></div>
+        <div class="kv__row"><span class="kv__label">№79 · защитник</span><span class="kv__val"><b>Данилов Кирилл.</b> Вызывался в сборную России.</span></div>
+        <div class="kv__row"><span class="kv__label">№67 · защитник</span><span class="kv__val"><b>Бадмаев Мингиян.</b> Дебютировал за основу ЦСКА в РПЛ.</span></div>
+      </div></div></details>
+      <details class="acc"><summary><span class="acc__title"><span class="fact__num">1</span>Гонка за золото</span><span class="acc__hint">2 очка от лидера</span></summary><div class="acc__body">
+      <div class="fact__data">Второе место, 35 очков, в двух от «Краснодара». Забито 48, пропущено 22.</div>
+      <div class="fact__phrase">«ЦСКА не выпал из чемпионской гонки, этот матч обязан брать».</div>
+      <div class="fact__source"><a href="https://yflrussia.ru/tournament/1060904/tables" target="_blank" rel="noopener">таблица&nbsp;↗</a></div>
+      </div></details>
+      <details class="acc"><summary><span class="acc__title"><span class="fact__num">2</span>Дома машина</span><span class="acc__hint">пять домашних побед подряд</span></summary><div class="acc__body">
+      <div class="fact__data">В 2026-м дома: «Спартак» 2:0, «Динамо» 3:1, «Чертаново» 3:0, «Зенит» 1:0, «Урал» 4:1 в последнем туре.</div>
       <div class="fact__phrase">«На „Октябре“ ЦСКА в этом сезоне почти не спотыкается».</div>
-      <div class="fact__source"><a href="https://yflrussia.ru/tournament/1060904/calendar" target="_blank" rel="noopener">календарь ↗</a></div>
-    </div><div class="fact">
-      <div><span class="fact__num">3</span><span class="fact__label">Свой снайпер №1</span></div>
-      <div class="fact__data">Тарасенко — 12 голов, первый бомбардир лиги. Джанашия 6+4, Пасичник 4+6.</div>
-      <div class="fact__phrase">«Атака ЦСКА — не один человек: за Тарасенко идут Джанашия и Пасичник».</div>
-      <div class="fact__source"><a href="https://yflrussia.ru/tournament/1060904/teams/application?team_id=1246836" target="_blank" rel="noopener">статистика ↗</a></div>
-    </div><div class="fact">
-      <div><span class="fact__num">4</span><span class="fact__label">Лифт в РПЛ</span></div>
-      <div class="fact__data">Данилов — в сборной России, Бадмаев дебютировал за основу ЦСКА в РПЛ.</div>
+      <div class="fact__source"><a href="https://yflrussia.ru/tournament/1060904/calendar" target="_blank" rel="noopener">календарь&nbsp;↗</a></div>
+      </div></details>
+      <details class="acc"><summary><span class="acc__title"><span class="fact__num">3</span>Свой снайпер №1</span><span class="acc__hint">Тарасенко, 13 голов</span></summary><div class="acc__body">
+      <div class="fact__data">Тарасенко: 13 голов, первый бомбардир лиги. Джанашия 6 голов и 4 передачи, Пасичник 5 голов и 6 передач.</div>
+      <div class="fact__phrase">«Атака ЦСКА это не один человек: за Тарасенко идут Джанашия и Пасичник».</div>
+      <div class="fact__source"><a href="https://yflrussia.ru/tournament/1060904/teams/application?team_id=1246836" target="_blank" rel="noopener">статистика&nbsp;↗</a></div>
+      </div></details>
+      <details class="acc"><summary><span class="acc__title"><span class="fact__num">4</span>Лифт в РПЛ</span><span class="acc__hint">сборная и дебют за основу</span></summary><div class="acc__body">
+      <div class="fact__data">Данилов вызывался в сборную России, Бадмаев дебютировал за основу ЦСКА в РПЛ.</div>
       <div class="fact__phrase">«Эта молодёжка реально кормит главную команду».</div>
-      <div class="fact__source"><a href="https://yflrussia.ru/team/1246836" target="_blank" rel="noopener">новости ↗</a></div>
-    </div><div class="fact">
-      <div><span class="fact__num">5</span><span class="fact__label">Уже били «Рубин»</span></div>
-      <div class="fact__data">В первом круге ЦСКА выиграл 4:2 в Казани.</div>
-      <div class="fact__phrase">«Психологически ЦСКА выходит фаворитом — и заслуженно».</div>
-      <div class="fact__source"><a href="https://yflrussia.ru/tournament/1060904/calendar" target="_blank" rel="noopener">календарь ↗</a></div>
-    </div>
+      <div class="fact__source"><a href="https://yflrussia.ru/team/1246836" target="_blank" rel="noopener">новости&nbsp;↗</a></div>
+      </div></details>
+      <details class="acc"><summary><span class="acc__title"><span class="fact__num">5</span>Уже били «Рубин»</span><span class="acc__hint">4:2 в Казани</span></summary><div class="acc__body">
+      <div class="fact__data">В первом круге ЦСКА выиграл 4:2 в Казани, на поле 2 стадиона «Рубин».</div>
+      <div class="fact__phrase">«Психологически ЦСКА выходит фаворитом, и заслуженно».</div>
+      <div class="fact__source"><a href="https://yflrussia.ru/tournament/1060904/calendar" target="_blank" rel="noopener">календарь&nbsp;↗</a></div>
+      </div></details>
     </div>
 
-    <div class="section-divider">Под угрозой и вне игры</div>
+    <div class="section-divider">Карточки и дисквалификации</div>
     <div style="padding:14px 16px">
       <div class="ctable ctable--cards">
         <div class="ctable__head"><span>Игрок</span><span>Амплуа</span><span>И</span><span>ЖК</span><span>КК</span></div>
@@ -556,41 +565,41 @@ a{color:var(--accent);text-decoration:none;}a:hover{text-decoration:underline;}
         <div class="ctable__row"><span class="nm">Алексей Бондаренко <i>№82</i></span><span class="rl">полузащитник</span><span>14</span><span class="yk">3</span><span class="dim">—</span></div>
         <div class="ctable__row"><span class="nm">Семён Николаев <i>№72</i></span><span class="rl">нападающий</span><span>14</span><span class="yk">3</span><span class="dim">—</span></div>
         <div class="ctable__row"><span class="nm">Илья Пасичник <i>№89</i></span><span class="rl">нападающий</span><span>14</span><span class="yk">3</span><span class="dim">—</span></div>
-        <div class="ctable__note">Единственная красная в команде — у Бадмаева, и он же дебютировал за основу ЦСКА в РПЛ. Источник: <a href="https://yflrussia.ru/tournament/1060904/stats/cards?common=1" target="_blank" rel="noopener">карточки лиги ↗</a></div>
+        <div class="ctable__note">Единственная красная карточка в команде у Бадмаева, и он же дебютировал за основу ЦСКА в РПЛ. Источник: <a href="https://yflrussia.ru/tournament/1060904/stats/cards?common=1" target="_blank" rel="noopener">карточки лиги ↗</a></div>
       </div>
     </div>
 
-    <div class="section-divider">Глубина обоймы</div>
+    <div class="section-divider">Глубина состава</div>
     <div style="padding:14px 16px">
       <div class="kv">
         <div class="kv__row"><span class="kv__label">Заявка</span><span class="kv__val"><b>33 игрока</b>, средний возраст 18,03.</span></div>
-        <div class="kv__row"><span class="kv__label">Ядро состава</span><span class="kv__val">Джанашия и Тарасенко — по 16 матчей. Хужахметов — 15. Пасичник, Филюшин, Тверитнев, Бондаренко, Николаев — по 14. Пономарчук и Масленников — по 13.</span></div>
-        <div class="kv__row"><span class="kv__label">Периферия — заготовка на замену</span><span class="kv__val">Фиров, Бадмаев, Баранов — по 6 матчей. Шанхоев — 8. Шивеоби и Корнеев — по 9. Сериков и Макаров — по 10.</span></div>
-        <div class="kv__row"><span class="kv__label">Вратари</span><span class="kv__val">Платонов — 11 матчей, основной. Маракулин — 3. Рамонов и Бунич в заявке без матчей.</span></div>
-        <div class="kv__note">Считаются «матчи с участием» — выход на замену тоже учтён.</div>
+        <div class="kv__row"><span class="kv__label">Ядро состава</span><span class="kv__val">Джанашия и Тарасенко по 16 матчей. Хужахметов 15. Пасичник, Филюшин, Тверитнев, Бондаренко, Николаев по 14. Пономарчук и Масленников по 13.</span></div>
+        <div class="kv__row"><span class="kv__label">Периферия, заготовка на замену</span><span class="kv__val">Фиров, Бадмаев, Баранов по 6 матчей. Шанхоев 8. Шивеоби и Корнеев по 9. Сериков и Макаров по 10.</span></div>
+        <div class="kv__row"><span class="kv__label">Вратари</span><span class="kv__val">Платонов 11 матчей, основной. Маракулин 3. Рамонов и Бунич в заявке без матчей.</span></div>
+        <div class="kv__note">Считаются «матчи с участием»: выход на замену тоже учтён.</div>
       </div>
     </div>
 
     <div class="section-divider">Кто делает голы, кроме бомбардира</div>
     <div style="padding:14px 16px">
-      <div class="blocknote"><b>48 голов, доля лидера — 27%</b> (13 из 48), забивали как минимум 12 разных игроков. Тезис «закройте Тарасенко — и ЦСКА не забьёт» не работает.</div>
+      <div class="blocknote"><b>48 голов, доля лидера 27%</b> (13 из 48), забивали как минимум 12 разных игроков. Тезис «закройте Тарасенко, и ЦСКА не забьёт» не работает.</div>
       <div class="ctable ctable--contrib">
-        <div class="ctable__head"><span>Игрок</span><span>И</span><span>Г+П</span><span>За матч</span></div>
-        <div class="ctable__row ctable__row--warn"><span class="nm">Имран Фиров <i>№62</i></span><span>6</span><span>5</span><span class="yk">0,83</span></div>
-        <div class="ctable__row"><span class="nm">Иван Тарасенко <i>№81</i></span><span>16</span><span>13</span><span>0,81</span></div>
-        <div class="ctable__row"><span class="nm">Илья Пасичник <i>№89</i></span><span>14</span><span>11</span><span>0,79</span></div>
-        <div class="ctable__row"><span class="nm">Владимир Джанашия <i>№65</i></span><span>16</span><span>10</span><span>0,63</span></div>
-        <div class="ctable__row"><span class="nm">Алексей Бондаренко <i>№82</i></span><span>14</span><span>7</span><span>0,50</span></div>
-        <div class="ctable__note">Фиров вышел на первое место по темпу: 4 гола и пас за 6 матчей — но выборка малая. Пасичник — созидатель, а не финишер: 6 голевых при 5 голах.</div>
+        <div class="ctable__head"><span>Игрок</span><span>И</span><span>Г</span><span>П</span><span>Всего</span><span>За матч</span></div>
+        <div class="ctable__row ctable__row--warn"><span class="nm">Имран Фиров <i>№62</i></span><span>6</span><span>4</span><span>1</span><span>5</span><span class="yk">0,83</span></div>
+        <div class="ctable__row"><span class="nm">Иван Тарасенко <i>№81, нап.</i></span><span>16</span><span>13</span><span>0</span><span>13</span><span>0,81</span></div>
+        <div class="ctable__row"><span class="nm">Илья Пасичник <i>№89, нап.</i></span><span>14</span><span>5</span><span>6</span><span>11</span><span>0,79</span></div>
+        <div class="ctable__row"><span class="nm">Владимир Джанашия <i>№65, нап.</i></span><span>16</span><span>6</span><span>4</span><span>10</span><span>0,63</span></div>
+        <div class="ctable__row"><span class="nm">Алексей Бондаренко <i>№82, пз.</i></span><span>14</span><span>3</span><span>4</span><span>7</span><span>0,50</span></div>
+        <div class="ctable__note">Фиров вышел на первое место по темпу: 4 гола и передача за 6 матчей, но выборка малая. Пасичник созидатель, а не финишер: 6 передач при 5 голах. У Тарасенко голевых передач нет вовсе, он чистый финишер. Амплуа Фирова на сайте лиги не указано.</div>
       </div>
     </div>
 
     <div class="section-divider">Что на кону</div>
     <div style="padding:14px 16px">
       <div class="kv">
-        <div class="kv__row"><span class="kv__label">Забито и пропущено</span><span class="kv__val"><b>48 : 22</b> — разница <b>+26</b>. У «Зенита» +27, у «Краснодара» +28.</span></div>
-        <div class="kv__row"><span class="kv__label">Темп очков</span><span class="kv__val"><b>2,19 за матч.</b> У «Краснодара» — 2,31. Отставание от лидера сократилось до <b>2 очков</b>.</span></div>
-        <div class="kv__row"><span class="kv__label">Что это значит в эфире</span><span class="kv__val">В 16-м туре «Краснодар» проиграл «Родине» 1:6, и гонка ожила. Но сзади вплотную «Зенит» — те же 35 очков. Потеря очков сегодня отбрасывает ЦСКА с призового направления сразу.</span></div>
+        <div class="kv__row"><span class="kv__label">Забито и пропущено</span><span class="kv__val"><b>48:22</b>, разница <b>+26</b>. У «Зенита» +27, у «Краснодара» +28.</span></div>
+        <div class="kv__row"><span class="kv__label">Темп очков</span><span class="kv__val"><b>2,19 за матч.</b> У «Краснодара» 2,31. Отставание от лидера, «Краснодара», сократилось до <b>2 очков</b>.</span></div>
+        <div class="kv__row"><span class="kv__label">Что это значит в эфире</span><span class="kv__val">В 16-м туре «Краснодар» проиграл «Родине» 1:6, и гонка ожила. Но сзади вплотную «Зенит» с теми же 35 очками. Потеря очков сегодня отбрасывает ЦСКА с призового направления сразу.</span></div>
         <div class="kv__note">ЦСКА выше «Зенита» при равенстве очков; в очной встрече 14-го тура ЦСКА выиграл 1:0. Регламент тай-брейка не сверялся.</div>
       </div>
     </div>
@@ -622,43 +631,42 @@ a{color:var(--accent);text-decoration:none;}a:hover{text-decoration:underline;}
       <div class="match-row__teams"><span class="match-row__side match-row__side--home"><span class="match-row__name">Факел</span></span><span class="match-row__score">0:1</span><span class="match-row__side match-row__side--away"><span class="match-row__name">Рубин</span></span></div>
       <span class="match-row__result match-row__result--W"><span>W</span></span>
     </div></div></div></details>
-      <details class="acc"><summary><span class="acc__title">Ключевые игроки</span><span class="acc__hint">37 в заявке</span></summary><div class="acc__body"><ul class="staff-list">
-        <li><span class="staff-role">№17 · нападающий</span><span class="staff-name">Сафаров Инсаф — 4 гола</span></li>
-        <li><span class="staff-role">№99 · нападающий</span><span class="staff-name">Кузнецов Егор — 3 гола</span></li>
-        <li><span class="staff-role">№68 · нападающий</span><span class="staff-name">Гумеров Риваль — 3 гола</span></li>
-        <li><span class="staff-role">№4 · защитник</span><span class="staff-name">Богомолов Роман — 2 гола</span></li>
-        <li><span class="staff-role">№15 · п/защитник</span><span class="staff-name">Толстов Арсений — 2 гола</span></li>
-        <li><span class="staff-role">№1 · вратарь</span><span class="staff-name">Щепанский Артём — основной</span></li>
-      </ul></div></details>
-      <div class="fact">
-      <div><span class="fact__num">1</span><span class="fact__label">На дне, но живой</span></div>
-      <div class="fact__data">16-е место, но по очкам вровень с «Факелом» (9). 20 забито — 36 пропущено.</div>
-      <div class="fact__phrase">«„Рубин“ последний, но не оторван — один рывок меняет картину».</div>
-      <div class="fact__source"><a href="https://yflrussia.ru/tournament/1060904/tables" target="_blank" rel="noopener">таблица ↗</a></div>
-    </div><div class="fact">
-      <div><span class="fact__num">2</span><span class="fact__label">Поймал победу</span></div>
-      <div class="fact__data">В 15-м туре 2:0 над «Нижним» — прервал серию из четырёх игр без побед.</div>
-      <div class="fact__phrase">«Команда приезжает на свежей победе, а не на серии поражений».</div>
-      <div class="fact__source"><a href="https://yflrussia.ru/tournament/1060904/calendar" target="_blank" rel="noopener">результаты ↗</a></div>
-    </div><div class="fact">
-      <div><span class="fact__num">3</span><span class="fact__label">Ахиллес — оборона</span></div>
-      <div class="fact__data">Крупно горит топам: Краснодар 1:5, Зенит 1:4, Локомотив 1:3.</div>
-      <div class="fact__phrase">«Против атаки ЦСКА оборона „Рубина“ — главный вопрос вечера».</div>
-      <div class="fact__source"><a href="https://yflrussia.ru/tournament/1060904/calendar" target="_blank" rel="noopener">календарь ↗</a></div>
-    </div><div class="fact">
-      <div><span class="fact__num">4</span><span class="fact__label">Кто забивает</span></div>
-      <div class="fact__data">Сафаров — 4 гола, Кузнецов и Гумеров по 3. Вратарь — Щепанский (№1).</div>
-      <div class="fact__phrase">«У „Рубина“ бьёт Сафаров, впереди цепляется Кузнецов».</div>
-      <div class="fact__source"><a href="https://yflrussia.ru/tournament/1060904/teams/application?team_id=1311490" target="_blank" rel="noopener">заявка ↗</a></div>
-    </div><div class="fact">
-      <div><span class="fact__num">5</span><span class="fact__label">Терять нечего</span></div>
-      <div class="fact__data">Аутсайдер против второго — классический матч раскрепощения.</div>
-      <div class="fact__phrase">«Когда терять нечего, играется свободнее — ЦСКА это должен помнить».</div>
-      <div class="fact__source"><a href="https://yflrussia.ru/tournament/1060904/tables" target="_blank" rel="noopener">таблица ↗</a></div>
-    </div>
+      <details class="acc"><summary><span class="acc__title">Ключевые игроки</span><span class="acc__hint">37 в заявке</span></summary><div class="acc__body"><div class="kv">
+        <div class="kv__row"><span class="kv__label">№68 · нападающий</span><span class="kv__val"><b>Гумеров Риваль.</b> 3 гола в 8 матчах. Автор победного мяча в Воронеже: 59-я минута, единственный гол матча.</span></div>
+        <div class="kv__row"><span class="kv__label">№17 · нападающий</span><span class="kv__val"><b>Сафаров Инсаф.</b> 4 гола в 14 матчах, лучший бомбардир команды. Пять жёлтых карточек.</span></div>
+        <div class="kv__row"><span class="kv__label">№99 · нападающий</span><span class="kv__val"><b>Кузнецов Егор.</b> 3 гола в 16 матчах, сыграл весь сезон без пропусков.</span></div>
+        <div class="kv__row"><span class="kv__label">№4 · защитник</span><span class="kv__val"><b>Богомолов Роман.</b> 2 гола в 13 матчах: защитник в пятёрке бомбардиров команды.</span></div>
+        <div class="kv__row"><span class="kv__label">№15 · полузащитник</span><span class="kv__val"><b>Толстов Арсений.</b> 2 гола в 9 матчах.</span></div>
+        <div class="kv__row"><span class="kv__label">№1 · вратарь</span><span class="kv__val"><b>Щепанский Артём.</b> Основной, 10 матчей. Два последних тура отыграл на ноль.</span></div>
+      </div></div></details>
+      <details class="acc"><summary><span class="acc__title"><span class="fact__num">1</span>Ушёл со дна</span><span class="acc__hint">13-е место, +3 от «Факела»</span></summary><div class="acc__body">
+      <div class="fact__data">Тринадцатое место, 12 очков. От «Факела» на дне оторвался на 3 очка, вровень идёт «Нижний Новгород». Забито 21, пропущено 36.</div>
+      <div class="fact__phrase">«Ещё тур назад „Рубин“ был последним. Сейчас у него запас в три очка и совсем другое настроение».</div>
+      <div class="fact__source"><a href="https://yflrussia.ru/tournament/1060904/tables" target="_blank" rel="noopener">таблица&nbsp;↗</a></div>
+      </div></details>
+      <details class="acc"><summary><span class="acc__title"><span class="fact__num">2</span>Две победы подряд</span><span class="acc__hint">обе на ноль</span></summary><div class="acc__body">
+      <div class="fact__data">В 15-м туре 2:0 над «Нижним Новгородом», в 16-м 1:0 у «Факела» в гостях. Победный мяч в Воронеже забил Риваль Гумеров на 59-й минуте. Обе победы на ноль, до этого было три поражения подряд.</div>
+      <div class="fact__phrase">«Команда приезжает на серии из двух побед и двух сухих матчей, а не на серии поражений».</div>
+      <div class="fact__source"><a href="https://yflrussia.ru/match/5483126" target="_blank" rel="noopener">протокол матча&nbsp;↗</a></div>
+      </div></details>
+      <details class="acc"><summary><span class="acc__title"><span class="fact__num">3</span>Ахиллес: оборона</span><span class="acc__hint">36 пропущено, но два сухих</span></summary><div class="acc__body">
+      <div class="fact__data">Крупно горит топам: «Краснодару» 1:5, «Зениту» 1:4, «Локомотиву» 1:3. При этом последние два матча отыграл на ноль.</div>
+      <div class="fact__phrase">«Против атаки ЦСКА оборона „Рубина“ это главный вопрос вечера. Но два сухих матча подряд говорят, что вопрос уже не риторический».</div>
+      <div class="fact__source"><a href="https://yflrussia.ru/tournament/1060904/calendar" target="_blank" rel="noopener">календарь&nbsp;↗</a></div>
+      </div></details>
+      <details class="acc"><summary><span class="acc__title"><span class="fact__num">4</span>Кто забивает</span><span class="acc__hint">Сафаров, 4 гола</span></summary><div class="acc__body">
+      <div class="fact__data">Сафаров: 4 гола. Кузнецов и Гумеров по 3. Вратарь Щепанский (№1). За 16 туров никто не перевалил за четыре мяча.</div>
+      <div class="fact__phrase">«У „Рубина“ бьёт Сафаров, впереди цепляется Кузнецов, а решает в последних матчах Гумеров».</div>
+      <div class="fact__source"><a href="https://yflrussia.ru/tournament/1060904/teams/application?team_id=1311490" target="_blank" rel="noopener">заявка&nbsp;↗</a></div>
+      </div></details>
+      <details class="acc"><summary><span class="acc__title"><span class="fact__num">5</span>Терять нечего</span><span class="acc__hint">играют свободнее</span></summary><div class="acc__body">
+      <div class="fact__data">Команда из низа таблицы против второго места: классический матч раскрепощения. Давление результата лежит на ЦСКА, а не на гостях.</div>
+      <div class="fact__phrase">«Когда терять нечего, играется свободнее. ЦСКА это должен помнить весь матч».</div>
+      <div class="fact__source"><a href="https://yflrussia.ru/tournament/1060904/tables" target="_blank" rel="noopener">таблица&nbsp;↗</a></div>
+      </div></details>
     </div>
 
-    <div class="section-divider">Под угрозой и вне игры</div>
+    <div class="section-divider">Карточки и дисквалификации</div>
     <div style="padding:14px 16px">
       <div class="ctable ctable--cards">
         <div class="ctable__head"><span>Игрок</span><span>Амплуа</span><span>И</span><span>ЖК</span><span>КК</span></div>
@@ -670,58 +678,58 @@ a{color:var(--accent);text-decoration:none;}a:hover{text-decoration:underline;}
         <div class="ctable__row"><span class="nm">Самат Хасянзянов <i>№9</i></span><span class="rl">полузащитник</span><span>12</span><span class="yk">3</span><span class="dim">—</span></div>
         <div class="ctable__row"><span class="nm">Богдан Хайруллин <i>№10</i></span><span class="rl">—</span><span>13</span><span class="yk">3</span><span class="dim">—</span></div>
         <div class="ctable__row"><span class="nm">Егор Кузнецов <i>№99</i></span><span class="rl">нападающий</span><span>16</span><span class="yk">3</span><span class="dim">—</span></div>
-        <div class="ctable__note">Трое на пяти жёлтых, включая лучшего бомбардира команды, плюс две красные за сезон. У ЦСКА столько нет — готовая фактура про игру на грани. Источник: <a href="https://yflrussia.ru/tournament/1060904/stats/cards?common=1" target="_blank" rel="noopener">карточки лиги ↗</a></div>
+        <div class="ctable__note">Трое на пяти жёлтых, включая лучшего бомбардира команды, плюс две красные за сезон. У ЦСКА столько нет: готовая фактура про игру на грани. Источник: <a href="https://yflrussia.ru/tournament/1060904/stats/cards?common=1" target="_blank" rel="noopener">карточки лиги ↗</a></div>
       </div>
     </div>
 
-    <div class="section-divider">Глубина обоймы</div>
+    <div class="section-divider">Глубина состава</div>
     <div style="padding:14px 16px">
       <div class="kv">
-        <div class="kv__row"><span class="kv__label">Заявка</span><span class="kv__val"><b>37 игроков</b>, средний возраст 18,05 — на четверых шире, чем у ЦСКА.</span></div>
-        <div class="kv__row"><span class="kv__label">Ядро состава</span><span class="kv__val">Кузнецов — 16 матчей. Уцумиев и Муха — по 15. Сафаров и Абдуллин — по 14. Хайруллин и Богомолов — по 13. Хасянзянов и Печугин — по 12.</span></div>
-        <div class="kv__row"><span class="kv__label">Периферия — заготовка на замену</span><span class="kv__val">Балаев — 6 матчей. Гумеров и Хабибуллин — по 8. Толстов и Анисимов — по 9.</span></div>
-        <div class="kv__row"><span class="kv__label">Вратари</span><span class="kv__val">Щепанский — 10 матчей, основной. Соколов — 5: смена вратаря по ходу сезона была.</span></div>
-        <div class="kv__note">Заявка шире, а ядро уже — тренер Яруллин перебирает сочетания. Причину из цифр не выводим.</div>
+        <div class="kv__row"><span class="kv__label">Заявка</span><span class="kv__val"><b>37 игроков</b>, средний возраст 18,05. Заявка на четверых шире, чем у ЦСКА.</span></div>
+        <div class="kv__row"><span class="kv__label">Ядро состава</span><span class="kv__val">Кузнецов 16 матчей. Уцумиев и Муха по 15. Сафаров и Абдуллин по 14. Хайруллин и Богомолов по 13. Хасянзянов и Печугин по 12.</span></div>
+        <div class="kv__row"><span class="kv__label">Периферия, заготовка на замену</span><span class="kv__val">Балаев 6 матчей. Гумеров и Хабибуллин по 8. Толстов и Анисимов по 9.</span></div>
+        <div class="kv__row"><span class="kv__label">Вратари</span><span class="kv__val">Щепанский 10 матчей, основной. Соколов 5: смена вратаря по ходу сезона была.</span></div>
+        <div class="kv__note">Заявка шире, а ядро уже: тренер Яруллин перебирает сочетания. Причину из цифр не выводим.</div>
       </div>
     </div>
 
     <div class="section-divider">Кто делает голы, кроме бомбардира</div>
     <div style="padding:14px 16px">
-      <div class="blocknote"><b>21 гол, доля лидера — 19%</b>, и никто не перевалил за 4 гола за 16 туров. Проблема не в отсутствии лидера, а в том, что забивать некому.</div>
+      <div class="blocknote"><b>21 гол, доля лидера 19%</b>, и никто не перевалил за 4 гола за 16 туров. Проблема не в отсутствии лидера, а в том, что забивать некому.</div>
       <div class="ctable ctable--contrib">
-        <div class="ctable__head"><span>Игрок</span><span>И</span><span>Г+П</span><span>За матч</span></div>
-        <div class="ctable__row ctable__row--warn"><span class="nm">Риваль Гумеров <i>№68</i></span><span>8</span><span>4</span><span class="yk">0,50</span></div>
-        <div class="ctable__row"><span class="nm">Карим Хабибуллин <i>№44</i></span><span>8</span><span>3</span><span>0,38</span></div>
-        <div class="ctable__row"><span class="nm">Егор Печугин <i>№23</i></span><span>12</span><span>4</span><span>0,33</span></div>
-        <div class="ctable__row"><span class="nm">Инсаф Сафаров <i>№17</i></span><span>14</span><span>4</span><span>0,29</span></div>
-        <div class="ctable__row"><span class="nm">Арсений Толстов <i>№15</i></span><span>9</span><span>2</span><span>0,22</span></div>
-        <div class="ctable__note">Хабибуллин — защитник: 3 голевых при нуле голов, второй по вовлечённости в голы во всей команде. У Гумерова и Хабибуллина по 8 матчей — выборка малая, темп может не удержаться.</div>
+        <div class="ctable__head"><span>Игрок</span><span>И</span><span>Г</span><span>П</span><span>Всего</span><span>За матч</span></div>
+        <div class="ctable__row ctable__row--warn"><span class="nm">Риваль Гумеров <i>№68, нап.</i></span><span>8</span><span>3</span><span>1</span><span>4</span><span class="yk">0,50</span></div>
+        <div class="ctable__row"><span class="nm">Карим Хабибуллин <i>№44, защ.</i></span><span>8</span><span>0</span><span>3</span><span>3</span><span>0,38</span></div>
+        <div class="ctable__row"><span class="nm">Егор Печугин <i>№23</i></span><span>12</span><span>2</span><span>2</span><span>4</span><span>0,33</span></div>
+        <div class="ctable__row"><span class="nm">Инсаф Сафаров <i>№17, нап.</i></span><span>14</span><span>4</span><span>0</span><span>4</span><span>0,29</span></div>
+        <div class="ctable__row"><span class="nm">Арсений Толстов <i>№15, пз.</i></span><span>9</span><span>2</span><span>0</span><span>2</span><span>0,22</span></div>
+        <div class="ctable__note">Хабибуллин защитник: 3 голевые передачи при нуле голов, второй по вовлечённости в голы во всей команде. У Гумерова и Хабибуллина по 8 матчей, выборка малая, темп может не удержаться. Амплуа Печугина на сайте лиги не указано.</div>
       </div>
     </div>
 
     <div class="section-divider">Что на кону</div>
     <div style="padding:14px 16px">
       <div class="kv">
-        <div class="kv__row"><span class="kv__label">Забито и пропущено</span><span class="kv__val"><b>21 : 36</b> — разница <b>−15</b>. У ЦСКА +26. Но в последних двух матчах «Рубин» не пропустил вовсе.</span></div>
-        <div class="kv__row"><span class="kv__label">Темп очков</span><span class="kv__val"><b>0,75 за матч</b> против 2,19 у соперника. Ещё тур назад было 0,60 — две победы подряд заметно сдвинули показатель.</span></div>
+        <div class="kv__row"><span class="kv__label">Забито и пропущено</span><span class="kv__val"><b>21:36</b>, разница <b>−15</b>. У ЦСКА +26. Но в последних двух матчах «Рубин» не пропустил вовсе.</span></div>
+        <div class="kv__row"><span class="kv__label">Темп очков</span><span class="kv__val"><b>0,75 за матч</b> против 2,19 у соперника. Ещё тур назад было 0,60: две победы подряд заметно сдвинули показатель.</span></div>
         <div class="kv__row"><span class="kv__label">Что это значит в эфире</span><span class="kv__val">«Рубин» ушёл с последнего места на 13-е и оторвался от «Факела» на 3 очка. Вровень идёт «Нижний Новгород» (те же 12), «Урал» впереди на 4. Отрыв от дна пока в одну игру.</span></div>
-        <div class="kv__note">Только арифметика мест. Регламент вылета не сверялся — про стыки не говорим.</div>
+        <div class="kv__note">Только арифметика мест. Регламент вылета не сверялся, про стыки не говорим.</div>
       </div>
     </div>
   </div>
 
   <!-- ПРОТОКОЛ -->
   <div class="panel" data-panel="protocol">
-    <div class="protocol-section-title">Протокол — сопоставление составов</div>
+    <div class="protocol-section-title">Протокол: сопоставление составов</div>
     <div class="pr-head">
       <div class="pr-head__side" style="flex-direction:row;align-items:center;gap:8px"><img src="data:image/png;base64,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" alt="ЦСКА" style="width:30px;height:30px;object-fit:contain"><div><div class="pr-head__name">ЦСКА</div><div class="pr-head__city">2-е место</div></div></div>
       <div class="pr-head__center">по заявке</div>
-      <div class="pr-head__side pr-head__side--away" style="flex-direction:row;align-items:center;gap:8px;justify-content:flex-end"><div style="text-align:right"><div class="pr-head__name">«Рубин»</div><div class="pr-head__city">16-е место</div></div><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAAAXNSR0IArs4c6QAAAHhlWElmTU0AKgAAAAgABAEaAAUAAAABAAAAPgEbAAUAAAABAAAARgEoAAMAAAABAAIAAIdpAAQAAAABAAAATgAAAAAAAABgAAAAAQAAAGAAAAABAAOgAQADAAAAAQABAACgAgAEAAAAAQAAAECgAwAEAAAAAQAAAEAAAAAAmoOaQAAAAAlwSFlzAAAOxAAADsQBlSsOGwAAGBBJREFUeAHVWwd41cWyn5NKDYEAoYcqRZSOAioiNhDLVenY9VqQ7z2RT0Wv9/ksXHu5D5UPkGIHK8XCVTGioIjSe6QEkhBSIJTkpJ/3+83/zGFzOATw6ffeGznZ3dnZ3ZnZ2dnZ3b8+EYnCL4CfDz/CyfLV1bM9+zEaS4k/UZ51hBPVG54pwe2f5Uj4cBzpCMRTXoLSRHv5UCfB4v96YgKcKiPV0VudTfBxfZ6owvCWsqGbP66jsHqXNlKeOMNbyj7dPMsGLt7ylhoNU+Ii4Y3G6jXlHzMJI6DGquvgRPUnwkfq94+m5RjkOVK/xBEi1hNZnbDaMuyPdRiG/j9TDJcnklJCzEZSwIkaqOB5eXl94+Pj20ZFRRUjLWFP5YDo6GjmywOBQAXSytjY2MqysrIYn88XxzJ+bE+fYxan/Tl1yEoUuoqKiYmJraioiEOfbMd+Sct2UcDHsk+kMRirHDxU+P3+mhgrvri4eFmzZs32gO60lKAd2wDBxuE4ltlp1MGDB1Mx8AmhEuBUunkH/edk09PTJ4NHgsu/TXJIBrc+BgVqORxsdsLxPrDOjmTv6g1SfPiIVFZwwjFiVJQktU2RBiktfLm/7ZLDWTnSomdXX1ztWlJ85KhkrtkoDVq3lBoJdSRrw1YJVFRKZaXXNoA+mnTpKHWbNJI9P6+V+Lp1pGnXjoKZluKjhbIP9M27dZH8XXulqKBAUvp0l+jYWCnMOyBZG7dKcsd2Uq9ZEwFvtqtVJ1MV2agA11yYN4JI+UCUZ+qyaPIUyd2+Q5I7nyHAyeF9+yFQpdyxYLaseusj+WnmuzL+63mo7yB5abtk9vA75ZKHJ0jLXmfLnBF3SlKbVlKvuTKtDFz66L8LlfX+HZOkeY+ucuPbU6W0sEjm3/mA7Frxi0xI/UhSX54uO1JXyMRVX0qtxDjJXLdZZl13u1w/9Snpc8P1VICnUc8CKEckGVx5JVwBaKPgErn5AGaljBSV5eUqxG0fvyGxNeLlh2lvymIopSBjHxQShdkDFzHsHlxAQWTFOqosK5eeo6+R+q2ai//gIamZmCAN27aW8tJSnXVaE+GLx56XLV8slVoN6mvZ+szetE0OpO9Vy+BYBmCuPJg34a0qUqo0p7oEzCrIYKnXG8UJSP7uvRITGyNHc/IkUBkQH5gPwBLKS8skd8cuSO2TA7v3aBPrJComWg7uzZKs9Zt1ljnDXYYOliuefFDpqbjl09+WNR8sVgs6vC8nKAC1GiVpsIKczdul8MBBLau2QQHFuabPvMek19qGt1TrqACqsArSow81JqF1FIiOjvIUoNgoWYGZT8e6pdBnXnmpNMZ6rCivkF0//irfPPOaWkGZ30/zVOHYdzksoHm3ztJn3PUCby5TB12viqyA0qLj4mTPqrWy/ZvvZdCku6DYfFk5Z16QJc/yzrvrRqmdVF+2LEmVuaPuQp3HPpYguTIwvt0ylWImw0Y+KsBr7ZFFyrs4ifJ5CqAZ00kNefwBOLRyCCjq4KIxe63P6SmXYU37Cw5LNGY7Bz7gi0efgxZ9aiV0ejlbd8jun1ZLaVGR0tWA40PnqK+AxezFErlaLhh/iyx86CnBfqoKpMO1PNlluYJ1cKgEWEAVXoFyy5a3lE0C4QqwmbaURG6eg6ijadS+jfYeWyNOYuLAPEBnGWnW+k2y5PGX1SrYmkuj46UDpcsVg6XoQIG07H22WghNnzwmNG0s594+RmJr1pCG6Ldlr24ybMrDupwSmiRLkzM7YYw4qd+yuSRjt6DTJVBpzc7uAh+RqGV4YfJKcIX0MJ4clq+SshHNwlLm7ReOEwQdcyHoSaG8rCxEgyURyjNMwMxpGeaPlVM1VHDLrGHbinLGVyeHXbt2PRCUzOWbeStbavJF0QIIpjFLPaz3tyouaGY/v/mBHM7O0Vlyibk7tB/YX9r06yW7V66WEuzjyR3bSy2s2Q2ffiHdh18phzKyZccPK+Wsqy7TPvLhJDtdMlC3u/opzaUIO0Mp2rXifo8lRYf60xvvif/QYc/Jcr0BKA39TZchg+BTzuSSdJ2g8c2UpG4ZRQ9MAVZmag3CcVqm6ggrZ8+TjLUbBeGq7v8eVqTMXyxDn4hRBWxYsEQFHDntWdkJgX9552M1cQRLkr5yDQTsJpsWf40ls0Va9DhLfn3vU4mrVUOad+8qOdt2qEL63jRC44PvX52tgRB3EIJOJZRTWuTXJUQFYH26CjCWSGrgyqZ5KsAlMMJwnJVDA3Dvj42Pl4QmjTWC8/b8gJSXlEoSIj5CCwhyeH+OBklHcw9Iz1FXa5xQp1ES1nMzZZ6RYbsLzpUCbIttz+sjDRAbcFYr0M/BPRnqV+LgG1r27qbRni+475dB8APpmepfzCdgcmyWjV+Tx03dOt0FQkI5VNaRg6qaxYqUsuJi6T3uWukKU87evC3knBgLbEYAE1e7ptBZZq7bJPF1aklMfKKUF5dKJiynYfvWcgT7e2KLZtruUGa2OjV/wREIXalLhs4t49f1amFnXzME0nlsxSAMZoQ5B1sgnaqBswtEksnIXNl0F3A1YkThKWnYkD+PXv/6JAazs+XLb+Xzvz8L863ptQOVOwojOCI8AYLNkehSRupz6ElLvLZhM+TpVzjLPm6TQNSoU0du+WiGp3CvOx2XMUUQHKzDM1nw+Ge95k+0BKwja2BlzobTOarBEBmjswqFvkFqNuZ42gBScjukQ+PWyeG9eo+j8LzXBj4FFsPzQwXijv1b09Tn2DjBYUIJnKDD23FL2+os1Xb0aTSXE/3Il9V5PAbjdOXeuGaqY3t9B5AgLgeSeM47BS8XOrRLHroXMcGFiAZ5pCANZjVEy3ZsBACurLhED0ajZjyPg1OyBj46JPunabCgP8Vqs+AfIly+rWwp6zRPBXhceKlbtjxTyyMbDCXBoKdwNA8yTTmI8/4DB4zUSso0WqPT4sy1GdAHfqBEZ9SjDzIQauf1S//CnWHMzOfVYRblHWQQpn2TCR3bhmZHAFgn+SQYv5aSwPJMQz93G/R6CYmjGiKOmmLq5Y8NohXAVwElxh/OepMuZ+DYWg9evVyandVZGnZordtb5yEX6frd8q9UPdfbwNYRhafZj5r+PJxkUzmKc//h/bnBmIMjHIOQxRxDMWdEyk6wys2HaFwF0CyMFyMmzkA7hel5G7GaIFH48R/K/I//eNjhLHe96lIZOOE2bQ+07P1lHS5JztKZpM/YhgMPHAOaYFgdGWaPOILxwegZL2DbS9a2+7ekyRGcNvWkyXE5ki0BHZM4gC1P5cJD4W+wUkdw5dERqQAT2lK2tLylxBEwrt26oMpqmaUZYijGB5w9eu7sjdvkg/GTpW7jhtL/zhvVCkhH5nuMuFJ2//gLgp9PsD3Ga+ec+ZS+3THzz6nwpCP9li9TNS7gWcGTJ7j8lAUdXNtjTJo2gSkFR2UVBaAY4lrrjZAFaodpdT8S2SAgdUHnUR0XQ9+eo65RH8B9uginQgY1MfG8H8UAOosi3a6/wts5UObMp/TtKerwvOstFf5AeoaG0BoBGmfOsMGuFEMfEQRSEix1824vGgcoJf5QWwQSWF4RVf5UVnpLgES2ALVLNvEU/vPced6Wh2Uw4J6b5OIH75UNC3CNhZudRgiADGo3TFIfwLi/9bm9ZCQcXkJyI1WQWcq/pvxTlcSTYAGCJbU06yAshWJdvk0OS0nt5rU1VWacR0pJ5OIFJzRPzcCGhnMpYLLRsTgiYynEJ9SVdR9/Lq9ePFzm3zNZVkx/Swe1Pwf3ZOoBJwUHp5EznlPh4cmtWr57ZaZejoyZ85IkInTmrnIccOxj4JaqcAWS8DJbnVIoTK2FAFr2FEDbM/vTbNAxgVIb8A+Uwe2Py6DpmR2l99hrvTrgKcyPM96RFFye0Nsn4EaYwnOG+fvun2/IL29/JGPnvCJNz+qkV25qFdrDsbG8oo4Y4tFYiJCSxoipkErXCbIyEpCQjbQhCixTtmDOS1n2zNPtH8dV7AgNcV0+CubNrZBQiRucz/72tN4GjZv7ijpJ+gVbw6mvzJBf3/lExrzxIi48OuPQkyGF+YgDeBAKDuyNpd0FcZpX3pCzlEiXIebdOrUAIlwiNiIYjnlrRLfMMiqZBn9qDUaCNDgMr814Xz9q5gsQvpPXDsIvwjVXNi41x855WXgypPAmUOpL0+XX9z+VMbNexNuA14bX37wAjcHSIm0InKzijjlBMmO1DmOhlpYJLQG3gTU0IqbHcMaApkR7VYFgyBtqBHQUbouHPfNISHgGRCo89vWxsz3hzezZbumL02TNvIUQ/iVdMibsxoVLVHAdIzi+1pFr5TzI3jH/YY6kOrm0zpaAdWX8s0xgz1bHPKcq2DnQ5gWR1fDXyiDjvUC34cOk08UXsB8Nhz+d9ITk4ap8HNa1zbyZ/dLnX5e1H32ma74JjrpmFbxV2r50uc5+aNdBf2YxHoceu2jj+afIWzWJTB6ypHmLBFkwCCc0vKY4lnqPD5hxH35VwONDu+ae3wuPHwSeAhf/7RnJ2f6b3PDWVKnTsEFIQNZ/89xrsv6TL6CYl3Gt3j5U5z90BJerL0k5rtV5Xe5B1TGDK1KrTJkouEQOV0rm1h13K0yKKgRhZd5c68sQZ5yEPp/3EAKugy0D6uHr49qraVfP6a16+0PZsewnufXDmccJ//UzU2Xjwq9kLJxh4w5tdSegIKUQ+pP7/gNvDmu8e4bQ0jvGovLgcssqD1ysm7f6UEqT4Y9aCs8TF47nu4A+iTMuD4FS4g/+8WhLL89DDK+7GMMvf32uvvok4i3Q3ee/+sd/ycZFFB4zD+Fp9io8ts4PEDfw8ZXvhPQd0HToR4kovHKHhOcKAtq7ax81IdksT7IqcrJgGmIanjec4fnOV8heYnH7Q4b5sMGXWloAy+yCfDBu5zqlgImI4s4YfL7W29plhLf586W6E/DazJwhLznn3/OQlBwplDGzX9I7x0rcEbJv+0XHxOJFqVzDbh6x+ahKQN9qnVrwZDH+iTIZquCcaQw2O0kS7fPtJwkPOBTmEF6F6dDsAZR1xDO2J+yBCbe74BydLJZZ98Nrc3HAgfCYeRPeZn7+3Q/ivdAvoxED8OGjtLBQ27Ad/sGfVOqzGFP/oUN6+KrdqAG7JuCxMAScdYKlXinsLxVgBEzD84azlLOwg30wuCGST9/1W7WQeN4HYpboF3l/x1ve4sNHccdfoLEA21CIvJ178Hz+oQx/7Wntg7OqwkPo+XdB+KJiGY24oWa9uuLHEjiSnecFQGpdGALWwPOE/+BhKYWVxNeprRcm7Ad3gukcxwGyaGAyWEo8PNixUyDXD380kUh5XV8QIg0EAYanjPdzoQDe8TU6o62uVTbm1TWfyTPxRBZbq5Y6NKAVti75Fvf+Z0ozBDnmD0rwAcW8ux/QrXPMG57wJN6/5Te8ImeCy2hlijrAu5K0u7C/ZOCDi1J/idDZJsAaS0pLjuDrld06iCeDycHUzZtsJNUrJNNIeGrWYSnrZffu3WnQdnZLXFfVxZsAv9JgpHb2X4bg4RKHFdopfrz8XIvn7Xp496OVGPDhkzdFBFoErWbBg0/p1dkoCF8DBygcuLR+NSLC8pISnSbS0uzrNU3G42sPxAbf61D8WiQKPqjYX7x+586du9lt2I99Ge64vCucEVlqxJYSH9WhQ4fckuLi5Vx3bfr1Vo+/Zv5Cffjkiw9ffumhGQfw4wa+EGeu3eR5cnQQW7MmHNxR9qlAUXk5MnL6s7jurq2OLgrCpn33o94DeJclHBrBFIKrXqP/goeWHNm3fquaf+fLB2ldYWHhJyNGjOBx0fg/pZQKIA/uz0yEOOYttbzA1N4mssfIq3SP5ns+Y/sLJ/5V+MbPJhyd6znt2+VqIXzvJ7TCjc+O71eqhXBW+esAk65ZL0GFZ5lXYIseeFKXBPshB3wGT2qfIn1vHqFOlN8c8HqN12f4OuxAZmbmxyQFkDX7Gc+WunjF8XKDSjDQ8VAwyzC80Wh9ixYt0rt173Zxk3ZtWqTjni93+05EeTtx5T0Blxb7cBW2VbdGvheQcZ4IM/E1SPuB/fTbAUZ9+7dsl/YQnA7QgMJTUR/e+wicaKYX/WFEOjjuMsNf/QfeBn6TH16fo3v/5Y9NEobNubm5Mzp37vwe+iF/9mO31rmLq5IP3e6Q2gESUVsuGM63ZMmSsttvuz2nXv3EkQ3bpfg2Lv4KV15Zerkx9PFJ+uFDwR58K4TDEBcqj7H0FWmI6WsnNZDuuAr7ec582fb197qHc9vL2rAFH0HNkKXPva6vw9FxjC3o9BBZQoFD/nOSNMW3ARog4ZW4y7CLZfD9eBrz+7O2bt16+6xZsw6BWQoczrcrw3F50wYbMU8Iz3tY729ICSzio8lZSUlJNy+bOlu+fPxFNedBWAa9x14n795yn2Ss24gdggGR15iPnrwIadShDfb4uvDkG3B5WiHxCGRKEFCZ72C8zSaMKFnPr8vOuvpyeeuGCbrU+IXZrR/MkMRWzeiUb2vXrt0skLu8nYoSlN5dAkTwR3Dz1KqV3frAtdde+1NiYuLQDued0+hw1n51dvzOjxeYl/39Ppz80iUPS4PRGpVAsRgi85OWKD6nwXs3PqONmjgDohLEDSgoLZcNH0GHPfWQtB3QV96/faLs35ymQdD1U6fod4PZ2dlvzZ49+7HU1FTj2VLjM3wJHCdHpCXgas/Ns3MXfDNnzjw6cuTIX+omJFzb9bJBtQqystWU03GEPYSPJ4Y+dr+GxHvxwlvBLRKnwmZ4x+eW2fb8c6QuLkD5iQuDHn42t2v5z/phJF+Q+XrM7/+4xc3Dt4L5CKAYcV73yhPSEWE1rO/7ZcuW3Tx+/PgiMGUCu/wZ70xPVO+jAsIrT1Z2B/FNmzYtc8yYMVsSEusN63bFJfFl+NYvA9vePnzLxy/FBtw5TrpecYmaLm91eXDhOYGOLRvevib2fa53Ro87l69CfF8sfW4cLlc+NRk+Ypl89uizeqeY3KkdnOAU6TBoAIVfvWrVquHXXHMNw/Jwfo0/w1tKvKsMxfOPmYlbaZ2cCo40gQ0bNgxr07btnNq1aiWt/XAxPnJ8AZ/L7pea9RPk/HtvlZ7YMtd++Jn8jC9LjuYfgA+oDWFLdS8vwnVXHMpNESANuv9uRI819B6AR2hCp0sHylVPP6I3w7n5+SvStm0bM2DAgHRUVce7tg37c5w8rnbCaE+/uGbNmgEpKSlz69ev347f9y56eIpaAQfh9z4XTbpbsGvIalx7McoryMiCH4iT1rgW73fbaI0Q13ywCLfF7+I9MF+jQn4TeBG8PXeUrKys+StXrrwHvif/9LmL3MIsgJqpDkgXicY0avWBb3/8sXXnNm2mJicnX1GOE+FSXHKunPUebnULNGhqP6if9L9jnDSAJ+fTWGLzpvrJ7KbPvtbvjvJ27NbdhC/Dlz7yb4gV+klpaenRrOzsJ2656aYX4fB4I8XxThWMR9K7eW3Pjk6nM210kj+BCRMmxE+cOPG+pIYNJ9etUyeBBxfe+TEq5DE5DgeklHN76pUZBWYozatvXp1xlzjnllFy3l/HSSy2xwMFB1btTd87sXv37j8Ex/2f8BtRASeR5/dXr127tgcs4cnGTZoM5WLduiRVVuAxZPdPv+qZPxpmba89vD7n7tAPH0zyI+pCv/9Ifm7uVJj8M4jxGeScLpiiKLQLhidO64g40Y9EVufmDXeylG2iEKkNh/NaB8+vkPbtisC7t00MPNG+f+DFc4cFvnlhWgDHZ60rLi0p37dv33x4+R5sHITqxiEJ9RuJJhxvtIZnGmrMglVE6qw6XHXtOIZ89dVX9dLS0sbn5+dvDOohgLuEAD6XDwpeWpaTk7Nw3bp1g7WB96e6McPrjIfTlcMZ7s/LklmFBQsW1IUixuXl539ZVlFeUOgvys7IyHhz/fr1FxjNH5iGxo3Qp9aZFq0+vIHrNNy80Z8oNVpLSWd5HkMJvhUrVrTzi/gH9++f6aFCZhwsVkmsPZFu3iUi3gXK49K6eaUzBRxX4fZykvzvbct2LoQr36370/JcLyZAOEMsu7jwvNUb4+H1ZNpomHeBeFM+8eF9hPdlZUutr/Ay8eE4lg1nqbWv8v8MURkGJHSVY3hjlGXmSReOszqmBqdCa2O6bU4l7/IQ3gfbh49t/Go7Fgxhg50sdQc8Ge3/u3pThqUU4PcoKZLgbp+R6v9oXDjfNr7hNf1vQs+388j4Xt4AAAAASUVORK5CYII=" alt="Рубин" style="width:30px;height:30px;object-fit:contain"></div>
+      <div class="pr-head__side pr-head__side--away" style="flex-direction:row;align-items:center;gap:8px;justify-content:flex-end"><div style="text-align:right"><div class="pr-head__name">«Рубин»</div><div class="pr-head__city">13-е место</div></div><img src="data:image/png;base64,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" alt="Рубин" style="width:30px;height:30px;object-fit:contain"></div>
     </div>
     <div class="h2h-group-title">Вратари</div><div class="pr-list"><div class="pr-row"><span class="pr-side pr-side--home"><span class="pr-num">96</span><span class="pr-role">ВР</span><span class="pr-name">Платонов Андрей</span></span><span class="pr-side pr-side--away"><span class="pr-name">Щепанский Артём</span><span class="pr-role">ВР</span><span class="pr-num">1</span></span></div><div class="pr-row"><span class="pr-side pr-side--home"><span class="pr-num">60</span><span class="pr-role">ВР</span><span class="pr-name">Рамонов Дмитрий</span></span><span class="pr-side pr-side--away"><span class="pr-name">Соколов Константин</span><span class="pr-role">ВР</span><span class="pr-num">35</span></span></div><div class="pr-row"><span class="pr-side pr-side--home"><span class="pr-num">63</span><span class="pr-role">ВР</span><span class="pr-name">Бунич Александр</span></span><span class="pr-side pr-side--away"><span class="pr-name">Павлов Никита</span><span class="pr-role">ВР</span><span class="pr-num">16</span></span></div></div>
     <div class="h2h-group-title">Защитники</div><div class="pr-list"><div class="pr-row"><span class="pr-side pr-side--home"><span class="pr-num">79</span><span class="pr-role">ЗАЩ</span><span class="pr-name">Данилов Кирилл ★</span></span><span class="pr-side pr-side--away"><span class="pr-name">Богомолов Роман</span><span class="pr-role">ЗАЩ</span><span class="pr-num">4</span></span></div><div class="pr-row"><span class="pr-side pr-side--home"><span class="pr-num">67</span><span class="pr-role">ЗАЩ</span><span class="pr-name">Бадмаев Мингиян</span></span><span class="pr-side pr-side--away"><span class="pr-name">Абдуллин Карим</span><span class="pr-role">ЗАЩ</span><span class="pr-num">19</span></span></div><div class="pr-row"><span class="pr-side pr-side--home"><span class="pr-num">71</span><span class="pr-role">ЗАЩ</span><span class="pr-name">Баранов Станислав</span></span><span class="pr-side pr-side--away"><span class="pr-name">Хабибуллин Карим</span><span class="pr-role">ЗАЩ</span><span class="pr-num">44</span></span></div><div class="pr-row"><span class="pr-side pr-side--home"><span class="pr-num">51</span><span class="pr-role">ЗАЩ</span><span class="pr-name">Костогрыз Тимофей</span></span><span class="pr-side pr-side--away"><span class="pr-name">Балаев Никита</span><span class="pr-role">ЗАЩ</span><span class="pr-num">55</span></span></div><div class="pr-row"><span class="pr-side pr-side--home"><span class="pr-num">86</span><span class="pr-role">ЗАЩ</span><span class="pr-name">Насонкин Филипп</span></span><span class="pr-side pr-side--away"><span class="pr-name">Гарипов Ислам</span><span class="pr-role">ЗАЩ</span><span class="pr-num">22</span></span></div></div>
     <div class="h2h-group-title">Полузащитники</div><div class="pr-list"><div class="pr-row"><span class="pr-side pr-side--home"><span class="pr-num">82</span><span class="pr-role">ПЗ</span><span class="pr-name">Бондаренко Алексей</span></span><span class="pr-side pr-side--away"><span class="pr-name">Муха Захар</span><span class="pr-role">ПЗ</span><span class="pr-num">3</span></span></div><div class="pr-row"><span class="pr-side pr-side--home"><span class="pr-num">87</span><span class="pr-role">ПЗ</span><span class="pr-name">Пономарчук Артём</span></span><span class="pr-side pr-side--away"><span class="pr-name">Уцумиев Саид</span><span class="pr-role">ПЗ</span><span class="pr-num">5</span></span></div><div class="pr-row"><span class="pr-side pr-side--home"><span class="pr-num">68</span><span class="pr-role">ПЗ</span><span class="pr-name">Тверитнев Саркис</span></span><span class="pr-side pr-side--away"><span class="pr-name">Хасянзянов Самат</span><span class="pr-role">ПЗ</span><span class="pr-num">9</span></span></div><div class="pr-row"><span class="pr-side pr-side--home"><span class="pr-num">61</span><span class="pr-role">ПЗ</span><span class="pr-name">Филюшин Павел</span></span><span class="pr-side pr-side--away"><span class="pr-name">Толстов Арсений</span><span class="pr-role">ПЗ</span><span class="pr-num">15</span></span></div><div class="pr-row"><span class="pr-side pr-side--home"><span class="pr-num">66</span><span class="pr-role">ПЗ</span><span class="pr-name">Корнеев Вячеслав</span></span><span class="pr-side pr-side--away"><span class="pr-name">Добрынин Егор</span><span class="pr-role">ПЗ</span><span class="pr-num">88</span></span></div></div>
-    <div class="h2h-group-title">Нападающие</div><div class="pr-list"><div class="pr-row"><span class="pr-side pr-side--home"><span class="pr-num">81</span><span class="pr-role">НАП</span><span class="pr-name">Тарасенко Иван ★12</span></span><span class="pr-side pr-side--away"><span class="pr-name">Сафаров Инсаф ★4</span><span class="pr-role">НАП</span><span class="pr-num">17</span></span></div><div class="pr-row"><span class="pr-side pr-side--home"><span class="pr-num">65</span><span class="pr-role">НАП</span><span class="pr-name">Джанашия Владимир</span></span><span class="pr-side pr-side--away"><span class="pr-name">Кузнецов Егор</span><span class="pr-role">НАП</span><span class="pr-num">99</span></span></div><div class="pr-row"><span class="pr-side pr-side--home"><span class="pr-num">89</span><span class="pr-role">НАП</span><span class="pr-name">Пасичник Илья</span></span><span class="pr-side pr-side--away"><span class="pr-name">Гумеров Риваль</span><span class="pr-role">НАП</span><span class="pr-num">68</span></span></div><div class="pr-row"><span class="pr-side pr-side--home"><span class="pr-num">88</span><span class="pr-role">НАП</span><span class="pr-name">Сериков Артём</span></span><span class="pr-side pr-side--away"><span class="pr-name">Малеев Даниил</span><span class="pr-role">НАП</span><span class="pr-num">11</span></span></div><div class="pr-row"><span class="pr-side pr-side--home"><span class="pr-num">58</span><span class="pr-role">НАП</span><span class="pr-name">Шивеоби Роланд</span></span><span class="pr-side pr-side--away"><span class="pr-name">Анисимов Алим</span><span class="pr-role">НАП</span><span class="pr-num">77</span></span></div></div>
+    <div class="h2h-group-title">Нападающие</div><div class="pr-list"><div class="pr-row"><span class="pr-side pr-side--home"><span class="pr-num">81</span><span class="pr-role">НАП</span><span class="pr-name">Тарасенко Иван ★13</span></span><span class="pr-side pr-side--away"><span class="pr-name">Сафаров Инсаф ★4</span><span class="pr-role">НАП</span><span class="pr-num">17</span></span></div><div class="pr-row"><span class="pr-side pr-side--home"><span class="pr-num">65</span><span class="pr-role">НАП</span><span class="pr-name">Джанашия Владимир</span></span><span class="pr-side pr-side--away"><span class="pr-name">Кузнецов Егор</span><span class="pr-role">НАП</span><span class="pr-num">99</span></span></div><div class="pr-row"><span class="pr-side pr-side--home"><span class="pr-num">89</span><span class="pr-role">НАП</span><span class="pr-name">Пасичник Илья</span></span><span class="pr-side pr-side--away"><span class="pr-name">Гумеров Риваль</span><span class="pr-role">НАП</span><span class="pr-num">68</span></span></div><div class="pr-row"><span class="pr-side pr-side--home"><span class="pr-num">88</span><span class="pr-role">НАП</span><span class="pr-name">Сериков Артём</span></span><span class="pr-side pr-side--away"><span class="pr-name">Малеев Даниил</span><span class="pr-role">НАП</span><span class="pr-num">11</span></span></div><div class="pr-row"><span class="pr-side pr-side--home"><span class="pr-num">58</span><span class="pr-role">НАП</span><span class="pr-name">Шивеоби Роланд</span></span><span class="pr-side pr-side--away"><span class="pr-name">Анисимов Алим</span><span class="pr-role">НАП</span><span class="pr-num">77</span></span></div></div>
     <div class="protocol-section-title" style="margin-top:14px">Тренерский штаб</div>
     <div class="pr-head">
       <div class="pr-head__side" style="flex-direction:row;align-items:center;gap:8px"><img src="data:image/png;base64,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" alt="ЦСКА" style="width:26px;height:26px;object-fit:contain"><div class="pr-head__name">ЦСКА</div></div>
@@ -734,15 +742,15 @@ a{color:var(--accent);text-decoration:none;}a:hover{text-decoration:underline;}
     </div>
     <div style="padding:14px 16px">
       <ul class="checklist-live">
-        <li class="check--pending"><span class="check-badge check-badge--pending">⏳</span><span class="check-text">Стартовые 11 и арбитр — из протокола ЮФЛ за ~60 мин до матча<span class="check-source">тогда строки сократятся до вышедших; номера сверить с итоговым протоколом</span></span></li>
-        <li class="check--pending"><span class="check-badge check-badge--pending">⏳</span><span class="check-text">Тренерский штаб обеих команд — вкладка «Сотрудники» заявки<span class="check-source">yflrussia.ru · заявка команды</span></span></li>
+        <li class="check--pending"><span class="check-badge check-badge--pending">⏳</span><span class="check-text">Стартовые 11 и арбитр: из протокола лиги за 60 минут до матча<span class="check-source">тогда строки сократятся до вышедших; номера сверить с итоговым протоколом</span></span></li>
+        <li class="check--pending"><span class="check-badge check-badge--pending">⏳</span><span class="check-text">Тренерский штаб обеих команд: вкладка «Сотрудники» заявки<span class="check-source">yflrussia.ru · заявка команды</span></span></li>
       </ul>
     </div>
   </div>
 
   <div class="site-footer">
-    <div class="site-footer__copyright" style="text-align:center">Справка комментатора · разработана по методике MKD AI Boutique · источник — yflrussia.ru (официальный)</div>
-    <div class="site-footer__private" style="text-align:center">Данные на 24.07.2026 · стартовые составы и арбитр — за 60 мин до матча</div>
+    <div class="site-footer__copyright" style="text-align:center">Справка комментатора. Разработано медиагруппой «ОСНОВНОЙ СОСТАВ». Источник: yflrussia.ru, официальный сайт лиги.</div>
+    <div class="site-footer__private" style="text-align:center">Официальные данные на 25.07.2026, 22:20. Стартовые составы и арбитр добавляются за 60 минут до матча.</div>
   </div>
 </div>
 
@@ -786,17 +794,18 @@ function setAll(closed){
     s.classList.toggle('scorers-mini__sub--closed',closed);
     b.style.display=closed?'none':'';
   });
+  document.querySelectorAll('details.acc').forEach(function(d){ d.open=!closed; });
 }
 // Сторож свежести: бриф сам сообщает, что после сбора данных сыграны новые туры.
 (function(){
-  var СБОР='2026-07-24', ТУРЫ=[['2026-07-31','17-й тур — этот матч']];
+  var СБОР='2026-07-24', ТУРЫ=[['2026-07-31','17-й тур, этот матч']];
   var сегодня=new Date(), сыграны=[];
   ТУРЫ.forEach(function(t){ var d=new Date(t[0]+'T21:00:00+03:00'); if(сегодня>d) сыграны.push(t[1]); });
   if(!сыграны.length) return;
   var el=document.getElementById('staleWarn');
   el.innerHTML='⚠️ <b>Данные могли устареть.</b> Справка собрана '+СБОР.split('-').reverse().join('.')+
-    ' (после 15 туров). С тех пор сыграно: '+сыграны.join(', ')+
-    '. Очки, места, голы и карточки изменились — скажи ассистенту «обнови бриф».';
+    ' (после 16 туров). С тех пор сыграно: '+сыграны.join(', ')+
+    '. Очки, места, голы и карточки изменились, скажи ассистенту «обнови бриф».';
   el.classList.add('stale--on');
 })();
 document.getElementById('expandAll').addEventListener('click',function(){setAll(false);});
