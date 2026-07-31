@@ -4,4 +4,6 @@
 *.v[0-9]*.html
 *.draft.*
 data.md
+ТЗ-*.md
+*.notes.md
 .DS_Store
