@@ -29,28 +29,41 @@ SCRIPTS = SCRIPTS.replace("(после 16 туров)", "(после 11 туро
 # Ключ хранилища привязан к адресу матча: отметки одного брифа не протекают в другой,
 # хотя все брифы лежат на одном домене.
 CHECKLIST_JS = r"""
-// Возраст данных страница считает сама: штамп в шапке не может тихо протухнуть.
+// Штамп актуальности живёт сам: показывает момент сбора данных и их возраст,
+// пересчитывая его раз в минуту. Пишем ровно то, что правда: когда данные сняты
+// с официальных источников. Само содержимое обновляет пересборка брифа.
 (function(){
   var поле = document.getElementById('freshness');
   if (!поле) return;
   var собрано = new Date(поле.getAttribute('data-built'));
   if (isNaN(собрано)) return;
-  var часов = (Date.now() - собрано.getTime()) / 3600000;
   var текст = поле.querySelector('.freshness__text');
-  var когда;
-  if (часов < 1)        когда = 'обновлено только что';
-  else if (часов < 24)  когда = 'обновлено ' + Math.floor(часов) + ' ч назад';
-  else {
-    var дней = Math.floor(часов / 24);
-    var хвост = (дней % 10 === 1 && дней % 100 !== 11) ? 'день'
-              : ((дней % 10 >= 2 && дней % 10 <= 4 && (дней % 100 < 10 || дней % 100 >= 20)) ? 'дня' : 'дней');
-    когда = 'обновлено ' + дней + ' ' + хвост + ' назад';
+
+  function два(ч){ return (ч < 10 ? '0' : '') + ч; }
+
+  function обновить(){
+    var минут = Math.floor((Date.now() - собрано.getTime()) / 60000);
+    var часов = минут / 60;
+    var дата = два(собрано.getDate()) + '.' + два(собрано.getMonth() + 1) + '.' + собрано.getFullYear();
+    var время = два(собрано.getHours()) + ':' + два(собрано.getMinutes());
+    var возраст;
+    if (минут < 2)        возраст = 'только что';
+    else if (минут < 60)  возраст = минут + ' мин назад';
+    else if (часов < 24)  возраст = Math.floor(часов) + ' ч назад';
+    else {
+      var дней = Math.floor(часов / 24);
+      var хвост = (дней % 10 === 1 && дней % 100 !== 11) ? 'день'
+                : ((дней % 10 >= 2 && дней % 10 <= 4 && (дней % 100 < 10 || дней % 100 >= 20)) ? 'дня' : 'дней');
+      возраст = дней + ' ' + хвост + ' назад';
+    }
+    поле.classList.toggle('freshness--stale', часов >= 12 && часов < 48);
+    поле.classList.toggle('freshness--old', часов >= 48);
+    текст.textContent = 'Актуально на ' + дата + ', ' + время;
+    поле.title = 'Данные сняты с официальных источников ' + возраст;
   }
-  if (часов >= 24) поле.classList.add('freshness--stale');
-  if (часов >= 72) poleOld(поле);
-  function poleOld(эл){ эл.classList.remove('freshness--stale'); эл.classList.add('freshness--old'); }
-  текст.textContent = 'Официальные источники · ' + когда;
-  поле.title = 'Данные собраны ' + собрано.toLocaleString('ru-RU');
+
+  обновить();
+  setInterval(обновить, 60000);
 })();
 
 (function(){
@@ -174,28 +187,34 @@ PALETTE = """
 .pr-row{background:linear-gradient(90deg,var(--home-soft) 0%,transparent 22%,transparent 78%,var(--away-soft) 100%);}
 .pr-head{border-top:2px solid transparent;border-image:linear-gradient(90deg,var(--home) 0%,var(--bg-divider) 50%,var(--away) 100%) 1;}
 
-/* Штамп актуальности: наверху карточки матча, справа от адреса арены.
-   Возраст данных считает сама страница, поэтому «свежо» не может протухнуть незаметно. */
-.match-card__top{display:flex;align-items:center;justify-content:space-between;gap:10px;
-  flex-wrap:wrap;padding:10px 14px 0;}
-.match-card__top .match-card__location{padding:0;margin:0;text-align:left;}
-.freshness{display:inline-flex;align-items:center;gap:7px;font-size:10.5px;line-height:1.35;
-  color:var(--text-muted);background:rgba(255,255,255,0.05);border:1px solid var(--border);
-  border-radius:20px;padding:5px 11px;white-space:nowrap;}
+/* Штамп актуальности: в самой верхней плашке справа, на стороне гостей.
+   Возраст данных пересчитывает сама страница раз в минуту, поэтому «свежо» не протухает незаметно. */
+.site-header{display:flex;align-items:center;gap:12px;}
+.site-header__title{flex:1 1 auto;text-align:center;}
+.freshness{display:inline-flex;align-items:center;gap:7px;font-size:10.5px;line-height:1.3;
+  color:rgba(255,255,255,0.82);background:rgba(0,0,0,0.28);border:1px solid rgba(255,255,255,0.18);
+  border-radius:20px;padding:5px 11px;white-space:nowrap;flex:0 0 auto;}
 .freshness__dot{width:7px;height:7px;border-radius:50%;background:var(--home);flex:0 0 auto;
   box-shadow:0 0 0 3px rgba(0,192,139,0.18);}
 .freshness--stale .freshness__dot{background:var(--warn);box-shadow:0 0 0 3px rgba(230,184,0,0.18);}
 .freshness--old .freshness__dot{background:var(--away-red);box-shadow:0 0 0 3px rgba(230,58,46,0.18);}
-@media (max-width:520px){
-  .match-card__top{flex-direction:column;align-items:flex-start;gap:7px;}
-  .freshness{white-space:normal;}
+@media (max-width:560px){
+  .site-header{flex-wrap:wrap;justify-content:center;padding-bottom:10px;}
+  .site-header__title{flex:1 1 100%;order:1;}
+  .site-header img{order:0;}
+  .freshness{order:2;flex:0 0 auto;font-size:10px;padding:4px 10px;}
 }
 
-/* Подвал: имя бренда и адреса источников не рвутся посреди слова. */
+/* Адрес арены по центру карточки матча, части адреса не рвутся посреди слова. */
+.match-card__location{text-align:center;line-height:1.5;}
+
+/* Подвал: источники сверху, бренд ниже, контакт последним. Ничего не рвётся посреди слова. */
 .site-footer__copyright{line-height:1.6;}
 .site-footer__brand{white-space:nowrap;}
-.site-footer__sources{display:block;margin-top:5px;}
-.site-footer__contact{display:block;margin-top:9px;}
+.site-footer__sources{display:block;}
+.site-footer__sources-note{display:block;}
+.site-footer__line{display:block;margin-top:9px;}
+.site-footer__contact{display:block;margin-top:10px;}
 .site-footer__contact a{display:inline-flex;align-items:center;gap:6px;color:var(--home);
   text-decoration:none;border-bottom:1px solid var(--home);padding-bottom:1px;white-space:nowrap;font-weight:600;}
 .site-footer__contact a:hover{color:var(--text);border-bottom-color:var(--text);}
@@ -512,14 +531,16 @@ BODY = f'''
 <div class="wrap">
   <div class="site-header">
     <img src="{CHR_L}" alt="Чемпионат России по регби" style="height:34px;width:auto">
-    <div class="site-header__title">Чемпионат России по регби · 12 тур</div>
-    <div style="width:34px"></div>
+    <div class="site-header__title">Чемпионат России по регби 2026 · <span class="nowrap">12 тур</span></div>
+    <div class="freshness" id="freshness" data-built="{СОБРАНО_ISO}">
+      <span class="freshness__dot"></span>
+      <span class="freshness__text">Актуально на {СОБРАНО_ТЕКСТ}</span>
+    </div>
   </div>
 
   <div class="stale" id="staleWarn"></div>
 
   <div class="tour-header">
-    <h1 class="tour-header__title">Чемпионат России по регби 2026 · <span class="nowrap">12-й тур</span></h1>
     <div class="tour-header__meta">
       <span class="tour-header__meta-item">Регулярный чемпионат · до плей-офф два тура</span>
       <span class="tour-header__meta-item">Онлайн-эфир</span>
@@ -527,13 +548,7 @@ BODY = f'''
   </div>
 
   <div class="match-card">
-    <div class="match-card__top">
-      <div class="match-card__location">📍 Стадион «Красный Яр», ул. Маерчака, 57, Красноярск</div>
-      <div class="freshness" id="freshness" data-built="{СОБРАНО_ISO}">
-        <span class="freshness__dot"></span>
-        <span class="freshness__text">Данные с официальных источников · {СОБРАНО_ТЕКСТ}</span>
-      </div>
-    </div>
+    <div class="match-card__location">📍 <span class="nowrap">Стадион «Красный Яр»</span> · <span class="nowrap">ул. Маерчака, 57</span> · <span class="nowrap">Красноярск</span></div>
     <div class="match-card__main">
       <div class="match-card__team"><img src="{KY_L}" alt="Красный Яр"><div class="match-card__team-name">Красный Яр</div><div class="match-card__team-city">4-е место · 21 очко</div></div>
       <div class="match-card__center"><div class="match-card__date">29 августа</div><div class="match-card__weekday">суббота</div><div class="match-card__time">13:00 мск</div></div>
@@ -658,11 +673,12 @@ BODY = f'''
 
   <div class="site-footer">
     <div class="site-footer__copyright" style="text-align:center">
-      Справка комментатора · разработана по методике <span class="site-footer__brand">MKD AI Boutique</span>
-      <span class="site-footer__sources">Источники: <span class="nowrap">rugby.ru</span> · <span class="nowrap">yarrugby.ru</span> · <span class="nowrap">vva-podmoskovie.ru</span>, все официальные</span>
-      <span class="site-footer__contact"><a href="https://t.me/albertkaunitz" target="_blank" rel="noopener">✈ По сотрудничеству: @albertkaunitz</a></span>
+      <span class="site-footer__sources">Источники: <span class="nowrap">rugby.ru</span> · <span class="nowrap">yarrugby.ru</span> · <span class="nowrap">vva-podmoskovie.ru</span></span>
+      <span class="site-footer__sources-note">все официальные</span>
+      <span class="site-footer__line">Справка комментатора · разработана по методике <span class="site-footer__brand">MKD AI Boutique</span></span>
+      <span class="site-footer__contact"><a href="https://t.me/albertkaunitz" target="_blank" rel="noopener">@albertkaunitz</a></span>
     </div>
-    <div class="site-footer__private" style="text-align:center">Данные собраны {СОБРАНО_ТЕКСТ}. Состав «Красного Яра» и ссылка на трансляцию внесены. Ожидаются: состав ВВА-Подмосковья и арбитр матча.</div>
+    <div class="site-footer__private" style="text-align:center">Состав «Красного Яра» и ссылка на трансляцию внесены. Ожидаются: состав ВВА-Подмосковья и арбитр матча.</div>
   </div>
 </div>
 
@@ -691,8 +707,11 @@ HTML = f'''<!-- identity: clients/rugby-ky-vva.json -->
 .site-header img{{filter:brightness(0) invert(1);opacity:.92;}}
 /* Регбийная таблица шире футбольной на две колонки: РИО и бонусные очки.
    Дизайн-код эталона не меняется, правится только сетка строки под 10 колонок. */
-.standings-mini__head,.standings-mini__row{{grid-template-columns:22px 1fr 26px 24px 24px 24px 62px 44px 26px 30px;}}
-@media (max-width:520px){{.standings-mini__head,.standings-mini__row{{font-size:10px;grid-template-columns:18px 1fr 20px 18px 18px 18px 50px 36px 20px 24px;padding:7px 8px;}}}}
+.standings-mini__head,.standings-mini__row{{grid-template-columns:22px minmax(0,1fr) 26px 24px 24px 24px 80px 46px 26px 30px;}}
+.standings-mini__head>span,.standings-mini__row>span{{white-space:nowrap;}}
+.standings-mini__row .team{{overflow:hidden;text-overflow:ellipsis;}}
+@media (max-width:520px){{.standings-mini__head,.standings-mini__row{{font-size:10px;grid-template-columns:16px minmax(0,1fr) 18px 16px 16px 16px 66px 38px 18px 22px;padding:7px 6px;}}
+.standings-mini__head>span,.standings-mini__row>span{{padding-left:4px;}}}}
 </style>
 </head>
 <body>
