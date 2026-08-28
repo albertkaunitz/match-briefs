@@ -190,7 +190,7 @@ PALETTE = """
 /* Штамп актуальности: в самой верхней плашке справа, на стороне гостей.
    Возраст данных пересчитывает сама страница раз в минуту, поэтому «свежо» не протухает незаметно. */
 .site-header{display:flex;align-items:center;gap:12px;}
-.site-header__title{flex:1 1 auto;text-align:center;}
+.site-header__title{flex:1 1 auto;text-align:center;padding:0 10px;}
 .freshness{display:inline-flex;align-items:center;gap:7px;font-size:10.5px;line-height:1.3;
   color:rgba(255,255,255,0.82);background:rgba(0,0,0,0.28);border:1px solid rgba(255,255,255,0.18);
   border-radius:20px;padding:5px 11px;white-space:nowrap;flex:0 0 auto;}
