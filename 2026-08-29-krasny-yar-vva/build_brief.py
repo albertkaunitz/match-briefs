@@ -226,7 +226,7 @@ body.hide-said .acc--said{display:none;}
 .say-count b{color:var(--accent);font-size:13px;}
 .toolbar{flex-wrap:wrap;align-items:center;}
 .toolbar__btn--on{border-color:var(--accent);color:var(--accent);}
-@media (max-width:520px){.say-count{width:100%;margin:6px 0 0;}
+@media (max-width:520px){.say-count{width:100%;margin:6px 0 0;}}
 
 /* Блоки команд: заголовок раздела красится стороной. */
 .panel[data-panel="ky"] .section-divider{box-shadow:inset 3px 0 0 var(--home);}
@@ -729,6 +729,17 @@ def gate(html):
             errors.append(f"дизайн-код матча: в стиле остался цвет эталона футбольной лиги ({чужой})")
     if "--home:" not in html or "--away:" not in html:
         errors.append("дизайн-код матча: нет разделения сторон (--home / --away), хозяева и гости не различаются цветом")
+    # Баланс скобок в CSS. Одна потерянная закрывающая у @media роняет весь стиль ниже
+    # внутрь мобильного блока: на широком экране правила молча перестают работать,
+    # а страница при этом выглядит «почти нормально». Поймано 28.08.2026 на таблице.
+    стиль = re.search(r"<style>(.*?)</style>", html, re.S)
+    if not стиль:
+        errors.append("в странице нет тега <style>")
+    else:
+        баланс = стиль.group(1).count("{") - стиль.group(1).count("}")
+        if баланс != 0:
+            errors.append(f"баланс скобок в CSS нарушен: незакрытых блоков {баланс}. "
+                          f"Правила ниже точки разрыва не применяются")
     if "Шанс есть всегда" in html:
         errors.append("слоган «Шанс есть всегда» запрещён в производстве памяток")
     if html.count("<div") != html.count("</div>"):
