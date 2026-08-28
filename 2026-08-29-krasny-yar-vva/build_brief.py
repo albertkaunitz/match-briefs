@@ -193,12 +193,13 @@ PALETTE = """
    заголовок из трёх строк вылезал наружу, а штамп ложился поверх текста. */
 .site-header{display:flex;align-items:center;flex-wrap:wrap;gap:0 12px;row-gap:9px;
   height:auto;min-height:54px;padding:12px 16px 11px;}
-.site-header img{order:0;flex:0 0 auto;}
+.site-header img{order:0;flex:0 0 100%;width:100%;height:34px;object-fit:contain;display:block;}
 /* В эталоне заголовок стоял absolute по центру полосы: он не занимал места,
    поэтому полоса не росла под три строки, а текст накрывал штамп. Возвращаем в поток. */
 .site-header__title{position:static;left:auto;transform:none;
   order:1;flex:1 1 auto;text-align:center;padding:0 6px;line-height:1.25;}
-.site-header::after{content:"";order:2;width:34px;flex:0 0 auto;}
+/* Распорка справа больше не нужна: эмблема стоит своей строкой по центру,
+   заголовок центрируется сам по всей ширине полосы. */
 /* Штамп актуальности идёт отдельной строкой под названием тура, внутри той же полосы. */
 .site-header .freshness{order:3;flex:1 1 100%;justify-content:center;}
 .freshness{display:inline-flex;align-items:center;gap:7px;font-size:10.5px;line-height:1.3;
