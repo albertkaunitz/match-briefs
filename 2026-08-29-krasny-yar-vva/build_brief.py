@@ -189,8 +189,18 @@ PALETTE = """
 
 /* Штамп актуальности: в самой верхней плашке справа, на стороне гостей.
    Возраст данных пересчитывает сама страница раз в минуту, поэтому «свежо» не протухает незаметно. */
-.site-header{display:flex;align-items:center;gap:12px;}
-.site-header__title{flex:1 1 auto;text-align:center;padding:0 10px;}
+/* Полоса растёт под содержимое: в эталоне у неё была жёсткая высота 54px, и на телефоне
+   заголовок из трёх строк вылезал наружу, а штамп ложился поверх текста. */
+.site-header{display:flex;align-items:center;flex-wrap:wrap;gap:0 12px;row-gap:9px;
+  height:auto;min-height:54px;padding:12px 16px 11px;}
+.site-header img{order:0;flex:0 0 auto;}
+/* В эталоне заголовок стоял absolute по центру полосы: он не занимал места,
+   поэтому полоса не росла под три строки, а текст накрывал штамп. Возвращаем в поток. */
+.site-header__title{position:static;left:auto;transform:none;
+  order:1;flex:1 1 auto;text-align:center;padding:0 6px;line-height:1.25;}
+.site-header::after{content:"";order:2;width:34px;flex:0 0 auto;}
+/* Штамп актуальности идёт отдельной строкой под названием тура, внутри той же полосы. */
+.site-header .freshness{order:3;flex:1 1 100%;justify-content:center;}
 .freshness{display:inline-flex;align-items:center;gap:7px;font-size:10.5px;line-height:1.3;
   color:rgba(255,255,255,0.82);background:rgba(0,0,0,0.28);border:1px solid rgba(255,255,255,0.18);
   border-radius:20px;padding:5px 11px;white-space:nowrap;flex:0 0 auto;}
@@ -199,10 +209,8 @@ PALETTE = """
 .freshness--stale .freshness__dot{background:var(--warn);box-shadow:0 0 0 3px rgba(230,184,0,0.18);}
 .freshness--old .freshness__dot{background:var(--away-red);box-shadow:0 0 0 3px rgba(230,58,46,0.18);}
 @media (max-width:560px){
-  .site-header{flex-wrap:wrap;justify-content:center;padding-bottom:10px;}
-  .site-header__title{flex:1 1 100%;order:1;}
-  .site-header img{order:0;}
-  .freshness{order:2;flex:0 0 auto;font-size:10px;padding:4px 10px;}
+  .site-header{padding:11px 12px 10px;}
+  .site-header .freshness{font-size:10px;padding:4px 10px;}
 }
 
 /* Адрес арены по центру карточки матча, части адреса не рвутся посреди слова. */
