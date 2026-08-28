@@ -198,6 +198,8 @@ PALETTE = """
    поэтому полоса не росла под три строки, а текст накрывал штамп. Возвращаем в поток. */
 .site-header__title{position:static;left:auto;transform:none;
   order:1;flex:1 1 auto;text-align:center;padding:0 6px;line-height:1.25;}
+/* Номер тура идёт своей строкой: разделитель-точка при переносе повисал в конце строки. */
+.site-header__tour{display:block;}
 /* Распорка справа больше не нужна: эмблема стоит своей строкой по центру,
    заголовок центрируется сам по всей ширине полосы. */
 /* Штамп актуальности идёт отдельной строкой под названием тура, внутри той же полосы. */
@@ -540,7 +542,7 @@ BODY = f'''
 <div class="wrap">
   <div class="site-header">
     <img src="{CHR_L}" alt="Чемпионат России по регби" style="height:34px;width:auto">
-    <div class="site-header__title">Чемпионат России по регби 2026 · <span class="nowrap">12 тур</span></div>
+    <div class="site-header__title"><span class="nowrap">Чемпионат России по регби 2026</span><span class="site-header__tour">12 тур</span></div>
     <div class="freshness" id="freshness" data-built="{СОБРАНО_ISO}">
       <span class="freshness__dot"></span>
       <span class="freshness__text">Актуально на {СОБРАНО_ТЕКСТ}</span>
