@@ -19,37 +19,82 @@ def b64(p): return base64.b64encode(open(os.path.join(ENGINE,"logos",p),"rb").re
 KY_L  = "data:image/png;base64,"+b64("ky.png")
 VVA_L = "data:image/png;base64,"+b64("vva.png")
 CHR_L = "data:image/png;base64,"+b64("chr-emblem.png")   # эмблема «Чемпионата России», rugby.ru
+HERO  = "data:image/jpeg;base64,"+b64("hero_bg.jpg")     # команда «Красного Яра» на своём стадионе, yarrugby.ru
 
-# ---------- дизайн-код мероприятия ----------
-# Эталон справки собран в палитре футбольной лиги (салатовый акцент). Матч играется
-# в Чемпионате России по регби, поэтому палитра берётся у мероприятия: цвета сняты
-# замером живых стилей rugby.ru (индиго #1E0E47, красный #EC3029).
-# Профиль: ~/.claude/identity/clients/frr-rugby.json. Меняются только переменные темы,
-# разметка и классы дизайн-кода остаются 1:1.
+# ---------- дизайн-код: коллаборация двух клубов ----------
+# Палитра собрана из фирменных стилей обеих команд, снятых с их официальных сайтов:
+#   «Красный Яр»  — изумруд навигации yarrugby.ru #009D7A и глубокий зелёный клубной
+#                   афиши этого матча (#004C34, доминанта YAr_VVA.jpg);
+#   ВВА-Подмосковье — тёмно-синий шапки vva-podmoskovie.ru #00167F и красный #E63A2E.
+# Смысл раскладки: слева всегда хозяева и зелёный, справа всегда гости и синий.
+# База нейтральная тёмная с лёгким зелёным подтоном: долго смотреть в эфире не устанешь.
+# Профиль: ~/.claude/identity/clients/rugby-ky-vva.json
 PALETTE = """
 :root{
-  --bg:#120A2C;--bg-card:#1E0E47;--bg-divider:#2A1660;--bg-row:#190C3B;--bg-row-2:#1C0F43;
-  --accent:#EC3029;--accent-soft:rgba(236,48,41,0.12);--accent-dim:rgba(236,48,41,0.30);
-  --text:#fff;--text-muted:#A79ECB;--text-dim:#7C71A6;
-  --border:#33206E;--border-soft:#281556;
-  --result-w:#2fa84f;--result-l:#EC3029;--result-d:#7C71A6;--warn:#e6b800;
+  --bg:#101614;--bg-card:#17211D;--bg-divider:#1C2A25;--bg-row:#141D1A;--bg-row-2:#16201C;
+  --accent:#00B383;--accent-soft:rgba(0,179,131,0.12);--accent-dim:rgba(0,179,131,0.30);
+  --text:#fff;--text-muted:#9DB3AA;--text-dim:#71877E;
+  --border:#25342E;--border-soft:#1E2A25;
+  --result-w:#00B383;--result-l:#E63A2E;--result-d:#71877E;--warn:#e6b800;
+  /* стороны матча */
+  --home:#00C08B;--home-deep:#004C34;--home-soft:rgba(0,192,139,0.10);
+  --away:#5B8CFF;--away-deep:#00167F;--away-soft:rgba(91,140,255,0.10);--away-red:#E63A2E;
 }
+
+/* Шапка: слева цвет хозяев, справа цвет гостей. */
+.site-header{background:linear-gradient(90deg,var(--home-deep) 0%,var(--bg-card) 45%,var(--bg-card) 55%,var(--away-deep) 100%);border-bottom:1px solid var(--border);}
+
+/* Карточка матча: фотография стадиона хозяев, поверх зелёное свечение слева и синее справа. */
+.match-card{position:relative;overflow:hidden;background:var(--bg-card);}
+.match-card::before{content:"";position:absolute;inset:0;background-image:url("ФОТО");background-size:cover;background-position:center 40%;opacity:.42;}
+.match-card::after{content:"";position:absolute;inset:0;background:
+   linear-gradient(90deg,rgba(0,76,52,0.62) 0%,rgba(16,22,20,0.80) 40%,rgba(16,22,20,0.80) 60%,rgba(0,22,127,0.62) 100%);}
+.match-card>*{position:relative;z-index:1;}
+.match-card__team:first-child .match-card__team-city{color:var(--home);}
+.match-card__team:last-child .match-card__team-city{color:var(--away);}
+
+/* Вкладки команд окрашены своей стороной. */
+.tab[data-tab="ky"].tab--active{color:var(--home);border-bottom-color:var(--home);}
+.tab[data-tab="vva"].tab--active{color:var(--away);border-bottom-color:var(--away);}
+
+/* Турнирная таблица: строки наших команд помечены полосой своей стороны. */
+.standings-mini__row--home{box-shadow:inset 3px 0 0 var(--home);background:var(--home-soft);}
+.standings-mini__row--away{box-shadow:inset 3px 0 0 var(--away);background:var(--away-soft);}
+.standings-mini__row--home .team,.standings-mini__row--home .pts{color:var(--home);}
+.standings-mini__row--away .team,.standings-mini__row--away .pts{color:var(--away);}
+
+/* Протокол: номер и амплуа хозяев зелёные, гостей синие. */
+.pr-side--home .pr-num{color:var(--home);}
+.pr-side--away .pr-num{color:var(--away);}
+.pr-row{background:linear-gradient(90deg,var(--home-soft) 0%,transparent 22%,transparent 78%,var(--away-soft) 100%);}
+.pr-head{border-top:2px solid transparent;border-image:linear-gradient(90deg,var(--home) 0%,var(--bg-divider) 50%,var(--away) 100%) 1;}
+
+/* Блоки команд: заголовок раздела красится стороной. */
+.panel[data-panel="ky"] .section-divider{box-shadow:inset 3px 0 0 var(--home);}
+.panel[data-panel="vva"] .section-divider{box-shadow:inset 3px 0 0 var(--away);}
+.panel[data-panel="ky"] .on-air{background:linear-gradient(135deg,rgba(0,192,139,0.10),rgba(0,192,139,0.02));border-left-color:var(--home);}
+.panel[data-panel="vva"] .on-air{background:linear-gradient(135deg,rgba(91,140,255,0.10),rgba(91,140,255,0.02));border-left-color:var(--away);}
+.panel[data-panel="ky"] .fact__num{background:var(--home);color:#04140E;}
+.panel[data-panel="vva"] .fact__num{background:var(--away);color:#050B22;}
+.panel[data-panel="ky"] .kv__label{color:var(--home);}
+.panel[data-panel="vva"] .kv__label{color:var(--away);}
 """
 
 # Переменных мало: часть цветов футбольной лиги вшита в дизайн-код литералами
 # (градиенты карточки матча, подложки логотипов, оттенки текста). Их тоже
 # переводим в палитру мероприятия, иначе на странице местами светится салатовый.
 ПЕРЕКРАСКА = {
-  "#18191b":"#120A2C", "#232527":"#1E0E47", "#2a2c2f":"#2A1660", "#1f2123":"#190C3B",
-  "#212325":"#1C0F43", "#1a1c1e":"#190C3B", "#2f3134":"#33206E", "#252729":"#281556",
-  "#A4D639":"#EC3029", "#a4d639":"#EC3029", "164,214,57":"236,48,41",
-  "#8a8f95":"#A79ECB", "#5e6166":"#7C71A6", "#6b6f74":"#7C71A6",
-  "#d64541":"#EC3029", "#e3e5e7":"#EDE9F7", "#d6d8da":"#DCD5F0", "#c9ccd0":"#CFC7E8",
-  "#8d2b0f":"#5A1030", "#f5c451":"#F2C14E", "#ffd97a":"#F7D9A0", "#8a6d1f":"#7A5A2A",
-  "#3d2b0f":"#5A1030", "#cdd0d4":"#D6CFEC", "#ff6b6b":"#EC3029", "#62c7d9":"#A79ECB",
+  "#18191b":"#101614", "#232527":"#17211D", "#2a2c2f":"#1C2A25", "#1f2123":"#141D1A",
+  "#212325":"#16201C", "#1a1c1e":"#141D1A", "#2f3134":"#25342E", "#252729":"#1E2A25",
+  "#A4D639":"#00B383", "#a4d639":"#00B383", "164,214,57":"0,179,131",
+  "#8a8f95":"#9DB3AA", "#5e6166":"#71877E", "#6b6f74":"#71877E",
+  "#d64541":"#E63A2E", "#e3e5e7":"#E2EDE8", "#d6d8da":"#D3E0DA", "#c9ccd0":"#C4D5CD",
+  "#8d2b0f":"#4A2A12", "#f5c451":"#F2C14E", "#ffd97a":"#F7D9A0", "#8a6d1f":"#7A5A2A",
+  "#3d2b0f":"#2E2410", "#cdd0d4":"#CDDCD5", "#ff6b6b":"#E63A2E", "#62c7d9":"#5B8CFF",
 }
 for _старый, _новый in ПЕРЕКРАСКА.items():
     STYLE = STYLE.replace(_старый, _новый)
+PALETTE = PALETTE.replace("ФОТО", HERO)
 
 RUGBY = "https://rugby.ru/seasons/chempionat-rossii-2026/"
 YAR   = "http://yarrugby.ru/news/"
@@ -450,7 +495,7 @@ BODY = f'''
 </script>
 '''
 
-HTML = f'''<!-- identity: clients/frr-rugby.json -->
+HTML = f'''<!-- identity: clients/rugby-ky-vva.json -->
 <!DOCTYPE html>
 <html lang="ru">
 <head>
