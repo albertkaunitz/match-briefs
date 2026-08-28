@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<meta name="brief-version" content="20260828-152508">
+<meta name="brief-version" content="20260828-154616">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Справка комментатора · Красный Яр · ВВА-Подмосковье · ЧР по регби, 12 тур · 29.08.2026</title>
@@ -395,6 +395,27 @@ a{color:var(--accent);text-decoration:none;}a:hover{text-decoration:underline;}
 .pr-row{background:linear-gradient(90deg,var(--home-soft) 0%,transparent 22%,transparent 78%,var(--away-soft) 100%);}
 .pr-head{border-top:2px solid transparent;border-image:linear-gradient(90deg,var(--home) 0%,var(--bg-divider) 50%,var(--away) 100%) 1;}
 
+/* ===== Пульт эфира: отметка «сказано» на каждой реплике ===== */
+.acc--say>summary{align-items:center;}
+.say-btn{width:30px;height:30px;min-width:30px;border-radius:50%;border:1.5px solid var(--border);
+  display:inline-flex;align-items:center;justify-content:center;margin-left:10px;flex:0 0 auto;
+  cursor:pointer;color:var(--text-dim);font-size:15px;line-height:1;background:var(--bg-row);
+  transition:background .15s,border-color .15s,color .15s;-webkit-tap-highlight-color:transparent;}
+.say-btn:hover{border-color:var(--accent);color:var(--accent);}
+.acc--said>summary .say-btn{background:var(--accent);border-color:var(--accent);color:#04140E;font-weight:800;}
+.acc--said>summary .acc__title{opacity:.42;text-decoration:line-through;}
+.acc--said>summary .acc__hint{opacity:.32;}
+.acc--said{border-color:var(--border-soft);}
+body.hide-said .acc--said{display:none;}
+.panel[data-panel="ky"] .acc--said>summary .say-btn{background:var(--home);border-color:var(--home);}
+.panel[data-panel="vva"] .acc--said>summary .say-btn{background:var(--away);border-color:var(--away);color:#050B22;}
+.say-count{margin-left:auto;font-size:11px;font-weight:700;letter-spacing:0.04em;color:var(--text-muted);
+  display:inline-flex;align-items:center;gap:6px;white-space:nowrap;}
+.say-count b{color:var(--accent);font-size:13px;}
+.toolbar{flex-wrap:wrap;align-items:center;}
+.toolbar__btn--on{border-color:var(--accent);color:var(--accent);}
+@media (max-width:520px){.say-count{width:100%;margin:6px 0 0;}}
+
 /* Блоки команд: заголовок раздела красится стороной. */
 .panel[data-panel="ky"] .section-divider{box-shadow:inset 3px 0 0 var(--home);}
 .panel[data-panel="vva"] .section-divider{box-shadow:inset 3px 0 0 var(--away);}
@@ -432,7 +453,7 @@ a{color:var(--accent);text-decoration:none;}a:hover{text-decoration:underline;}
   <div class="tour-header">
     <h1 class="tour-header__title">Чемпионат России по регби 2026 · 12-й тур</h1>
     <div class="tour-header__meta">
-      <span class="tour-header__meta-item">Регулярный чемпионат · 7 команд</span>
+      <span class="tour-header__meta-item">Регулярный чемпионат · до плей-офф два тура</span>
       <span class="tour-header__meta-item">Онлайн-эфир</span>
     </div>
   </div>
@@ -458,6 +479,9 @@ a{color:var(--accent);text-decoration:none;}a:hover{text-decoration:underline;}
   <div class="toolbar">
     <button class="toolbar__btn" id="expandAll">Развернуть всё</button>
     <button class="toolbar__btn" id="collapseAll">Свернуть всё</button>
+    <button class="toolbar__btn" id="hideSaid">Скрыть сказанное</button>
+    <button class="toolbar__btn" id="resetSaid">Сбросить</button>
+    <span class="say-count" id="sayCount"></span>
   </div>
 
   <!-- ПРЕВЬЮ -->
@@ -477,47 +501,47 @@ a{color:var(--accent);text-decoration:none;}a:hover{text-decoration:underline;}
       <span class="match-row__result match-row__result--В"><span>В</span></span>
     </div></div></div>
     <div class="section-divider">Углы подачи матча</div>
-    <div style="padding:14px 16px"><details class="acc"><summary><span class="acc__title">Цена матча: путёвка в плей-офф</span><span class="acc__hint">победа = плей-офф</span></summary><div class="acc__body">
+    <div style="padding:14px 16px"><details class="acc acc--say" data-say="Цена матча: путёвка в плей-офф"><summary><span class="acc__title">Цена матча: путёвка в плей-офф</span><span class="acc__hint">победа = плей-офф</span></summary><div class="acc__body">
       <div class="angle-fact">Клуб объявил ставку прямым текстом за пять дней до игры: «Один матч, одна победа и „Красный Яр“ обеспечит себе место в плей-офф».</div>
       <p class="angle-quote">«Красноярцы выходят на матч, в котором победа решает не тур, а сезон: она закрывает вопрос с плей-офф».</p>
       <span class="bundle__source"><a href="http://yarrugby.ru/news/" target="_blank" rel="noopener">яrugby.ru, новость 24.08&nbsp;↗</a></span>
-      </div></details><details class="acc"><summary><span class="acc__title">Тренер назвал цифру: десять баллов</span><span class="acc__hint">нужен бонус атаки</span></summary><div class="acc__body">
+      </div></details><details class="acc acc--say" data-say="Тренер назвал цифру: десять баллов"><summary><span class="acc__title">Тренер назвал цифру: десять баллов</span><span class="acc__hint">нужен бонус атаки</span></summary><div class="acc__body">
       <div class="angle-fact">Ульрих Бейерс перед этими двумя турами: «нам нужны десять турнирных баллов в следующих матчах со „Славой-МАР“ и „ВВА-Подмосковьем“». Пять баллов из десяти уже взяты 23 августа, победа со Славой прошла с бонусом атаки.</div>
       <p class="angle-quote">«Половину задачи Бейерс закрыл неделю назад. Сегодня он приехал за второй половиной, и это значит: побеждать мало, нужен бонус».</p>
       <span class="bundle__source"><a href="http://yarrugby.ru/news/ulrikh-beyers-my-mozhem-pobedit-lyubuyu-komandu-v-chempionate-rossii.htm" target="_blank" rel="noopener">интервью Бейерса, 21.08&nbsp;↗</a></span>
-      </div></details><details class="acc"><summary><span class="acc__title">Что такое бонус атаки в этом матче</span><span class="acc__hint">5 бонусов против 0</span></summary><div class="acc__body">
+      </div></details><details class="acc acc--say" data-say="Что такое бонус атаки в этом матче"><summary><span class="acc__title">Что такое бонус атаки в этом матче</span><span class="acc__hint">5 бонусов против 0</span></summary><div class="acc__body">
       <div class="angle-fact">В регби очки в таблицу даёт не только победа. Команда получает дополнительный балл за четыре и более занесённые попытки. У «Красного Яра» пять таких бонусов за сезон, у ВВА за десять матчей ни одного.</div>
       <p class="angle-quote">«Следите не только за счётом. Четвёртая попытка хозяев это отдельное событие: она приносит очко в таблицу».</p>
       <span class="bundle__source"><a href="https://rugby.ru/seasons/chempionat-rossii-2026/" target="_blank" rel="noopener">таблица ЧР, колонка «Бонус»&nbsp;↗</a></span>
-      </div></details><details class="acc"><summary><span class="acc__title">Первый круг: единственный намёк на сопротивление</span><span class="acc__hint">ВВА 32:40 КЯ</span></summary><div class="acc__body">
+      </div></details><details class="acc acc--say" data-say="Первый круг: единственный намёк на сопротивление"><summary><span class="acc__title">Первый круг: единственный намёк на сопротивление</span><span class="acc__hint">ВВА 32:40 КЯ</span></summary><div class="acc__body">
       <div class="angle-fact">15 мая в Монино ВВА уступила 32:40. Это лучший матч подмосковных против «Яра» за сезон и один из немногих, где они набрали больше тридцати очков.</div>
       <p class="angle-quote">«В мае в Монино эта пара выдала пятизначную перестрелку на семьдесят два очка. Если ВВА повторит тот матч, вечер получится не проходным».</p>
       <span class="bundle__source"><a href="https://rugby.ru/seasons/chempionat-rossii-2026/" target="_blank" rel="noopener">календарь ЧР-2026&nbsp;↗</a></span>
-      </div></details><details class="acc"><summary><span class="acc__title">Разрыв, который трудно вообразить</span><span class="acc__hint">+35 против −268</span></summary><div class="acc__body">
+      </div></details><details class="acc acc--say" data-say="Разрыв, который трудно вообразить"><summary><span class="acc__title">Разрыв, который трудно вообразить</span><span class="acc__hint">+35 против −268</span></summary><div class="acc__body">
       <div class="angle-fact">Разница очков: у «Красного Яра» плюс 35, у ВВА минус 268. За три последних тура подмосковные пропустили 172 очка при 34 забитых.</div>
       <p class="angle-quote">«Минус двести шестьдесят восемь. Такой разницы нет ни у кого в лиге, и она набрана не в один вечер».</p>
       <span class="bundle__source"><a href="https://rugby.ru/seasons/chempionat-rossii-2026/" target="_blank" rel="noopener">таблица ЧР-2026&nbsp;↗</a></span>
-      </div></details><details class="acc"><summary><span class="acc__title">Обидная серия хозяев: три поражения в концовках</span><span class="acc__hint">24:25, 29:30, 13:17</span></summary><div class="acc__body">
+      </div></details><details class="acc acc--say" data-say="Обидная серия хозяев: три поражения в концовках"><summary><span class="acc__title">Обидная серия хозяев: три поражения в концовках</span><span class="acc__hint">24:25, 29:30, 13:17</span></summary><div class="acc__body">
       <div class="angle-fact">До победы над «Славой» у «Яра» шли поражения от топ-3 с минимальным счётом: 24:25 от «Динамо», 29:30 от «Енисея-СТМ», 13:17 от «Стрелы-Ак Барс».</div>
       <p class="angle-quote">«Красноярцы весь второй круг проигрывают лучшим по очку. Тренер говорит, что должны были выигрывать все три».</p>
       <span class="bundle__source"><a href="http://yarrugby.ru/news/ulrikh-beyers-my-mozhem-pobedit-lyubuyu-komandu-v-chempionate-rossii.htm" target="_blank" rel="noopener">интервью Бейерса, 21.08&nbsp;↗</a></span>
-      </div></details><details class="acc"><summary><span class="acc__title">Схватка перестала быть слабым местом</span><span class="acc__hint">молы и схватки</span></summary><div class="acc__body">
+      </div></details><details class="acc acc--say" data-say="Схватка перестала быть слабым местом"><summary><span class="acc__title">Схватка перестала быть слабым местом</span><span class="acc__hint">молы и схватки</span></summary><div class="acc__body">
       <div class="angle-fact">Бейерс: «Сейчас наши молы и схватки серьёзное оружие. Тренер нападающих Руан Смит добился огромных успехов в этом направлении». Речь о линии, которая годами была проблемой клуба.</div>
       <p class="angle-quote">«Смотрите на схватку и мол: то, за что „Яр“ годами получал упрёки, тренер теперь называет оружием».</p>
       <span class="bundle__source"><a href="http://yarrugby.ru/news/ulrikh-beyers-my-mozhem-pobedit-lyubuyu-komandu-v-chempionate-rossii.htm" target="_blank" rel="noopener">интервью Бейерса, 21.08&nbsp;↗</a></span>
-      </div></details><details class="acc"><summary><span class="acc__title">Ротация: новый капитан и десять новых лиц</span><span class="acc__hint">10 новых, капитан Морозов</span></summary><div class="acc__body">
+      </div></details><details class="acc acc--say" data-say="Ротация: новый капитан и десять новых лиц"><summary><span class="acc__title">Ротация: новый капитан и десять новых лиц</span><span class="acc__hint">10 новых, капитан Морозов</span></summary><div class="acc__body">
       <div class="angle-fact">Тренер обещал ротацию «в разумных пределах» и провёл её второй матч подряд. В старте на эту игру десять новых игроков против состава со «Славой», повязка перешла от восьмого номера Аллена Де Вита к столбу Валерию Морозову, самого Де Вита в заявке нет. Неделю назад ротация сработала: Чабан занёс попытку, Елисеев первую за основу, Семёнов реализовал.</div>
       <p class="angle-quote">«Бейерс снова переписал состав: десять новых игроков и капитан из первой линии. Ставка та же, что неделю назад, и неделю назад она сыграла».</p>
       <span class="bundle__source"><a href="http://yarrugby.ru/news/" target="_blank" rel="noopener">составы клуба 22.08 и 28.08&nbsp;↗</a></span>
-      </div></details><details class="acc"><summary><span class="acc__title">У гостей всё держится на девятом номере</span><span class="acc__hint">Казаков: капитан и бьющий</span></summary><div class="acc__body">
+      </div></details><details class="acc acc--say" data-say="У гостей всё держится на девятом номере"><summary><span class="acc__title">У гостей всё держится на девятом номере</span><span class="acc__hint">Казаков: капитан и бьющий</span></summary><div class="acc__body">
       <div class="angle-fact">Александр Казаков это капитан ВВА, скрам-хав и штатный бьющий. В матче со «Стрелой» он набрал все двенадцать очков первого тайма четырьмя штрафными, в матче со «Славой» реализовал решающую попытку.</div>
       <p class="angle-quote">«Если у ВВА будет шанс набрать очки, почти наверняка их наберёт девятый номер: Казаков и капитан, и бьющий».</p>
       <span class="bundle__source"><a href="https://vva-podmoskovie.ru/news/" target="_blank" rel="noopener">отчёты клуба ВВА&nbsp;↗</a></span>
-      </div></details><details class="acc"><summary><span class="acc__title">Два бывших титана друг напротив друга</span><span class="acc__hint">12 титулов против 17</span></summary><div class="acc__body">
+      </div></details><details class="acc acc--say" data-say="Два бывших титана друг напротив друга"><summary><span class="acc__title">Два бывших титана друг напротив друга</span><span class="acc__hint">12 титулов против 17</span></summary><div class="acc__body">
       <div class="angle-fact">У «Красного Яра» 12 чемпионств СССР и России, у ВВА-Подмосковья 9 титулов СССР и 8 российских. Сейчас это четвёртая и шестая команды лиги из семи.</div>
       <p class="angle-quote">«Матч двух клубов, у которых на двоих под тридцать чемпионских титулов. Сегодня они делят четвёртое и шестое места из семи».</p>
       <span class="bundle__source"><a href="https://rugby.ru/teams/krasnyj-yar/" target="_blank" rel="noopener">истории клубов на сайте ФРР&nbsp;↗</a></span>
-      </div></details><details class="acc"><summary><span class="acc__title">Лифт из школы работает</span><span class="acc__hint">U18 чемпион России</span></summary><div class="acc__body">
+      </div></details><details class="acc acc--say" data-say="Лифт из школы работает"><summary><span class="acc__title">Лифт из школы работает</span><span class="acc__hint">U18 чемпион России</span></summary><div class="acc__body">
       <div class="angle-fact">19 августа СШОР «Красный Яр» выиграла Первенство России U18, обыграв в финале «Приморец-ОН» из Санкт-Петербурга 27:20.</div>
       <p class="angle-quote">«За неделю до этого матча школа „Яра“ стала лучшей в стране среди восемнадцатилетних. Это тот резерв, который через год окажется на этом поле».</p>
       <span class="bundle__source"><a href="http://yarrugby.ru/news/" target="_blank" rel="noopener">яrugby.ru, новость 19.08&nbsp;↗</a></span>
@@ -552,23 +576,23 @@ a{color:var(--accent);text-decoration:none;}a:hover{text-decoration:underline;}
     </div></div></div></details>
       <details class="acc"><summary><span class="acc__title">Ключевые игроки</span><span class="acc__hint">кто это и почему важен</span></summary><div class="acc__body"><div class="kv"><div class="kv__row"><span class="kv__label">№1 · столб, капитан на этот матч</span><span class="kv__val"><b>Валерий Морозов</b>, 31 год, 190 см, 121 кг, мастер спорта. Родом из Киргизии. Единственный в лиге с таким послужным списком в Англии: играл за «Сейл Шаркс», «Бат» и «Вустер», до того «Зеленоград», «Енисей-СТМ» и ЦСКА. В «Красном Яре» с 2023 года. Сегодня выводит команду с повязкой.</span></div><div class="kv__row"><span class="kv__label">№10 · флай-хав</span><span class="kv__val"><b>Джейсон Таумалоло</b>, 24 года, 184 см, 94 кг. Из Тонги, играл за «Майрост», в «Красном Яре» с 2020 года. Бьющий: в матче со «Славой» реализовал четыре попытки подряд. Через него идут все очки после приземлений.</span></div><div class="kv__row"><span class="kv__label">№8 · восьмой</span><span class="kv__val"><b>Виктор Архип</b>, 36 лет, 192 см, 112 кг, мастер спорта. Из Молдавии, прошёл её клубы и «Енисей-СТМ», в «Красном Яре» с 2014 года. Самый возрастной в старте и главный таран третьей линии.</span></div><div class="kv__row"><span class="kv__label">№9 · скрам-хав</span><span class="kv__val"><b>Хушнуд Сангинов</b>, 26 лет, 172 см, 75 кг, кандидат в мастера спорта. Воспитанник красноярской школы «Красный Яр», играет и девятым, и пятнадцатым номером. Свой, местный.</span></div><div class="kv__row"><span class="kv__label">№5 · замок</span><span class="kv__val"><b>Александр Худяков</b>, 36 лет, 190 см, 109 кг, мастер спорта. Воспитанник «Красного Яра», в команде с 2010 года: шестнадцатый сезон в одном клубе.</span></div><div class="kv__row"><span class="kv__label">№12 · центр</span><span class="kv__val"><b>Лоуренс Преториус</b>, 31 год, 186 см, 100 кг. Из ЮАР, в клубе с 2022 года. Занёс последнюю попытку матча со «Славой», на 80-й минуте.</span></div><div class="kv__row"><span class="kv__label">№15 · фуллбэк</span><span class="kv__val"><b>Дилан Смит</b>, 25 лет, 188 см, 86 кг. Из ЮАР, пришёл из «Грифонс». Последний защитник и первый контратакующий.</span></div><div class="kv__note">Паспорта игроков: официальный сайт клуба, раздел «Мужская команда». Возраст посчитан на день матча.</div></div></div></details>
       <details class="acc"><summary><span class="acc__title">Куда делись 5-й и 8-й туры</span><span class="acc__hint">в лиге семь команд</span></summary><div class="acc__body"><div class="kv"><div class="kv__row"><span class="kv__label">Почему нет 5-го и 8-го туров</span><span class="kv__val">В Чемпионате России по регби семь команд. В туре проходят три матча, и одна команда каждый раз остаётся без игры. По календарю Федерации «Красный Яр» отдыхал в 5-м туре (6 и 8 июня) и в 8-м (4 и 5 июля): матчей у команды в эти даты нет. Отсюда и разница в сыгранных матчах, у «Яра» их девять, у ВВА и «Локомотива» по десять.</span></div><div class="kv__row"><span class="kv__label">Что это значит для таблицы</span><span class="kv__val">У «Красного Яра» на матч меньше, чем у ближайшего преследователя, и запас по очкам он добирает как раз в таких турах.</span></div><div class="kv__note">Прочтение календаря сезона на rugby.ru: перечень матчей каждого тура. Отдельного объявления Федерации о переносе нет, потому что переноса и не было.</div></div></div></details>
-      <details class="acc"><summary><span class="acc__title"><span class="fact__num">01</span>Семь попыток в последнем матче</span><span class="acc__hint">45:10 со «Славой»</span></summary><div class="acc__body">
+      <details class="acc acc--say" data-say="Семь попыток в последнем матче"><summary><span class="acc__title"><span class="fact__num">01</span>Семь попыток в последнем матче</span><span class="acc__hint">45:10 со «Славой»</span></summary><div class="acc__body">
       <div class="fact__data">23 августа «Красный Яр» обыграл «Славу-МАР» 45:10, занеся семь попыток против одной. Первый тайм 28:10.</div>
       <div class="fact__phrase">Соперник тот же класс, что и сегодняшний: последний раз хозяева отгрузили аутсайдеру семь попыток.</div>
       <div class="fact__source"><a href="http://yarrugby.ru/news/krasnyy-yar-obygral-slavu-mar-s-bonusom-ataki%20%2023.htm" target="_blank" rel="noopener">отчёт клуба, 23.08&nbsp;↗</a></div>
-      </div></details><details class="acc"><summary><span class="acc__title"><span class="fact__num">02</span>Таумалоло: четыре реализации подряд</span><span class="acc__hint">10-й номер, бьющий</span></summary><div class="acc__body">
+      </div></details><details class="acc acc--say" data-say="Таумалоло: четыре реализации подряд"><summary><span class="acc__title"><span class="fact__num">02</span>Таумалоло: четыре реализации подряд</span><span class="acc__hint">10-й номер, бьющий</span></summary><div class="acc__body">
       <div class="fact__data">В матче со «Славой» флай-хав Джейсон Таумалоло реализовал четыре попытки: на 4-й, 21-й, 32-й и 35-й минутах.</div>
       <div class="fact__phrase">Десятый номер хозяев отвечает за очки после попыток. Его нога в этом матче будет работать часто.</div>
       <div class="fact__source"><a href="http://yarrugby.ru/news/krasnyy-yar-obygral-slavu-mar-s-bonusom-ataki%20%2023.htm" target="_blank" rel="noopener">отчёт клуба, 23.08&nbsp;↗</a></div>
-      </div></details><details class="acc"><summary><span class="acc__title"><span class="fact__num">03</span>Капитана прошлого матча в заявке нет</span><span class="acc__hint">повязка сменилась</span></summary><div class="acc__body">
+      </div></details><details class="acc acc--say" data-say="Капитана прошлого матча в заявке нет"><summary><span class="acc__title"><span class="fact__num">03</span>Капитана прошлого матча в заявке нет</span><span class="acc__hint">повязка сменилась</span></summary><div class="acc__body">
       <div class="fact__data">Неделю назад команду выводил восьмой номер Аллен Де Вит: попытка на 3-й минуте и жёлтая карточка на 37-й. В заявке на эту игру его нет вовсе, повязку получил столб Валерий Морозов.</div>
       <div class="fact__phrase">Капитан, который открыл счёт в прошлом туре и там же схлопотал десять минут, сегодня остался вне заявки.</div>
       <div class="fact__source"><a href="http://yarrugby.ru/news/" target="_blank" rel="noopener">составы клуба 22.08 и 28.08&nbsp;↗</a></div>
-      </div></details><details class="acc"><summary><span class="acc__title"><span class="fact__num">04</span>Ротация в чистом виде: десять новых игроков в старте</span><span class="acc__hint">10 новых из 15</span></summary><div class="acc__body">
+      </div></details><details class="acc acc--say" data-say="Ротация в чистом виде: десять новых игроков в старте"><summary><span class="acc__title"><span class="fact__num">04</span>Ротация в чистом виде: десять новых игроков в старте</span><span class="acc__hint">10 новых из 15</span></summary><div class="acc__body">
       <div class="fact__data">Между матчем со «Славой» и этим стартовый состав сменился на две трети. Из пятнадцати вышедших 23 августа на поле снова выходят пятеро: Мамрикишвили, Лосенков, Архип, Таумалоло, Абдулкадиров. Капитанскую повязку у Аллена Де Вита забрал столб Валерий Морозов, самого Де Вита в заявке на этот матч нет.</div>
       <div class="fact__phrase">Тренер обещал ротацию в разумных пределах и сделал её по-крупному: десять новых игроков в старте и новый капитан.</div>
       <div class="fact__source"><a href="http://yarrugby.ru/news/" target="_blank" rel="noopener">составы клуба на 22.08 и 28.08&nbsp;↗</a></div>
-      </div></details><details class="acc"><summary><span class="acc__title"><span class="fact__num">05</span>Клуб с 1969 года и 12 титулов</span><span class="acc__hint">1969, «Политехник»</span></summary><div class="acc__body">
+      </div></details><details class="acc acc--say" data-say="Клуб с 1969 года и 12 титулов"><summary><span class="acc__title"><span class="fact__num">05</span>Клуб с 1969 года и 12 титулов</span><span class="acc__hint">1969, «Политехник»</span></summary><div class="acc__body">
       <div class="fact__data">Основан в 1969 году: секцию в Красноярском политехническом институте создал Леонид Тихонович Сабинин, команда называлась «Политехник». Двукратный чемпион СССР, десятикратный чемпион России, десятикратный обладатель Кубка.</div>
       <div class="fact__phrase">Красноярск это регбийная столица страны по числу титулов, и «Яр» её главная вывеска.</div>
       <div class="fact__source"><a href="https://rugby.ru/teams/krasnyj-yar/" target="_blank" rel="noopener">профиль клуба на сайте ФРР&nbsp;↗</a></div>
@@ -603,23 +627,23 @@ a{color:var(--accent);text-decoration:none;}a:hover{text-decoration:underline;}
       <span class="match-row__result match-row__result--П"><span>П</span></span>
     </div></div></div></details>
       <details class="acc"><summary><span class="acc__title">Ключевые игроки</span><span class="acc__hint">кто это и почему важен</span></summary><div class="acc__body"><div class="kv"><div class="kv__row"><span class="kv__label">№9 · скрам-хав, капитан</span><span class="kv__val"><b>Александр Казаков</b>, 23 года, 177 см, 72 кг, мастер спорта. Из Ногинска, воспитанник подмосковной школы, первый тренер Фукс. В «ВВА-Подмосковье» с 2019 года, золото Кубка России по регби-7 2021. Капитан и штатный бьющий: со «Стрелой» принёс все 12 очков первого тайма четырьмя штрафными. Почти все очки команды идут через него.</span></div><div class="kv__row"><span class="kv__label">№1 · столб</span><span class="kv__val"><b>Александр Новик</b>, 23 года, 179 см, 110 кг, мастер спорта. Родился в Красноярске и вырос в школе «Енисея-СТМ»: завтра он играет в родном городе против клуба, с которым его школа соперничает всю жизнь. Четырежды чемпион России среди молодёжи.</span></div><div class="kv__row"><span class="kv__label">№15 · фуллбэк</span><span class="kv__val"><b>Даниил Крылаткин</b>, 26 лет, 181 см, 81 кг, мастер спорта. Из Ногинска, входил в юниорскую сборную России, играл на чемпионате Европы U20. Бьёт дроп-голы: со «Славой» забил один с игры.</span></div><div class="kv__row"><span class="kv__label">№10 · флай-хав</span><span class="kv__val"><b>Егор Кулешов</b>, 28 лет, 186 см, 93 кг, мастер спорта. Из Ногинска, в регби с 2005 года, выступал за сборную России по регби-7. Второй распасовщик после Казакова.</span></div><div class="kv__row"><span class="kv__label">№8 · восьмой</span><span class="kv__val"><b>Михаил Жлутков</b>, 25 лет, 190 см, 84 кг, кандидат в мастера спорта. Москвич, воспитанник школы в Долгопрудном, играет за сборную Московской области. В основе весь сезон без пропусков.</span></div><div class="kv__note">Паспорта игроков: официальный сайт клуба, карточки раздела «Мужская команда». Возраст посчитан на день матча.</div></div></div></details>
-      <details class="acc"><summary><span class="acc__title"><span class="fact__num">01</span>Ноль бонусных очков за сезон</span><span class="acc__hint">единственные в лиге</span></summary><div class="acc__body">
+      <details class="acc acc--say" data-say="Ноль бонусных очков за сезон"><summary><span class="acc__title"><span class="fact__num">01</span>Ноль бонусных очков за сезон</span><span class="acc__hint">единственные в лиге</span></summary><div class="acc__body">
       <div class="fact__data">После десяти туров у ВВА в колонке «Бонус» стоит ноль. Это единственная команда лиги без бонусных очков.</div>
       <div class="fact__phrase">Ни разу за сезон подмосковные не занесли четыре попытки в одном матче и ни разу не проиграли в пределах семи очков.</div>
       <div class="fact__source"><a href="https://rugby.ru/seasons/chempionat-rossii-2026/" target="_blank" rel="noopener">таблица ЧР-2026&nbsp;↗</a></div>
-      </div></details><details class="acc"><summary><span class="acc__title"><span class="fact__num">02</span>Пять очков за весь прошлый матч</span><span class="acc__hint">5:49 от «Енисея»</span></summary><div class="acc__body">
+      </div></details><details class="acc acc--say" data-say="Пять очков за весь прошлый матч"><summary><span class="acc__title"><span class="fact__num">02</span>Пять очков за весь прошлый матч</span><span class="acc__hint">5:49 от «Енисея»</span></summary><div class="acc__body">
       <div class="fact__data">22 августа дома ВВА уступила «Енисею-СТМ» 5:49. Одна попытка без реализации за восемьдесят минут.</div>
       <div class="fact__phrase">Неделю назад в Монино они набрали пять очков. Сегодня им нужно занести хотя бы столько же в Красноярске.</div>
       <div class="fact__source"><a href="https://rugby.ru/seasons/chempionat-rossii-2026/" target="_blank" rel="noopener">таблица и календарь ЧР&nbsp;↗</a></div>
-      </div></details><details class="acc"><summary><span class="acc__title"><span class="fact__num">03</span>Казаков решает всё</span><span class="acc__hint">12 очков за тайм</span></summary><div class="acc__body">
+      </div></details><details class="acc acc--say" data-say="Казаков решает всё"><summary><span class="acc__title"><span class="fact__num">03</span>Казаков решает всё</span><span class="acc__hint">12 очков за тайм</span></summary><div class="acc__body">
       <div class="fact__data">Капитан Александр Казаков бьёт штрафные и реализации. В матче со «Стрелой» он принёс все 12 очков первого тайма, в победном матче со «Славой» реализовал попытку Джураева.</div>
       <div class="fact__phrase">Девятый номер гостей это их атака, их очки и их капитан в одном лице.</div>
       <div class="fact__source"><a href="https://vva-podmoskovie.ru/news/" target="_blank" rel="noopener">отчёты клуба ВВА&nbsp;↗</a></div>
-      </div></details><details class="acc"><summary><span class="acc__title"><span class="fact__num">04</span>Единственная победа с июля</span><span class="acc__hint">15:14 со «Славой»</span></summary><div class="acc__body">
+      </div></details><details class="acc acc--say" data-say="Единственная победа с июля"><summary><span class="acc__title"><span class="fact__num">04</span>Единственная победа с июля</span><span class="acc__hint">15:14 со «Славой»</span></summary><div class="acc__body">
       <div class="fact__data">4 июля дома ВВА обыграла «Славу-МАР» 15:14. Крылаткин забил дроп-гол, Джураев и Шмелёв занесли попытки, оборона выстояла в концовке.</div>
       <div class="fact__phrase">Последний раз подмосковные побеждали почти два месяца назад, и то одним очком.</div>
       <div class="fact__source"><a href="https://vva-podmoskovie.ru/news/" target="_blank" rel="noopener">отчёт клуба ВВА&nbsp;↗</a></div>
-      </div></details><details class="acc"><summary><span class="acc__title"><span class="fact__num">05</span>Команда военных лётчиков с 1967 года</span><span class="acc__hint">«военлёты», Монино</span></summary><div class="acc__body">
+      </div></details><details class="acc acc--say" data-say="Команда военных лётчиков с 1967 года"><summary><span class="acc__title"><span class="fact__num">05</span>Команда военных лётчиков с 1967 года</span><span class="acc__hint">«военлёты», Монино</span></summary><div class="acc__body">
       <div class="fact__data">Создана в 1967 году в Монино при Военно-воздушной академии имени Гагарина. Инициатор: начальник академии, маршал авиации, Герой Советского Союза Красовский. Девятикратный чемпион СССР, восьмикратный чемпион России.</div>
       <div class="fact__phrase">Их зовут военлётами не для красоты: клуб вырос из Военно-воздушной академии.</div>
       <div class="fact__source"><a href="https://rugby.ru/teams/vva-podmoskove/" target="_blank" rel="noopener">профиль клуба на сайте ФРР&nbsp;↗</a></div>
@@ -756,6 +780,73 @@ document.getElementById('collapseAll').addEventListener('click',function(){setAl
     })
     .catch(function () {});
 })();
+
+(function(){
+  // Один и тот же бриф открывается и как «…/матч/», и как «…/матч/index.html».
+  // Без нормализации это два разных ключа, и отметки эфира «теряются» при переходе.
+  var КЛЮЧ = 'brief-said:' + location.pathname.replace(/index\.html?$/i, '');
+  var сказано = new Set();
+  try { сказано = new Set(JSON.parse(localStorage.getItem(КЛЮЧ) || '[]')); } catch(e) {}
+
+  function сохранить(){
+    try { localStorage.setItem(КЛЮЧ, JSON.stringify(Array.from(сказано))); } catch(e) {}
+  }
+
+  var плашки = Array.prototype.slice.call(document.querySelectorAll('details.acc--say'));
+  if (!плашки.length) return;
+
+  function пересчитать(){
+    var всего = плашки.length, отмечено = 0;
+    плашки.forEach(function(d){ if (d.classList.contains('acc--said')) отмечено++; });
+    var поле = document.getElementById('sayCount');
+    if (поле) {
+      поле.innerHTML = отмечено >= всего
+        ? 'Проговорено всё: <b>' + всего + '</b>'
+        : 'Осталось сказать <b>' + (всего - отмечено) + '</b> из ' + всего;
+    }
+  }
+
+  плашки.forEach(function(d){
+    var имя = d.getAttribute('data-say') || '';
+    var кнопка = document.createElement('span');
+    кнопка.className = 'say-btn';
+    кнопка.setAttribute('role', 'button');
+    кнопка.setAttribute('aria-label', 'отметить как сказанное');
+    кнопка.title = 'Сказал в эфире';
+    кнопка.textContent = '✓';
+    d.querySelector('summary').appendChild(кнопка);
+
+    if (сказано.has(имя)) d.classList.add('acc--said');
+
+    кнопка.addEventListener('click', function(ев){
+      ев.preventDefault();      // клик по галочке не должен раскрывать плашку
+      ев.stopPropagation();
+      var стало = d.classList.toggle('acc--said');
+      if (стало) { сказано.add(имя); d.open = false; } else { сказано.delete(имя); }
+      сохранить();
+      пересчитать();
+    });
+  });
+
+  var скрывать = document.getElementById('hideSaid');
+  if (скрывать) скрывать.addEventListener('click', function(){
+    var включено = document.body.classList.toggle('hide-said');
+    скрывать.classList.toggle('toolbar__btn--on', включено);
+    скрывать.textContent = включено ? 'Показать сказанное' : 'Скрыть сказанное';
+  });
+
+  var сброс = document.getElementById('resetSaid');
+  if (сброс) сброс.addEventListener('click', function(){
+    сказано.clear(); сохранить();
+    плашки.forEach(function(d){ d.classList.remove('acc--said'); });
+    document.body.classList.remove('hide-said');
+    if (скрывать) { скрывать.classList.remove('toolbar__btn--on'); скрывать.textContent = 'Скрыть сказанное'; }
+    пересчитать();
+  });
+
+  пересчитать();
+})();
+
 </script>
 
 

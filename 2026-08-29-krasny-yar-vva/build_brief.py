@@ -15,6 +15,81 @@ if not _watch_old:
 SCRIPTS = SCRIPTS.replace(_watch_old.group(0),
     "var СБОР='2026-08-26', ТУРЫ=[['2026-08-29','12-й тур, этот матч'],['2026-09-06','13-й тур']];")
 SCRIPTS = SCRIPTS.replace("(после 16 туров)", "(после 11 туров)")
+
+# ---------- Пульт эфира ----------
+# Комментатор отмечает произнесённое прямо в брифе: галочка на плашке, счётчик остатка,
+# режим «скрыть сказанное». Отметки живут в браузере (localStorage) и переживают
+# перезагрузку страницы, включая ту, что делает сверщик версий при выходе новой сборки.
+# Ключ хранилища привязан к адресу матча: отметки одного брифа не протекают в другой,
+# хотя все брифы лежат на одном домене.
+CHECKLIST_JS = r"""
+(function(){
+  // Один и тот же бриф открывается и как «…/матч/», и как «…/матч/index.html».
+  // Без нормализации это два разных ключа, и отметки эфира «теряются» при переходе.
+  var КЛЮЧ = 'brief-said:' + location.pathname.replace(/index\.html?$/i, '');
+  var сказано = new Set();
+  try { сказано = new Set(JSON.parse(localStorage.getItem(КЛЮЧ) || '[]')); } catch(e) {}
+
+  function сохранить(){
+    try { localStorage.setItem(КЛЮЧ, JSON.stringify(Array.from(сказано))); } catch(e) {}
+  }
+
+  var плашки = Array.prototype.slice.call(document.querySelectorAll('details.acc--say'));
+  if (!плашки.length) return;
+
+  function пересчитать(){
+    var всего = плашки.length, отмечено = 0;
+    плашки.forEach(function(d){ if (d.classList.contains('acc--said')) отмечено++; });
+    var поле = document.getElementById('sayCount');
+    if (поле) {
+      поле.innerHTML = отмечено >= всего
+        ? 'Проговорено всё: <b>' + всего + '</b>'
+        : 'Осталось сказать <b>' + (всего - отмечено) + '</b> из ' + всего;
+    }
+  }
+
+  плашки.forEach(function(d){
+    var имя = d.getAttribute('data-say') || '';
+    var кнопка = document.createElement('span');
+    кнопка.className = 'say-btn';
+    кнопка.setAttribute('role', 'button');
+    кнопка.setAttribute('aria-label', 'отметить как сказанное');
+    кнопка.title = 'Сказал в эфире';
+    кнопка.textContent = '✓';
+    d.querySelector('summary').appendChild(кнопка);
+
+    if (сказано.has(имя)) d.classList.add('acc--said');
+
+    кнопка.addEventListener('click', function(ев){
+      ев.preventDefault();      // клик по галочке не должен раскрывать плашку
+      ев.stopPropagation();
+      var стало = d.classList.toggle('acc--said');
+      if (стало) { сказано.add(имя); d.open = false; } else { сказано.delete(имя); }
+      сохранить();
+      пересчитать();
+    });
+  });
+
+  var скрывать = document.getElementById('hideSaid');
+  if (скрывать) скрывать.addEventListener('click', function(){
+    var включено = document.body.classList.toggle('hide-said');
+    скрывать.classList.toggle('toolbar__btn--on', включено);
+    скрывать.textContent = включено ? 'Показать сказанное' : 'Скрыть сказанное';
+  });
+
+  var сброс = document.getElementById('resetSaid');
+  if (сброс) сброс.addEventListener('click', function(){
+    сказано.clear(); сохранить();
+    плашки.forEach(function(d){ d.classList.remove('acc--said'); });
+    document.body.classList.remove('hide-said');
+    if (скрывать) { скрывать.classList.remove('toolbar__btn--on'); скрывать.textContent = 'Скрыть сказанное'; }
+    пересчитать();
+  });
+
+  пересчитать();
+})();
+"""
+SCRIPTS = SCRIPTS + "\n" + CHECKLIST_JS
 def b64(p): return base64.b64encode(open(os.path.join(ENGINE,"logos",p),"rb").read()).decode()
 KY_L  = "data:image/png;base64,"+b64("ky.png")
 VVA_L = "data:image/png;base64,"+b64("vva.png")
@@ -69,6 +144,27 @@ PALETTE = """
 .pr-row{background:linear-gradient(90deg,var(--home-soft) 0%,transparent 22%,transparent 78%,var(--away-soft) 100%);}
 .pr-head{border-top:2px solid transparent;border-image:linear-gradient(90deg,var(--home) 0%,var(--bg-divider) 50%,var(--away) 100%) 1;}
 
+/* ===== Пульт эфира: отметка «сказано» на каждой реплике ===== */
+.acc--say>summary{align-items:center;}
+.say-btn{width:30px;height:30px;min-width:30px;border-radius:50%;border:1.5px solid var(--border);
+  display:inline-flex;align-items:center;justify-content:center;margin-left:10px;flex:0 0 auto;
+  cursor:pointer;color:var(--text-dim);font-size:15px;line-height:1;background:var(--bg-row);
+  transition:background .15s,border-color .15s,color .15s;-webkit-tap-highlight-color:transparent;}
+.say-btn:hover{border-color:var(--accent);color:var(--accent);}
+.acc--said>summary .say-btn{background:var(--accent);border-color:var(--accent);color:#04140E;font-weight:800;}
+.acc--said>summary .acc__title{opacity:.42;text-decoration:line-through;}
+.acc--said>summary .acc__hint{opacity:.32;}
+.acc--said{border-color:var(--border-soft);}
+body.hide-said .acc--said{display:none;}
+.panel[data-panel="ky"] .acc--said>summary .say-btn{background:var(--home);border-color:var(--home);}
+.panel[data-panel="vva"] .acc--said>summary .say-btn{background:var(--away);border-color:var(--away);color:#050B22;}
+.say-count{margin-left:auto;font-size:11px;font-weight:700;letter-spacing:0.04em;color:var(--text-muted);
+  display:inline-flex;align-items:center;gap:6px;white-space:nowrap;}
+.say-count b{color:var(--accent);font-size:13px;}
+.toolbar{flex-wrap:wrap;align-items:center;}
+.toolbar__btn--on{border-color:var(--accent);color:var(--accent);}
+@media (max-width:520px){.say-count{width:100%;margin:6px 0 0;}}
+
 /* Блоки команд: заголовок раздела красится стороной. */
 .panel[data-panel="ky"] .section-divider{box-shadow:inset 3px 0 0 var(--home);}
 .panel[data-panel="vva"] .section-divider{box-shadow:inset 3px 0 0 var(--away);}
@@ -102,7 +198,10 @@ VVAS  = "https://vva-podmoskovie.ru/news/"
 
 # ---------- конструкторы блоков эталона ----------
 def angle(label, fact_, quote, src, href, hint=""):
-    return f'''<details class="acc"><summary><span class="acc__title">{label}</span><span class="acc__hint">{hint}</span></summary><div class="acc__body">
+    # acc--say: единица, которую комментатор произносит в эфире. Такие плашки получают
+    # галочку «сказано» и попадают в счётчик. Ключ отметки строится из data-say,
+    # то есть из заголовка: он переживает пересборку брифа, в отличие от порядкового номера.
+    return f'''<details class="acc acc--say" data-say="{label}"><summary><span class="acc__title">{label}</span><span class="acc__hint">{hint}</span></summary><div class="acc__body">
       <div class="angle-fact">{fact_}</div>
       <p class="angle-quote">{quote}</p>
       <span class="bundle__source"><a href="{href}" target="_blank" rel="noopener">{src}&nbsp;↗</a></span>
@@ -119,7 +218,7 @@ def mrow(date, tour, venue, home, score, away, res):
     </div>'''
 
 def fact(num, label, data, phrase, src, href, hint=""):
-    return f'''<details class="acc"><summary><span class="acc__title"><span class="fact__num">{num}</span>{label}</span><span class="acc__hint">{hint}</span></summary><div class="acc__body">
+    return f'''<details class="acc acc--say" data-say="{label}"><summary><span class="acc__title"><span class="fact__num">{num}</span>{label}</span><span class="acc__hint">{hint}</span></summary><div class="acc__body">
       <div class="fact__data">{data}</div>
       <div class="fact__phrase">{phrase}</div>
       <div class="fact__source"><a href="{href}" target="_blank" rel="noopener">{src}&nbsp;↗</a></div>
@@ -358,7 +457,7 @@ BODY = f'''
   <div class="tour-header">
     <h1 class="tour-header__title">Чемпионат России по регби 2026 · 12-й тур</h1>
     <div class="tour-header__meta">
-      <span class="tour-header__meta-item">Регулярный чемпионат · 7 команд</span>
+      <span class="tour-header__meta-item">Регулярный чемпионат · до плей-офф два тура</span>
       <span class="tour-header__meta-item">Онлайн-эфир</span>
     </div>
   </div>
@@ -384,6 +483,9 @@ BODY = f'''
   <div class="toolbar">
     <button class="toolbar__btn" id="expandAll">Развернуть всё</button>
     <button class="toolbar__btn" id="collapseAll">Свернуть всё</button>
+    <button class="toolbar__btn" id="hideSaid">Скрыть сказанное</button>
+    <button class="toolbar__btn" id="resetSaid">Сбросить</button>
+    <span class="say-count" id="sayCount"></span>
   </div>
 
   <!-- ПРЕВЬЮ -->
@@ -536,6 +638,13 @@ def gate(html):
             errors.append("проза в staff-list: нужен kv()")
     if "expandAll" not in html:
         errors.append("нет интерактива: кнопки «развернуть/свернуть всё»")
+    # Пульт эфира: плашки-реплики, кнопка отметки и хранилище отметок должны доехать до страницы.
+    сказать = html.count('acc--say"') + html.count('acc--say ')
+    if сказать < 10:
+        errors.append(f"пульт эфира: плашек с отметкой «сказано» всего {сказать}, ожидается не меньше десяти")
+    for кусок in ("brief-said:", "say-btn", "sayCount", "resetSaid"):
+        if кусок not in html:
+            errors.append(f"пульт эфира: в странице нет «{кусок}», отметки работать не будут")
     if "Шанс есть всегда" in html:
         errors.append("слоган «Шанс есть всегда» запрещён в производстве памяток")
     if html.count("<div") != html.count("</div>"):
