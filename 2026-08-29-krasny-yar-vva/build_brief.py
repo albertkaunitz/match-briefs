@@ -2,7 +2,13 @@
 # Справка комментатора: «Красный Яр» · ВВА-Подмосковье, 12 тур ЧР по регби, 29.08.2026.
 # Дизайн-код эталона (Электрон/ЦСКА) 1:1: style и классы взяты как есть, изменены только данные.
 # Отличие от футбольных сборок: слой «Протокол» опирается на регбийную нумерацию 1..23 (номер = позиция).
-import os, re, base64
+import os, re, base64, datetime
+
+# Момент сборки проставляется машиной, а не руками: штамп актуальности в шапке
+# и подпись в подвале обязаны говорить правду после каждой пересборки.
+СОБРАНО = datetime.datetime.now()
+СОБРАНО_ТЕКСТ = СОБРАНО.strftime("%d.%m.%Y, %H:%M")
+СОБРАНО_ISO = СОБРАНО.strftime("%Y-%m-%dT%H:%M:%S+03:00")
 
 ENGINE = "/Users/Rapido/Desktop/12 НЕДЕЛЬ/Комментаторство/5_Инструменты-песочница/_Методика-справки/_движок"
 STYLE   = open(os.path.join(ENGINE,"etalon_style.css"), encoding="utf-8").read().strip()
@@ -23,6 +29,30 @@ SCRIPTS = SCRIPTS.replace("(после 16 туров)", "(после 11 туро
 # Ключ хранилища привязан к адресу матча: отметки одного брифа не протекают в другой,
 # хотя все брифы лежат на одном домене.
 CHECKLIST_JS = r"""
+// Возраст данных страница считает сама: штамп в шапке не может тихо протухнуть.
+(function(){
+  var поле = document.getElementById('freshness');
+  if (!поле) return;
+  var собрано = new Date(поле.getAttribute('data-built'));
+  if (isNaN(собрано)) return;
+  var часов = (Date.now() - собрано.getTime()) / 3600000;
+  var текст = поле.querySelector('.freshness__text');
+  var когда;
+  if (часов < 1)        когда = 'обновлено только что';
+  else if (часов < 24)  когда = 'обновлено ' + Math.floor(часов) + ' ч назад';
+  else {
+    var дней = Math.floor(часов / 24);
+    var хвост = (дней % 10 === 1 && дней % 100 !== 11) ? 'день'
+              : ((дней % 10 >= 2 && дней % 10 <= 4 && (дней % 100 < 10 || дней % 100 >= 20)) ? 'дня' : 'дней');
+    когда = 'обновлено ' + дней + ' ' + хвост + ' назад';
+  }
+  if (часов >= 24) поле.classList.add('freshness--stale');
+  if (часов >= 72) poleOld(поле);
+  function poleOld(эл){ эл.classList.remove('freshness--stale'); эл.classList.add('freshness--old'); }
+  текст.textContent = 'Официальные источники · ' + когда;
+  поле.title = 'Данные собраны ' + собрано.toLocaleString('ru-RU');
+})();
+
 (function(){
   // Один и тот же бриф открывается и как «…/матч/», и как «…/матч/index.html».
   // Без нормализации это два разных ключа, и отметки эфира «теряются» при переходе.
@@ -144,6 +174,39 @@ PALETTE = """
 .pr-row{background:linear-gradient(90deg,var(--home-soft) 0%,transparent 22%,transparent 78%,var(--away-soft) 100%);}
 .pr-head{border-top:2px solid transparent;border-image:linear-gradient(90deg,var(--home) 0%,var(--bg-divider) 50%,var(--away) 100%) 1;}
 
+/* Штамп актуальности: наверху карточки матча, справа от адреса арены.
+   Возраст данных считает сама страница, поэтому «свежо» не может протухнуть незаметно. */
+.match-card__top{display:flex;align-items:center;justify-content:space-between;gap:10px;
+  flex-wrap:wrap;padding:10px 14px 0;}
+.match-card__top .match-card__location{padding:0;margin:0;text-align:left;}
+.freshness{display:inline-flex;align-items:center;gap:7px;font-size:10.5px;line-height:1.35;
+  color:var(--text-muted);background:rgba(255,255,255,0.05);border:1px solid var(--border);
+  border-radius:20px;padding:5px 11px;white-space:nowrap;}
+.freshness__dot{width:7px;height:7px;border-radius:50%;background:var(--home);flex:0 0 auto;
+  box-shadow:0 0 0 3px rgba(0,192,139,0.18);}
+.freshness--stale .freshness__dot{background:var(--warn);box-shadow:0 0 0 3px rgba(230,184,0,0.18);}
+.freshness--old .freshness__dot{background:var(--away-red);box-shadow:0 0 0 3px rgba(230,58,46,0.18);}
+@media (max-width:520px){
+  .match-card__top{flex-direction:column;align-items:flex-start;gap:7px;}
+  .freshness{white-space:normal;}
+}
+
+/* Подвал: имя бренда и адреса источников не рвутся посреди слова. */
+.site-footer__copyright{line-height:1.6;}
+.site-footer__brand{white-space:nowrap;}
+.site-footer__sources{display:block;margin-top:5px;}
+.site-footer__contact{display:block;margin-top:9px;}
+.site-footer__contact a{display:inline-flex;align-items:center;gap:6px;color:var(--home);
+  text-decoration:none;border-bottom:1px solid var(--home);padding-bottom:1px;white-space:nowrap;font-weight:600;}
+.site-footer__contact a:hover{color:var(--text);border-bottom-color:var(--text);}
+
+/* Шапка на телефоне: номер тура и формат эфира переносятся целиком, а не рвутся пополам. */
+.nowrap{white-space:nowrap;display:inline-block;}
+@media (max-width:520px){
+  .tour-header__meta{flex-direction:column;align-items:flex-start;gap:5px;}
+  .tour-header__meta-item{white-space:nowrap;}
+}
+
 /* ===== Пульт эфира: отметка «сказано» на каждой реплике ===== */
 .acc--say>summary{align-items:center;}
 .say-btn{width:30px;height:30px;min-width:30px;border-radius:50%;border:1.5px solid var(--border);
@@ -163,7 +226,7 @@ body.hide-said .acc--said{display:none;}
 .say-count b{color:var(--accent);font-size:13px;}
 .toolbar{flex-wrap:wrap;align-items:center;}
 .toolbar__btn--on{border-color:var(--accent);color:var(--accent);}
-@media (max-width:520px){.say-count{width:100%;margin:6px 0 0;}}
+@media (max-width:520px){.say-count{width:100%;margin:6px 0 0;}
 
 /* Блоки команд: заголовок раздела красится стороной. */
 .panel[data-panel="ky"] .section-divider{box-shadow:inset 3px 0 0 var(--home);}
@@ -455,7 +518,7 @@ BODY = f'''
   <div class="stale" id="staleWarn"></div>
 
   <div class="tour-header">
-    <h1 class="tour-header__title">Чемпионат России по регби 2026 · 12-й тур</h1>
+    <h1 class="tour-header__title">Чемпионат России по регби 2026 · <span class="nowrap">12-й тур</span></h1>
     <div class="tour-header__meta">
       <span class="tour-header__meta-item">Регулярный чемпионат · до плей-офф два тура</span>
       <span class="tour-header__meta-item">Онлайн-эфир</span>
@@ -463,7 +526,13 @@ BODY = f'''
   </div>
 
   <div class="match-card">
-    <div class="match-card__location">📍 Стадион «Красный Яр», ул. Маерчака, 57, Красноярск</div>
+    <div class="match-card__top">
+      <div class="match-card__location">📍 Стадион «Красный Яр», ул. Маерчака, 57, Красноярск</div>
+      <div class="freshness" id="freshness" data-built="{СОБРАНО_ISO}">
+        <span class="freshness__dot"></span>
+        <span class="freshness__text">Данные с официальных источников · {СОБРАНО_ТЕКСТ}</span>
+      </div>
+    </div>
     <div class="match-card__main">
       <div class="match-card__team"><img src="{KY_L}" alt="Красный Яр"><div class="match-card__team-name">Красный Яр</div><div class="match-card__team-city">4-е место · 21 очко</div></div>
       <div class="match-card__center"><div class="match-card__date">29 августа</div><div class="match-card__weekday">суббота</div><div class="match-card__time">13:00 мск</div></div>
@@ -587,8 +656,12 @@ BODY = f'''
   </div>
 
   <div class="site-footer">
-    <div class="site-footer__copyright" style="text-align:center">Справка комментатора · разработана по методике MKD AI Boutique · источники: rugby.ru, yarrugby.ru, vva-podmoskovie.ru (официальные)</div>
-    <div class="site-footer__private" style="text-align:center">Официальные данные на 28.08.2026, 14:30. Состав «Красного Яра» и ссылка на трансляцию внесены. Ожидаются: состав ВВА-Подмосковья и арбитр матча.</div>
+    <div class="site-footer__copyright" style="text-align:center">
+      Справка комментатора · разработана по методике <span class="site-footer__brand">MKD AI Boutique</span>
+      <span class="site-footer__sources">Источники: <span class="nowrap">rugby.ru</span> · <span class="nowrap">yarrugby.ru</span> · <span class="nowrap">vva-podmoskovie.ru</span>, все официальные</span>
+      <span class="site-footer__contact"><a href="https://t.me/albertkaunitz" target="_blank" rel="noopener">✈ По сотрудничеству: @albertkaunitz</a></span>
+    </div>
+    <div class="site-footer__private" style="text-align:center">Данные собраны {СОБРАНО_ТЕКСТ}. Состав «Красного Яра» и ссылка на трансляцию внесены. Ожидаются: состав ВВА-Подмосковья и арбитр матча.</div>
   </div>
 </div>
 
@@ -645,6 +718,16 @@ def gate(html):
     for кусок in ("brief-said:", "say-btn", "sayCount", "resetSaid"):
         if кусок not in html:
             errors.append(f"пульт эфира: в странице нет «{кусок}», отметки работать не будут")
+    # Дизайн-код матча (правило Albert Kaunitz от 28.08.2026): палитра снимается с официальных
+    # сайтов обеих команд и объявляется профилем. Без объявления бриф уедет в цветах прошлого
+    # матча, и заметит это только владелец.
+    if not re.search(r"<!--\s*identity:\s*clients/[^>]+\.json\s*-->", html):
+        errors.append("дизайн-код матча: не объявлен профиль палитры «<!-- identity: clients/<матч>.json -->»")
+    for чужой in ("#A4D639", "#a4d639", "164,214,57"):
+        if чужой in html:
+            errors.append(f"дизайн-код матча: в стиле остался цвет эталона футбольной лиги ({чужой})")
+    if "--home:" not in html or "--away:" not in html:
+        errors.append("дизайн-код матча: нет разделения сторон (--home / --away), хозяева и гости не различаются цветом")
     if "Шанс есть всегда" in html:
         errors.append("слоган «Шанс есть всегда» запрещён в производстве памяток")
     if html.count("<div") != html.count("</div>"):

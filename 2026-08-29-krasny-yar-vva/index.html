@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<meta name="brief-version" content="20260828-154616">
+<meta name="brief-version" content="20260828-162505">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Справка комментатора · Красный Яр · ВВА-Подмосковье · ЧР по регби, 12 тур · 29.08.2026</title>
@@ -395,6 +395,39 @@ a{color:var(--accent);text-decoration:none;}a:hover{text-decoration:underline;}
 .pr-row{background:linear-gradient(90deg,var(--home-soft) 0%,transparent 22%,transparent 78%,var(--away-soft) 100%);}
 .pr-head{border-top:2px solid transparent;border-image:linear-gradient(90deg,var(--home) 0%,var(--bg-divider) 50%,var(--away) 100%) 1;}
 
+/* Штамп актуальности: наверху карточки матча, справа от адреса арены.
+   Возраст данных считает сама страница, поэтому «свежо» не может протухнуть незаметно. */
+.match-card__top{display:flex;align-items:center;justify-content:space-between;gap:10px;
+  flex-wrap:wrap;padding:10px 14px 0;}
+.match-card__top .match-card__location{padding:0;margin:0;text-align:left;}
+.freshness{display:inline-flex;align-items:center;gap:7px;font-size:10.5px;line-height:1.35;
+  color:var(--text-muted);background:rgba(255,255,255,0.05);border:1px solid var(--border);
+  border-radius:20px;padding:5px 11px;white-space:nowrap;}
+.freshness__dot{width:7px;height:7px;border-radius:50%;background:var(--home);flex:0 0 auto;
+  box-shadow:0 0 0 3px rgba(0,192,139,0.18);}
+.freshness--stale .freshness__dot{background:var(--warn);box-shadow:0 0 0 3px rgba(230,184,0,0.18);}
+.freshness--old .freshness__dot{background:var(--away-red);box-shadow:0 0 0 3px rgba(230,58,46,0.18);}
+@media (max-width:520px){
+  .match-card__top{flex-direction:column;align-items:flex-start;gap:7px;}
+  .freshness{white-space:normal;}
+}
+
+/* Подвал: имя бренда и адреса источников не рвутся посреди слова. */
+.site-footer__copyright{line-height:1.6;}
+.site-footer__brand{white-space:nowrap;}
+.site-footer__sources{display:block;margin-top:5px;}
+.site-footer__contact{display:block;margin-top:9px;}
+.site-footer__contact a{display:inline-flex;align-items:center;gap:6px;color:var(--home);
+  text-decoration:none;border-bottom:1px solid var(--home);padding-bottom:1px;white-space:nowrap;font-weight:600;}
+.site-footer__contact a:hover{color:var(--text);border-bottom-color:var(--text);}
+
+/* Шапка на телефоне: номер тура и формат эфира переносятся целиком, а не рвутся пополам. */
+.nowrap{white-space:nowrap;display:inline-block;}
+@media (max-width:520px){
+  .tour-header__meta{flex-direction:column;align-items:flex-start;gap:5px;}
+  .tour-header__meta-item{white-space:nowrap;}
+}
+
 /* ===== Пульт эфира: отметка «сказано» на каждой реплике ===== */
 .acc--say>summary{align-items:center;}
 .say-btn{width:30px;height:30px;min-width:30px;border-radius:50%;border:1.5px solid var(--border);
@@ -414,7 +447,7 @@ body.hide-said .acc--said{display:none;}
 .say-count b{color:var(--accent);font-size:13px;}
 .toolbar{flex-wrap:wrap;align-items:center;}
 .toolbar__btn--on{border-color:var(--accent);color:var(--accent);}
-@media (max-width:520px){.say-count{width:100%;margin:6px 0 0;}}
+@media (max-width:520px){.say-count{width:100%;margin:6px 0 0;}
 
 /* Блоки команд: заголовок раздела красится стороной. */
 .panel[data-panel="ky"] .section-divider{box-shadow:inset 3px 0 0 var(--home);}
@@ -451,7 +484,7 @@ body.hide-said .acc--said{display:none;}
   <div class="stale" id="staleWarn"></div>
 
   <div class="tour-header">
-    <h1 class="tour-header__title">Чемпионат России по регби 2026 · 12-й тур</h1>
+    <h1 class="tour-header__title">Чемпионат России по регби 2026 · <span class="nowrap">12-й тур</span></h1>
     <div class="tour-header__meta">
       <span class="tour-header__meta-item">Регулярный чемпионат · до плей-офф два тура</span>
       <span class="tour-header__meta-item">Онлайн-эфир</span>
@@ -459,7 +492,13 @@ body.hide-said .acc--said{display:none;}
   </div>
 
   <div class="match-card">
-    <div class="match-card__location">📍 Стадион «Красный Яр», ул. Маерчака, 57, Красноярск</div>
+    <div class="match-card__top">
+      <div class="match-card__location">📍 Стадион «Красный Яр», ул. Маерчака, 57, Красноярск</div>
+      <div class="freshness" id="freshness" data-built="2026-08-28T16:21:07+03:00">
+        <span class="freshness__dot"></span>
+        <span class="freshness__text">Данные с официальных источников · 28.08.2026, 16:21</span>
+      </div>
+    </div>
     <div class="match-card__main">
       <div class="match-card__team"><img src="data:image/png;base64,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" alt="Красный Яр"><div class="match-card__team-name">Красный Яр</div><div class="match-card__team-city">4-е место · 21 очко</div></div>
       <div class="match-card__center"><div class="match-card__date">29 августа</div><div class="match-card__weekday">суббота</div><div class="match-card__time">13:00 мск</div></div>
@@ -697,8 +736,12 @@ body.hide-said .acc--said{display:none;}
   </div>
 
   <div class="site-footer">
-    <div class="site-footer__copyright" style="text-align:center">Справка комментатора · разработана по методике MKD AI Boutique · источники: rugby.ru, yarrugby.ru, vva-podmoskovie.ru (официальные)</div>
-    <div class="site-footer__private" style="text-align:center">Официальные данные на 28.08.2026, 14:30. Состав «Красного Яра» и ссылка на трансляцию внесены. Ожидаются: состав ВВА-Подмосковья и арбитр матча.</div>
+    <div class="site-footer__copyright" style="text-align:center">
+      Справка комментатора · разработана по методике <span class="site-footer__brand">MKD AI Boutique</span>
+      <span class="site-footer__sources">Источники: <span class="nowrap">rugby.ru</span> · <span class="nowrap">yarrugby.ru</span> · <span class="nowrap">vva-podmoskovie.ru</span>, все официальные</span>
+      <span class="site-footer__contact"><a href="https://t.me/albertkaunitz" target="_blank" rel="noopener">✈ По сотрудничеству: @albertkaunitz</a></span>
+    </div>
+    <div class="site-footer__private" style="text-align:center">Данные собраны 28.08.2026, 16:21. Состав «Красного Яра» и ссылка на трансляцию внесены. Ожидаются: состав ВВА-Подмосковья и арбитр матча.</div>
   </div>
 </div>
 
@@ -779,6 +822,30 @@ document.getElementById('collapseAll').addEventListener('click',function(){setAl
       location.replace(location.pathname + '?v=' + encodeURIComponent(live));
     })
     .catch(function () {});
+})();
+
+// Возраст данных страница считает сама: штамп в шапке не может тихо протухнуть.
+(function(){
+  var поле = document.getElementById('freshness');
+  if (!поле) return;
+  var собрано = new Date(поле.getAttribute('data-built'));
+  if (isNaN(собрано)) return;
+  var часов = (Date.now() - собрано.getTime()) / 3600000;
+  var текст = поле.querySelector('.freshness__text');
+  var когда;
+  if (часов < 1)        когда = 'обновлено только что';
+  else if (часов < 24)  когда = 'обновлено ' + Math.floor(часов) + ' ч назад';
+  else {
+    var дней = Math.floor(часов / 24);
+    var хвост = (дней % 10 === 1 && дней % 100 !== 11) ? 'день'
+              : ((дней % 10 >= 2 && дней % 10 <= 4 && (дней % 100 < 10 || дней % 100 >= 20)) ? 'дня' : 'дней');
+    когда = 'обновлено ' + дней + ' ' + хвост + ' назад';
+  }
+  if (часов >= 24) поле.classList.add('freshness--stale');
+  if (часов >= 72) poleOld(поле);
+  function poleOld(эл){ эл.classList.remove('freshness--stale'); эл.classList.add('freshness--old'); }
+  текст.textContent = 'Официальные источники · ' + когда;
+  поле.title = 'Данные собраны ' + собрано.toLocaleString('ru-RU');
 })();
 
 (function(){
