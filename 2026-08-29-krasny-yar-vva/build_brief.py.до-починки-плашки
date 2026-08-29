@@ -516,7 +516,7 @@ bench  = [prow(n, KY_BENCH_POS[n], KY_BENCH[n], n, VVA_BENCH_POS[n], VVA_BENCH[n
 
 STAFF_MAIN = "".join([
  '<div class="pr-row pr-row--staff"><span class="pr-side pr-side--home"><span class="pr-role">главный тренер</span><span class="pr-name pr-name--accent">Ульрих Бейерс</span></span><span class="pr-side pr-side--away"><span class="pr-name pr-name--accent">Андрей Сорокин</span><span class="pr-role">врио главного тренера</span></span></div>',
- '<div class="pr-row pr-row--staff"><span class="pr-side pr-side--home"><span class="pr-role">тренер нападающих</span><span class="pr-name">Руан Смит</span></span><span class="pr-side pr-side--away"><span class="pr-name">Николай Неруш</span><span class="pr-role">28 лет главным тренером</span></span></div>',
+ '<div class="pr-row pr-row--staff"><span class="pr-side pr-side--home"><span class="pr-role">тренер нападающих</span><span class="pr-name">Руан Смит</span></span><span class="pr-side pr-side--away"><span class="pr-name">Николай Неруш</span><span class="pr-role">главный тренер клуба 1990-2018, 8 чемпионств</span></span></div>',
 ])
 STAFF_REST = "".join([
  '<div class="pr-row"><span class="pr-side pr-side--home"><span class="pr-role">клуб</span><span class="pr-name">АНО «Спортивный регбийный клуб „Красный Яр“», Красноярск</span></span><span class="pr-side pr-side--away"><span class="pr-name">РК «ВВА-Подмосковье», Монино, Новинское шоссе, стр. 9</span><span class="pr-role">клуб</span></span></div>',
@@ -753,11 +753,6 @@ HTML = f'''<!-- identity: clients/rugby-ky-vva.json -->
 .match-row__venue{{max-width:none;white-space:normal;overflow:visible;text-overflow:clip;line-height:1.35;}}
 .match-row__when{{min-width:210px;}}
 @media (max-width:520px){{.match-row__when{{min-width:0;}}}}
-/* Плашка роли в эталоне стояла с flex-shrink:0 и фиксированной строкой: длинная роль
-   («28 лет главным тренером») распирала свою половину и наезжала на имя соседней команды.
-   Разрешаем плашке сжиматься и переносить текст, имя при этом не обрезается. */
-.pr-role{{flex-shrink:1;min-width:0;white-space:normal;line-height:1.25;}}
-.pr-row--staff .pr-name{{overflow:visible;text-overflow:clip;}}
 /* Эмблема турнира приходит чёрной графикой: на тёмной подложке выводим её белой. */
 .site-header img{{filter:brightness(0) invert(1);opacity:.92;}}
 /* Регбийная таблица шире футбольной на две колонки: РИО и бонусные очки.
