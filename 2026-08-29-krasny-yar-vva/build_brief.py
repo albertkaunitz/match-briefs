@@ -333,6 +333,10 @@ def grp(title, rows):
 
 # ---------- СЛОЙ 1: превью, углы подачи ----------
 angles = "".join([
+ angle("Перед стартом: минута молчания",
+       "25 августа на 48-м году жизни скоропостижно скончался один из лучших российских арбитров Алексей Алексеевич Брызгалин. Федерация регби России приняла решение начать все соревнования, проходящие с 28 по 31 августа, с минуты молчания в его память. Прощание состоится 31 августа в Москве.",
+       "«Перед началом матча команды и трибуны почтят память Алексея Брызгалина, одного из лучших арбитров российского регби, ушедшего из жизни 25 августа на 48-м году».",
+       "сайт Федерации регби России, 28.08", "https://rugby.ru/news/minuta-molchaniya-v-pamyat-ob-aleksee-bryzgaline/", "сказать до первого свистка"),
  angle("Цена матча: путёвка в плей-офф",
        "Клуб объявил ставку прямым текстом за пять дней до игры: «Один матч, одна победа и „Красный Яр“ обеспечит себе место в плей-офф».",
        "«Красноярцы выходят на матч, в котором победа решает не тур, а сезон: она закрывает вопрос с плей-офф».",
@@ -504,6 +508,21 @@ STAFF_REST = "".join([
  '<div class="pr-row"><span class="pr-side pr-side--home"><span class="pr-role">штаб</span><span class="pr-name">Ульрих Бейерс, Руан Смит</span></span><span class="pr-side pr-side--away"><span class="pr-name">Горошилов, Кузин, Кукишев, Кушнарев В., Неруш, Сорокин, Хрокин</span><span class="pr-role">штаб</span></span></div>',
 ])
 
+судьи = kv([
+ ("Судья в поле","<b>Алексей Куликов</b>, Москва"),
+ ("Первый помощник","Максим Крамской, Москва"),
+ ("Второй помощник","Умар Хомидов, Красноярск"),
+ ("Резервный судья","Александр Егоров, Красноярск"),
+ ("Судья видеоповторов","Артур Каптюх, Москва"),
+ ("Комиссар матча","Сергей Мурашкин, Красноярск"),
+], "Назначения опубликованы в анонсе матча на сайте Федерации регби России, 28 августа.")
+
+# Изменения в составах, объявленные Федерацией в анонсе матча.
+ИЗМЕНЕНИЯ = kv([
+ ("«Красный Яр»","С первых минут выходит <b>Валерий Морозов</b>, Михеил Ратиашвили остаётся в запасе. Место основного девятого номера занимает <b>Хушнуд Сангинов</b>. Вне заявки на матч: Руди Ван Ройен, Аллен Стефан де Вит, Дмитрий Сухин и Мхлели Дламини."),
+ ("ВВА-Подмосковье","Точечные изменения: в стартовом составе выходят <b>Джурабек Джураев</b> и <b>Виталий Безматерных</b>, а <b>Даниил Крылаткин</b> матч пропускает. Полный состав клуб не публиковал, поэтому в протоколе справа стоит состав на прошлый тур."),
+], "Источник: анонс матча на сайте Федерации регби России, 28 августа. Номера позиций Федерация не называет, поэтому по номерам эти замены не расставлены.")
+
 # ---------- Вкладка «Регби в эфире» ----------
 score_rules = kv([
  ("Попытка, 5 очков","Мяч приземлён в зачётной зоне соперника. Главное событие матча и единственный способ получить бонусное очко: четыре попытки за игру дают команде дополнительный балл в таблицу."),
@@ -645,7 +664,10 @@ BODY = f'''
       <div class="pr-head__center">составы на матч</div>
       <div class="pr-head__side pr-head__side--away" style="flex-direction:row;align-items:center;gap:8px;justify-content:flex-end"><div style="text-align:right"><div class="pr-head__name">ВВА-Подмосковье</div><div class="pr-head__city">6-е место</div></div><img src="{VVA_L}" alt="ВВА" style="width:30px;height:30px;object-fit:contain"></div>
     </div>
-    <div style="padding:10px 16px 0"><div class="standings-mini__note" style="border:none;padding:0 0 8px">Слева состав «Красного Яра» <b>на этот матч</b>: опубликован клубом 28 августа. Справа состав ВВА-Подмосковья <b>на предыдущий тур</b>, 22 августа: свой состав на эту игру клуб к моменту сборки не публиковал, у гостей он обычно меняется мало. Номер в регби это позиция, поэтому пара строк читается как противостояние на одном месте поля.</div></div>
+    <div style="padding:10px 16px 0"><div class="standings-mini__note" style="border:none;padding:0 0 8px">Слева состав «Красного Яра» <b>на этот матч</b>: опубликован клубом 28 августа. Справа состав ВВА-Подмосковья <b>на предыдущий тур</b>, 22 августа: свой состав на эту игру клуб не публиковал. Что известно об изменениях у гостей, вынесено в блок ниже. Номер в регби это позиция, поэтому пара строк читается как противостояние на одном месте поля.</div></div>
+    <div style="padding:0 16px 6px">
+      <details class="acc" open><summary><span class="acc__title">Изменения в составах на этот матч</span><span class="acc__hint">по анонсу Федерации</span></summary><div class="acc__body">{ИЗМЕНЕНИЯ}</div></details>
+    </div>
     {grp("Схватка · номера с 1 по 8", pack)}
     {grp("Полузащита · номера 9 и 10", halves)}
     {grp("Линия трёх четвертей · номера с 11 по 15", backs)}
@@ -661,11 +683,13 @@ BODY = f'''
       <details class="acc"><summary><span class="acc__title">Клубы и остальной штаб</span><span class="acc__hint">по сайтам клубов</span></summary><div class="acc__body" style="padding:0"><div class="pr-list" style="border:none">{STAFF_REST}</div></div></details>
     </div>
     <div style="padding:14px 16px">
+      <div class="protocol-section-title" style="margin-top:14px">Судейская бригада</div>
+      <div style="padding:10px 16px 0">{судьи}</div>
       <ul class="checklist-live">
         <li class="check--done"><span class="check-badge check-badge--done">✓</span><span class="check-text">Состав «Красного Яра» на матч<span class="check-source">опубликован клубом 28 августа, внесён в протокол выше</span></span></li>
+        <li class="check--done"><span class="check-badge check-badge--done">✓</span><span class="check-text">Судейская бригада<span class="check-source">анонс матча на сайте Федерации, 28 августа</span></span></li>
         <li class="check--done"><span class="check-badge check-badge--done">✓</span><span class="check-text">Трансляция: <a href="https://video.sports.ru/stream/ncPRxPfU2fo56Yep-VGMXiWO438aKoDVIYyw0lix_H4" target="_blank" rel="noopener">video.sports.ru, прямой эфир матча&nbsp;↗</a><span class="check-source">ссылку дал клуб в анонсе состава</span></span></li>
-        <li class="check--pending"><span class="check-badge check-badge--pending">⏳</span><span class="check-text">Состав ВВА-Подмосковья на этот матч<span class="check-source">vva-podmoskovie.ru: на момент сборки клуб опубликовал только состав на 11 тур</span></span></li>
-        <li class="check--pending"><span class="check-badge check-badge--pending">⏳</span><span class="check-text">Главный судья матча<span class="check-source">«Красный Яр» объявляет арбитра отдельной новостью, на 11 тур это был Иван Мошняков</span></span></li>
+        <li class="check--pending"><span class="check-badge check-badge--pending">⏳</span><span class="check-text">Полный состав ВВА-Подмосковья<span class="check-source">свой состав клуб не публиковал; известные изменения внесены по анонсу Федерации</span></span></li>
       </ul>
     </div>
   </div>
@@ -689,7 +713,7 @@ BODY = f'''
       <span class="site-footer__line">Справка комментатора · разработана по методике <span class="site-footer__brand">MKD AI Boutique</span></span>
       <span class="site-footer__contact"><a href="https://t.me/albertkaunitz" target="_blank" rel="noopener">@albertkaunitz</a></span>
     </div>
-    <div class="site-footer__private" style="text-align:center">Состав «Красного Яра» и ссылка на трансляцию внесены. Ожидаются: состав ВВА-Подмосковья и арбитр матча.</div>
+    <div class="site-footer__private" style="text-align:center">Состав «Красного Яра», судейская бригада и ссылка на трансляцию внесены. Полный состав ВВА-Подмосковья клуб не публиковал: известные изменения взяты из анонса Федерации.</div>
   </div>
 </div>
 
